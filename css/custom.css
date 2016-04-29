@@ -3929,7 +3929,15 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         display: none;
     }
 
-    .basket-outer:hover .productList-qty-changer {
+    .etBasket .productList-qty-changer {
+        bottom: auto;
+        top: 1px;
+        left: 11%;
+        height: 47px;
+    }
+
+    .basket-outer:hover .productList-qty-changer,
+    .etBasket:hover .productList-qty-changer {
         display: block;
     }
 
@@ -3940,6 +3948,13 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .productList-qty-changer a i.fa {
         color: #333333;
         line-height: 19px;
+        display: block;
+        text-decoration: none !important;
+    }
+
+    .etBasket .productList-qty-changer a i.fa {
+        color: #333333;
+        line-height: 23px;
         display: block;
         text-decoration: none !important;
     }
@@ -4960,6 +4975,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         font-size: 12px;
         height: 38px;
         display: none;
+    }
+
+    .etBasket .productList-qty-changer {
+        left: 10%;
     }
 
 }
