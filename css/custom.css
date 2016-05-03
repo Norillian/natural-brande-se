@@ -1640,7 +1640,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .teaserBoxdiv > div {
         /*height: 200px;*/
-        min-height: 200px;
+        min-height: 202px;
         padding-left: 0;
         padding-right: 20px;
         margin-bottom: 20px;
