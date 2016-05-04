@@ -2750,6 +2750,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .productInfoBackDiv #navigateParentLnk {
         border: solid 1px #c1c1c1;
+        background-color: #eee;
         padding: 4px 6px;
         margin-bottom: 0.9375rem;
         display: inline-block;
@@ -2760,7 +2761,8 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .productInfoBackDiv #navigateParentLnk:hover {
-        background-color: #eee;
+        background-color: #cccc;
+        color: #333333;
     }
 
     .productInfoBackDiv #navigateParentLnk i {
