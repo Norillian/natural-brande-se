@@ -4963,22 +4963,26 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
 }
 
-@media only screen and (max-width: 406px) {
+@media only screen and (max-width: 882px) {
+
+    /*** product list colli changer ***/
 
     .productList-qty-changer {
         display: inline-block;
-        max-width: 16px;
         position: absolute;
         top: 1px;
         bottom: auto;
-        left: 55%;
+        left: 50%;
+        margin-left: 40px;
         font-size: 12px;
         height: 38px;
-        display: none;
+        font-size: 16px;
+        display: block !important;
     }
 
-    .etBasket .productList-qty-changer {
-        left: 10%;
+    .productElement .basketQtyInput {
+        width: 60px;
+        height: 40px;
     }
 
 }
