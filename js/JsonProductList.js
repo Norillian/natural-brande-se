@@ -217,11 +217,35 @@ weightBeforeZipCode=200000;
                 productPrevPriceDiv = $('<a></a>');
                 productPrevPriceDiv.attr('href', val.URLPathAndQuery);
                 productPrevPriceDiv.addClass('productPrevPriceDiv');
-                if(val.hasSalesPrice.length != 0) {
+				if(val.hasSalesPrice.length != 0) {
                     if(val.hasSalesPrice == true) {
-                        if(!val.salesPrices[0].hasPreviousPrice == false) {
-                            productPrevPriceDiv.append(val.salesPrices[0].previousTagPriceFormatted);
-                        }
+						salespriceNoFormat = String(val.salesPrices[0].totalTagPrice);
+						discountpriceNoFormat = String(val.salesPrices[0].tagPriceLineDiscountAmount);
+						currentCurrency = CurrencySymbol;
+
+						var hasComma = false;
+
+						if(String(salespriceNoFormat).indexOf(",") >= 0) {
+
+							salespriceNoFormat = salespriceNoFormat.replace(',', '.');
+							discountpriceNoFormat = discountpriceNoFormat.replace(',', '.');
+							hasComma = true;
+
+						}
+
+						salespriceNoFormat = Math.floor(parseFloat(salespriceNoFormat) * 100) / 100;
+						discountpriceNoFormat = Math.floor(parseFloat(discountpriceNoFormat) * 100) / 100;
+						var priceWithoutDiscount = salespriceNoFormat + discountpriceNoFormat;
+
+						if(priceWithoutDiscount > salespriceNoFormat) {
+
+							if(hasComma === true) {
+								priceWithoutDiscount = String(priceWithoutDiscount);
+								priceWithoutDiscount = priceWithoutDiscount.replace('.', ',');
+							}
+
+							productPrevPriceDiv.append(currentCurrency + " " + priceWithoutDiscount);
+						}
                     }
                 }
                 productInnerDiv.append(productPrevPriceDiv);
@@ -941,11 +965,35 @@ function createAddedToBasketProducts() {
                 productPrevPriceDiv = $('<a></a>');
                 productPrevPriceDiv.attr('href', val.URLPathAndQuery);
                 productPrevPriceDiv.addClass('productPrevPriceDiv');
-                if(val.hasSalesPrice.length != 0) {
+				if(val.hasSalesPrice.length != 0) {
                     if(val.hasSalesPrice == true) {
-                        if(!val.salesPrices[0].hasPreviousPrice == false) {
-                            productPrevPriceDiv.append(val.salesPrices[0].previousTagPriceFormatted);
-                        }
+						salespriceNoFormat = String(val.salesPrices[0].totalTagPrice);
+						discountpriceNoFormat = String(val.salesPrices[0].tagPriceLineDiscountAmount);
+						currentCurrency = CurrencySymbol;
+
+						var hasComma = false;
+
+						if(String(salespriceNoFormat).indexOf(",") >= 0) {
+
+							salespriceNoFormat = salespriceNoFormat.replace(',', '.');
+							discountpriceNoFormat = discountpriceNoFormat.replace(',', '.');
+							hasComma = true;
+
+						}
+
+						salespriceNoFormat = Math.floor(parseFloat(salespriceNoFormat) * 100) / 100;
+						discountpriceNoFormat = Math.floor(parseFloat(discountpriceNoFormat) * 100) / 100;
+						var priceWithoutDiscount = salespriceNoFormat + discountpriceNoFormat;
+
+						if(priceWithoutDiscount > salespriceNoFormat) {
+
+							if(hasComma === true) {
+								priceWithoutDiscount = String(priceWithoutDiscount);
+								priceWithoutDiscount = priceWithoutDiscount.replace('.', ',');
+							}
+
+							productPrevPriceDiv.append(currentCurrency + " " + priceWithoutDiscount);
+						}
                     }
                 }
                 productInnerDiv.append(productPrevPriceDiv);
