@@ -4963,7 +4963,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
 }
 
-@media only screen and (max-width: 882px) {
+@media only screen and (max-width: 1024px) {
 
     /*** product list colli changer ***/
 
@@ -4977,6 +4977,16 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         height: 38px;
         font-size: 20px;
         display: block !important;
+    }
+
+    .etBasket .productList-qty-changer {
+        margin-left: 0;
+        left: 16.5%;
+    }
+
+    #main #ShopContent .pInfoBasket .etBasket .ecBB a.addToBasketBtn, .notVariantBuyBtn {
+        width: 76%;
+        margin-left: 9%;
     }
 
     .productElement .basketQtyInput {
