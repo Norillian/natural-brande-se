@@ -1779,6 +1779,9 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .teaser-containers .columns:last-child{
         padding: 0 0 0 10px !important;
     }
+    .teaser-containers .columns .small-teaser{
+        width: 50%;
+    }
 
     .newsletterBox .innerNewsletterBox {
         min-height: 202px;
