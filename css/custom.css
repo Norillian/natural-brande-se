@@ -2539,10 +2539,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         top: 0.9375rem;
         right: 0.9375rem;
         color: #69C99C;
-        font-family: arial;
-        font-size: 11px;
+        font-family: Arial, Tahoma, sans-serif;
+        font-size: 15px;
         border: 1px solid #69C99C;
-        padding: 2px 5px;
+        padding: 4px 7px;
         background-color: #FFF;
         text-decoration: none;
     }
