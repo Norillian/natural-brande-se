@@ -1739,7 +1739,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         font-size: 18px;
         font-weight: bold;
         margin: 0;
-        max-width: 65%;
+        max-width: 60%;
         display: inline-block;
         padding: 5px 5px 5px 15px;
     }
@@ -1753,20 +1753,31 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         line-height: 57px;
         border-radius: 4px !important;
         background-color: #000000;
-        /*font-size: 18px;*/
         font-size: 15px;
         font-weight: bold;
         color: #fff;
         display: inline-block;
         width: 100%;
-        max-width: 31%;
+        max-width: 37%;
         text-transform: uppercase;
         text-align: center;
         margin: 0 0 0 5px;
+        white-space: nowrap;
     }
 
     .frontpageQuickBasket div a:hover {
         text-decoration: none;
+    }
+
+    .teaser-containers{
+        max-width:100%;
+        width:100%;
+    }
+    .teaser-containers .columns:first-child{
+        padding: 0 10px 0 0 !important;
+    }
+    .teaser-containers .columns:last-child{
+        padding: 0 0 0 10px !important;
     }
 
     .newsletterBox .innerNewsletterBox {
@@ -4546,6 +4557,13 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .teaserBoxdiv > div {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .teaser-containers .columns:first-child{
+        padding: 0 0 10px 0 !important;
+    }
+    .teaser-containers .columns:last-child{
+        padding: 10px 0 0 0 !important;
     }
 
     /*** frontpageQuickBasket styles ***/
