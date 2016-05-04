@@ -4970,13 +4970,12 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .productList-qty-changer {
         display: inline-block;
         position: absolute;
-        top: 1px;
+        top: 0px;
         bottom: auto;
         left: 50%;
         margin-left: 40px;
-        font-size: 12px;
         height: 38px;
-        font-size: 16px;
+        font-size: 20px;
         display: block !important;
     }
 
