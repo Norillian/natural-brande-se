@@ -900,6 +900,12 @@ $( document ).ready(function() {
     }
   });
 
+  //if cusomer not logg in disable search
+  if(isCustomerLoggedIn == "False"){
+    $("#advancedSearchBdy").addClass('disabled-attr');
+    $('#advancedSearchBdy input').attr('disabled', 'disabled');
+  }
+
   //Frontpage slider
   if($('.frontpageCarousel').length > 0) {
     $('.frontpageCarousel').slick({

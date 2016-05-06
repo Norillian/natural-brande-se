@@ -1218,6 +1218,18 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         min-width: 250px;
     }
 
+    #advancedSearchBdy.disabled-attr  input.textbox {
+        color: #ccc;
+    }
+
+    #advancedSearchBdy.disabled-attr  input.submit {
+        background-color: #BDBFBE;
+    }
+
+    #advancedSearchBdy.disabled-attr  input.submit:hover {
+        background-color: #BDBFBE;
+    }
+
     #advancedSearchBdy input.submit {
         position: absolute;
         top: 24px;
