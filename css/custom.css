@@ -822,6 +822,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         text-decoration: none;
     }
 
+    #memberMenuPanelMobile .customerLoginBdy ul li a{
+        display: none;
+    }
+
     .memberMenuLoggedIn > a,
     .memberMenuLoggedIn > a {
         display: block;
@@ -3333,6 +3337,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .onePageCheckoutBdy .AcceptTermsCheckBox {
         padding: 0.9375rem;
+        padding-left: 0;
     }
 
     .onePageCheckoutBdy .AcceptTermsCheckBox > div {
