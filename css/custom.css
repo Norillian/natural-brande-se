@@ -546,6 +546,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 		border-left: solid 2px #bad6ba;
 		padding: 10px;
 		height: 100%;
+        display: none;
 	}
 
 	.form-box h4 {
