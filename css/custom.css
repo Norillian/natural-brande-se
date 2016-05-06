@@ -3203,6 +3203,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         width: 49.2%;
     }
 
+    .basketMyInformationOuter .basketPaymentInformation ,
+    .basketMyInformationOuter .basketShipmentInformation{
+        display: none;
+    }
+
     .TermsTextDiv {
         display: none;
     }
