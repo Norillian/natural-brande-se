@@ -893,6 +893,13 @@
 
 $( document ).ready(function() {
 
+  //Accordion hide tabs
+  $('.accordion li.accordion-navigation').each(function() {
+    if($(this).find('div.content').html() == ""){
+      $(this).hide();
+    }
+  });
+
   //Frontpage slider
   if($('.frontpageCarousel').length > 0) {
     $('.frontpageCarousel').slick({
