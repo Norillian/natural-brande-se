@@ -1,0 +1,115 @@
+<!-- If basket is not empty -->
+
+<eSeller:If IsFalse="Basket:IsEmpty">
+
+    <div class="basketOuterBdy onePageCheckoutBdy clearfix">
+        <div class="basketMyInformationOuter">
+            <div class="basketMyInformation clearfix">
+                <div class="paymentHeader">
+                    <div class="header_bullet"><span>1</span></div>
+                    <div class="checkoutHeadersLabel"><h2><eSeller:Select Text="label_invoice_head" TextSourceControlId="Betalingsadresse" /></h2></div>
+                </div>
+                <div class="paymentAndShipmentInfoBdy left clearfix">
+                    <div class="paymentInfo">
+                        <eSeller:Control ControlId="Betalingsadresse" ControlType="PaymentAddress" InputMode="Protected" />
+                    </div>
+                </div>
+                <eSeller:If IsTrue="Basket:IsShipmentAddressSpecified">
+                    <div class="shipmentInfo right">
+                        <eSeller:Control ControlId="Leveringsadresse" ControlType="ShipmentAddress" InputMode="Protected" Required="false" UseExistingAddressOnly="False" />
+                    </div>
+                </eSeller:If>
+                <div class="basketOrderRemarksOuterDiv right">
+                    <div class="orderRemarksHeader">
+                        <eSeller:Select Text="label_order_remarks" TextSourceControlId="Ordrebemærkning"/>
+                    </div>
+                    <div class="orderRemarksDiv">
+                        <eSeller:Control ControlType="OrderingRemarks" ControlId="Ordrebemærkning"  CssClass="txtOrderRemarks" MaxLength="150" />
+                    </div>
+                    <span class="orderRemarksSpecialText"><eSeller:Select Text="label_order_remarks_specialText" /></span>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="shipmentAddressCheckBox clearfix">
+                    <eSeller:Control ControlType="ShipmentAddressCheckbox" ControlId="BrugLeveringsadresseValg" />
+                </div>
+            </div>
+            <div class="basketPaymentInformation evenRow">
+                <div class="paymentMethod">
+                    <div class="header_bullet"><span>2</span></div>
+                    <div class="checkoutHeadersLabel"><h2><eSeller:Select Text="label_payment_method" TextSourceControlId="Betalingsmåde" /></h2></div>
+                </div>
+                <div class="paymentMethodSelect">
+                    <!--<eSeller:Control ControlType="PaymentMethodSelect" ControlId="Betalingsmåde" />-->
+                    <eSeller:Control ControlType="PaymentMethodSelectRadioButtonList" ControlId="Betalingsmåde" />
+                </div>
+            </div>
+            <div class="basketShipmentInformation">
+                <div class="shipmentMethod">
+                    <div class="header_bullet"><span>3</span></div>
+                    <div class="checkoutHeadersLabel">
+                        <h2><eSeller:Select Text="label_delivery_method" TextSourceControlId="Leveringsmåde" /></h2>
+                    </div>
+                </div>
+                <div class="shipmentMethodSelect">
+                    <!--<eSeller:Control ControlType="ShipmentMethodSelect" ControlId="Leveringsmåde" />-->
+                    <eSeller:Control ControlType="ShipmentMethodSelectRadioButtonList" ControlId="Leveringsmåde" />
+                </div>
+            </div>
+            <div class="basketAcceptTermsBdy clearfix evenRow">
+                <div class="acceptTermsDivHeader">
+                    <div class="header_bullet"><span>4</span></div>
+                    <div class="checkoutHeadersLabel">
+                        <h2><eSeller:Select Text="label_acceptTerms_header" /></h2>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+                <div class="AcceptTermsCheckBox clearfix left">
+                    <div class="acceptTermsControlDiv">
+                        <eSeller:Control ControlType="AcceptTerms" ControlId="AcceptTerms" />&amp;nbsp;
+                    </div>
+                    <div class="acceptTermsReadMoreDiv">
+                        <a href="#" class="openTermsText"><eSeller:Select Text="accept_terms_readmore" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="basketMyOrderBdy">
+            <div class="basketOrderOuterDiv">
+                <div class="orderDetails">
+                    <div class="header_bullet"><span>5</span></div>
+                    <div class="checkoutHeadersLabel">
+                        <h2><eSeller:Select Text="label_order_details" /></h2>
+                    </div>
+                </div>
+                <div class="basketDetailsBdy">
+                    <eSeller:Control ControlId="Basket" ControlType="BasketDetails" InputMode="ViewOnly" />
+                </div>
+                <div class="basketTotalsBdy">
+                    <eSeller:Control ControlId="Totals" ControlType="BasketTotals"></eSeller:Control>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="basketNxtStep2 clearfix">
+            <eSeller:Control ControlType="BasketActionButton" ControlId="NextStep2" Mode="NavigateNext" CssClass="buttonNavNext" CausesValidation="True" CausesSave="True" >
+                <eSeller:Attribute Name="Text" Text="button_next(address)" />
+            </eSeller:Control>
+        </div>
+    </div>
+    <div class="TermsTextDiv">
+        <span id="closeTermsTop">X</span>
+        <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;SalesAndDeliveryTerms&quot;)" />
+        <a id="closeTermsBottom" href="#"><eSeller:Select Text="label_close_Terms" /></a>
+    </div>
+</eSeller:If>
+
+<!-- If basket is empty -->
+<eSeller:If IsTrue="Basket:IsEmpty">
+    <div class="basketIsEmptyBdy">
+        <h1><eSeller:Select Text="error_label_empty_basket" /></h1>
+        <br />
+        <eSeller:Control ControlType="NavigateButton" ControlId="JumpOutButton" Command="Frontpage" CssClass="buttonNavPrev" >
+            <eSeller:Attribute Name="Text" AppText="Navigate_goto_frontpage" />
+        </eSeller:Control>
+    </div>
+</eSeller:If>
