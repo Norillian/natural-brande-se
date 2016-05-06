@@ -4246,7 +4246,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .jsonProducts .productElement .productPriceDiv {
         font-size: 14px;
         display: block;
-        min-height: 20px;
+        min-height: 34px;
     }
 
     .jsonProducts .productElement .productPrevPriceDiv {
@@ -4997,20 +4997,25 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     /*** product list colli changer ***/
 
     .productList-qty-changer {
-        display: inline-block;
         position: absolute;
-        top: 0px;
+        top: 0;
         bottom: auto;
         left: 50%;
-        margin-left: 40px;
+        margin-left: 38px;
         height: 38px;
-        font-size: 20px;
+        font-size: 24px;
         display: block !important;
+    }
+    .productElement .productList-qty-changer a.productList-qty-add i{
+        padding-bottom: 2px;
+    }
+    .productElement .productList-qty-changer a.productList-qty-Subtract i{
+        padding-top: 2px;
     }
 
     .etBasket .productList-qty-changer {
         margin-left: 0;
-        left: 16.5%;
+        left: 16%;
     }
 
     #main #ShopContent .pInfoBasket .etBasket .ecBB a.addToBasketBtn, .notVariantBuyBtn {
