@@ -38,6 +38,12 @@
     </div>
 </div>
 
+<eSeller:If IsFalse="Settings:IsCustomerLoggedIn">
+<script type="text/javascript">
+    $('.frontpageQuickBasket .textbox').attr('readonly', true)
+</script>
+</eSeller:If>
+
 <div class="row teaser-containers">
     <div class="small-12 medium-6 large-6 columns">
         <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;frontpageTeaser1&quot;)" />
