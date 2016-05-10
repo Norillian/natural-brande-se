@@ -758,7 +758,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .accordion-navigation.loginMenuBdy > div.content label input,
     .loginMenuBdy > div.content label input {
-        width: 75%;
+        width: 70%;
         border: 1px solid #dddddb !important;
         background-color: #FFFFFF !important;
         position: absolute;
@@ -2453,6 +2453,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         vertical-align: middle;
     }
 
+    .jsonProducts .productElement.no-prices .productPriceDiv,
+    .jsonProducts .productElement.no-prices .productPrevPriceDiv{
+        text-indent: -99999em;
+    }
+
     .jsonProducts .productElement .productEsellerID {
         color: #1d1d1b;
         font-size: 12px;
@@ -2765,6 +2770,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         float:right;
         text-align: right;
         padding-bottom: 0.9375rem;
+    }
+
+    .pInfoProductPrices.hide-info-price .ProductPriceValue,
+    .pInfoProductPrices.hide-info-price .price-before-discount{
+        font-size: 0;
     }
 
     .productIdSpan {

@@ -1164,6 +1164,19 @@ $( document ).ready(function() {
     $( ".newsletterBox p" ).show();
   });
 
+  var checkPrice = $('.show-hide-price');
+  var isCheckedPrice = $('.show-hide-price').is(':checked');
+  if(isCheckedPrice){
+    $("li.productElement").addClass("no-prices");
+    $(".pInfoProductPrices").addClass("hide-info-price");
+  }else {
+    $("li.productElement").removeClass("no-prices");
+    $(".pInfoProductPrices").removeClass("hide-info-price");
+  }
+  checkPrice.on("change", function(){
+    $("li.productElement").toggleClass("no-prices");
+    $(".pInfoProductPrices").toggleClass("hide-info-price");
+  });
 
   var $topMenu = $('#topMenuQuickLinks');
   $topMenu.hide();
