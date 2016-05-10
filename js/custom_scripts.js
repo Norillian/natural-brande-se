@@ -906,6 +906,10 @@ $( document ).ready(function() {
     $('#advancedSearchBdy input').attr('disabled', 'disabled');
   }
 
+  if(isCustomerLoggedIn == "False"){
+    $('#productFilteringDrop').hide();
+  }
+
   //Frontpage slider
   if($('.frontpageCarousel').length > 0) {
     $('.frontpageCarousel').slick({
@@ -1024,8 +1028,17 @@ $( document ).ready(function() {
       getOnclickEventFromImg = $(this).parent().attr("href");
       newAddToBasketBtn = $("<a></a>");
       newAddToBasketBtn.addClass("addToBasketBtn");
-      newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
-      newAddToBasketBtn.append($("#newPInfoAddToBasketVariant").text());
+
+      if($('span.isNotInStockIcon').length > 0){
+        newAddToBasketBtn.addClass('not-in-stock');
+        newAddToBasketBtn.text('Udsolgt');
+        $('.normalBasket input, .productList-qty-changer').hide();
+      }
+      else {
+        newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
+        newAddToBasketBtn.append($("#newPInfoAddToBasket").text());
+      }
+
       $(this).parent().append(newAddToBasketBtn);
     }
 

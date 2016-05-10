@@ -2392,7 +2392,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .jsonProducts .productElement .productName a {
         color: #333333;
         font-size: 16px;
-        text-transform: uppercase;
+        text-transform: none;
         display: block;
         padding: 0 0.9375rem;
         text-decoration: none;
@@ -4034,9 +4034,15 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         margin: 0 auto;
     }
 
-    .basket-outer .not-in-stock{
+    .basket-outer .not-in-stock,
+    .normalBasket .not-in-stock{
         pointer-events: none;
         opacity: 0.5;
+    }
+
+    #main  #mainInnerBdy  .priceAndBasketDiv  .normalBasket  a.addToBasketBtn.not-in-stock{
+        width: 100% !important;
+        border-radius: 4px 4px 4px 4px!important;
     }
 
     .productList-qty-changer {
