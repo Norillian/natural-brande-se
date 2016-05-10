@@ -80,7 +80,7 @@ weightBeforeZipCode=200000;
 				var bundlesToAdd = 1;
 				var addToBasketData = "";
 				var addToBasketTxt = "Tilføj til kurv";
-				var addToBasketNotInStockTxt = "Udsolgt";
+				var addToBasketNotInStockTxt = "UTSÅLD";
 
 				basketOuterDiv = $('<div></div>');
 				basketOuterDiv.addClass('basket-outer');
@@ -898,7 +898,7 @@ function createAddedToBasketProducts() {
 				//Create the add to basket button
 				var addToBasketData = "";
 				var addToBasketTxt = "TilfÃ¸j til kurv";
-				var addToBasketNotInStockTxt = "Udsolgt";
+				var addToBasketNotInStockTxt = "UTSÅLD";
 
 				basketQtyInput = $('<input></input>')
 				basketQtyInput.attr('value', '1');

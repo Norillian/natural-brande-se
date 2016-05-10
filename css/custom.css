@@ -2511,6 +2511,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         border-radius: 4px;
         height: 38px;
         line-height: 38px;
+        min-width: 115px;
     }
 
     .not-found-text {
