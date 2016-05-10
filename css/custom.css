@@ -2480,7 +2480,8 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
 
-    .productElement .addToBasketLnk {
+    .productElement .addToBasketLnk,
+    .not-found-text	 a {
         background-color: #00763a;
         color: #FFF;
         font-family: 'Open Sans', sans-serif;
@@ -2496,8 +2497,25 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         line-height: 38px;
     }
 
-    .productElement .addToBasketLnk:hover {
+    .not-found-text {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+
+    .not-found-text a{
+        display: inline-block;
+    }
+
+    .not-found-text h2{
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .productElement .addToBasketLnk:hover,
+    .not-found-text a:hover {
         background-color: #038342;
+        text-decoration: none;
     }
 
     .productElement .productRemoveFromFavorites {
