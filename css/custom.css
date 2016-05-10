@@ -623,6 +623,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         border-bottom: solid 1px #dddddd;
     }
 
+    .left-off-canvas-menu .bannerBdy img{
+        height: 58px;
+    }
+
     .left-off-canvas-menu .bannerBdy a {
         position: absolute;
         right: 1rem;
@@ -4673,6 +4677,21 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
 
 @media only screen and (max-width: 1024px) {
+
+    /* Top element Styles */
+
+    #topbanner{
+        padding-top: 3px;
+        max-height: 84px;
+        overflow: hidden;
+        text-align: center;
+    }
+    #topbanner > a{
+        max-height: 84px;
+        max-width: 309px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
 
     /*** advanced Search styles ***/
 
