@@ -6,6 +6,9 @@
     <div class="small-12 medium-4 large-6 columns footer-navigation">
         <strong>Informationer</strong><br /><br />
         <eSeller:Control ControlID="bottomInfoMenu4Ul" ControlType="ShopMenu" MenuType="InfoMenu4" Depth="1" Mode="Text" />
+        <eSeller:If IsTrue="Settings:IsLoggedIn">
+            <div class="price-switcher hide-for-large-up"><input type="checkbox" class="show-hide-price" /></div>
+        </eSeller:If>
     </div>
     <div class="small-12 medium-4 large-3 columns form-box">
         <h4>Tilmeld vores nyhedsbrev</h4>

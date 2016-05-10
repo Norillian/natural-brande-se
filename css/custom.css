@@ -1128,6 +1128,9 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         height: 35px;
         padding: 11px 0 0 8px;
     }
+    .footer-navigation .price-switcher{
+        padding-top: 12px;
+    }
 
     #topMenuQuickLinks ul.shopMenu li:last-child a {
         background-image: none;
