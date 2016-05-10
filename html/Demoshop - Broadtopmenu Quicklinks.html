@@ -1,3 +1,6 @@
 <div class="broadTopMenuQuickLinks clearfix">
+    <eSeller:If IsTrue="Settings:IsLoggedIn">
+        <div class="right price-switcher"><input type="checkbox" class="show-hide-price" /></div>
+    </eSeller:If>
     <eSeller:Control ControlID="infoLinksBdy" ControlType="ShopMenu" MenuType="InfoMenu4" Depth="1" Mode="Text" />
 </div>

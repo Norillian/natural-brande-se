@@ -1120,6 +1120,14 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 		position: relative;
 		width: 100%;
     }
+    #main .ese71bdy .broadTopMenuQuickLinks ul.shopMenu {
+        float: right;
+        width: auto;
+    }
+    #main .ese71bdy .broadTopMenuQuickLinks .price-switcher{
+        height: 35px;
+        padding: 11px 0 0 8px;
+    }
 
     #topMenuQuickLinks ul.shopMenu li:last-child a {
         background-image: none;
