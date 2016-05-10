@@ -3712,6 +3712,39 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         padding-left: 0;
     }
 
+    /* Customer password reset */
+    .pass-reset-container{
+        max-width: 600px;
+        width: 100%;
+        overflow: hidden;
+        padding-top: 12px;
+    }
+    .pass-reset-container > div{
+        overflow: hidden;
+        padding-bottom: 12px;
+    }
+    .pass-reset-container > div > div{
+        float: left;
+        width: 50%;
+        padding: 3px;
+        font-family: Arial, Tahoma, sans-serif;
+        line-height: 30px;
+    }
+    .pass-reset-container input.passwordReset{
+        background-color: #00763a;
+        color: #FFF;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 9px 20px;
+        text-transform: uppercase;
+        border: medium none;
+        border-radius: 4px !important;
+        float: right;
+    }
+    .pass-reset-container input.passwordReset:hover{
+        background-color: #038342;
+    }
+
     /*** Customer order list styles ***/
 
     .orderListBdy table,
@@ -4628,6 +4661,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .frontpageQuickBasket h2 {
     	padding: 20px 10px 5px;
+    }
+
+    /* Customer Password reset */
+    .pass-reset-container > div > div{
+        font-size: 12px;
     }
 
 
