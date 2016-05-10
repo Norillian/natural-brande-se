@@ -80,6 +80,7 @@ weightBeforeZipCode=200000;
 				var bundlesToAdd = 1;
 				var addToBasketData = "";
 				var addToBasketTxt = "Tilføj til kurv";
+				var addToBasketNotInStockTxt = "Udsolgt";
 
 				basketOuterDiv = $('<div></div>');
 				basketOuterDiv.addClass('basket-outer');
@@ -130,8 +131,16 @@ weightBeforeZipCode=200000;
 								atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
 							}
 						});
-						basketDiv.addClass("addToBasketLnk");
-						basketDiv.text(addToBasketTxt);
+
+						if(val.inventoryCount <= 0) {
+							basketDiv.addClass("addToBasketLnk not-in-stock");
+							basketDiv.prop('disabled',true);
+							basketDiv.text(addToBasketNotInStockTxt);
+						} else if(val.inventoryCount >= 1) {
+							basketDiv.addClass("addToBasketLnk");
+							basketDiv.text(addToBasketTxt);
+						}
+
 						basketOuterDiv.append(basketDiv);
 					}
 				}
@@ -889,6 +898,7 @@ function createAddedToBasketProducts() {
 				//Create the add to basket button
 				var addToBasketData = "";
 				var addToBasketTxt = "TilfÃ¸j til kurv";
+				var addToBasketNotInStockTxt = "Udsolgt";
 
 				basketQtyInput = $('<input></input>')
 				basketQtyInput.attr('value', '1');
@@ -909,8 +919,8 @@ function createAddedToBasketProducts() {
 								atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
 							}
 						});
-						basketDiv.addClass("addToBasketLnk");
-						basketDiv.text(addToBasketTxt);
+						basketDiv.addClass("addToBasketLnk not-in-stock");
+						basketDiv.text(addToBasketNotInStockTxt);
 					}
 				}
 

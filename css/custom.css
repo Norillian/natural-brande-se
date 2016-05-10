@@ -4012,6 +4012,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         margin: 0 auto;
     }
 
+    .basket-outer .not-in-stock{
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
     .productList-qty-changer {
         display: inline-block;
         max-width: 16px;
