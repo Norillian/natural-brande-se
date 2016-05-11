@@ -4051,6 +4051,8 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .normalBasket .not-in-stock{
         pointer-events: none;
         opacity: 0.5;
+        margin-left: 0;
+        width: 75%;
     }
 
     #main  #mainInnerBdy  .priceAndBasketDiv  .normalBasket  a.addToBasketBtn.not-in-stock{

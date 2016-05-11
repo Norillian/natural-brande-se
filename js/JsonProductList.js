@@ -136,7 +136,6 @@ weightBeforeZipCode=200000;
 							basketDiv.addClass("addToBasketLnk not-in-stock");
 							basketDiv.prop('disabled',true);
 							basketDiv.text(addToBasketNotInStockTxt);
-							$('.basket-outer input, .productList-qty-changer').hide();
 						} else if(val.inventoryCount >= 1) {
 							basketDiv.addClass("addToBasketLnk");
 							basketDiv.text(addToBasketTxt);
