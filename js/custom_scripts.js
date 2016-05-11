@@ -1029,6 +1029,10 @@ $( document ).ready(function() {
         newAddToBasketBtn.text('Udsolgt');
         $('.normalBasket input, .productList-qty-changer').hide();
       }
+      newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
+      newAddToBasketBtn.append($("#newPInfoAddToBasket").text());
+
+      $(this).parent().append(newAddToBasketBtn);
 
     }
     else if($( "#main #ShopContent .pInfoBasket .etBasket").hasClass('variantBasket')) {

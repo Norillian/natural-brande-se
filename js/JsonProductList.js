@@ -323,6 +323,9 @@ weightBeforeZipCode=200000;
                 productDiv.append(productInnerDiv);
                 $(selector + " > .products").append(productDiv);
 
+				$('.not-in-stock').closest('.basket-outer').find('input.basketQtyInput').hide();
+				$('.not-in-stock').closest('.basket-outer').find('.productList-qty-changer').hide();
+
             });
 
 			//Check if related products has products if yes then show
