@@ -1020,10 +1020,10 @@ $( document ).ready(function() {
       getOnclickEventFromImg = $(this).attr("onclick");
       newAddToBasketBtn = $("<a></a>");
       newAddToBasketBtn.addClass("addToBasketBtn");
-      newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
+      /*newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
       newAddToBasketBtn.append($("#newPInfoAddToBasket").text());
       $(this).parent().append(newAddToBasketBtn);
-
+*/
       if($('span.isNotInStockIcon').length > 0){
         newAddToBasketBtn.addClass('not-in-stock');
         newAddToBasketBtn.text('Udsolgt');
@@ -1033,15 +1033,13 @@ $( document ).ready(function() {
       newAddToBasketBtn.append($("#newPInfoAddToBasket").text());
 
       $(this).parent().append(newAddToBasketBtn);
-
     }
     else if($( "#main #ShopContent .pInfoBasket .etBasket").hasClass('variantBasket')) {
       getOnclickEventFromImg = $(this).parent().attr("href");
       newAddToBasketBtn = $("<a></a>");
       newAddToBasketBtn.addClass("addToBasketBtn");
       newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
-      newAddToBasketBtn.append($("#newPInfoAddToBasket").text());
-
+      newAddToBasketBtn.append($("#newPInfoAddToBasketVariant").text());
       $(this).parent().append(newAddToBasketBtn);
     }
 

@@ -1,0 +1,409 @@
+<style type="text/css">
+    .contentPane.columns {
+        padding-left: 0;
+        padding-right: 0;
+    }
+</style>
+
+<div class="productInfoBdy clearfix" itemscope="" itemtype="http://schema.org/Product">
+    <div class="productInfoBackDiv">
+        <a id="navigateParentLnk"><i class="fa fa-angle-left"></i>&amp;nbsp;<eSeller:Select text="label_navigate_parentURL" /></a>
+    </div>
+    <script type="text/javascript">
+        var getParentUrl = '<eSeller:Select Value-Of="Context:NavigateUrlParent.NavigateUrl" />';
+
+        $('.productInfoBackDiv #navigateParentLnk').attr('href', getParentUrl);
+    </script>
+    <div class="productInfoMiddleDiv">
+        <!--Product image area start-->
+        <div class="imageBdy">
+            <eSeller:Control ControlID="productimages" ControlType="ProductImages" />
+            <eSeller:If IsTrue="Product:IsGoodBuy">
+                <span class="goodDeal"><eSeller:Select text="label_goodDeal_text" /></span>
+            </eSeller:If>
+            <eSeller:If IsTrue="Product:IsNewProduct">
+                <span class="noveltyProduct"><eSeller:Select text="label_newProduct_text" /></span>
+            </eSeller:If>
+            <eSeller:If IsTrue="Product:IsDeprecated">
+                <span class="deprecatedProduct"><eSeller:Select text="label_isDeprecated_text" /></span>
+            </eSeller:If>
+        </div>
+        <!--Manufacturer logo area start-->
+        <div class="pInfoManufacturerLogo">
+            <eSeller:Control ControlID="manuflogo" ControlType="ManufacturerLogo" />
+        </div>
+        <!--Manufacturer logo area start-->
+        <!--Product image area end-->
+    </div>
+    <div class="productInfoTopDiv">
+        <!--Product name area start-->
+        <div class="productNameBdy">
+            <div class="pInfoProductName">
+                <h1 itemprop="name">
+                    <eSeller:Select Value-Of="Product:ProductName" />
+                </h1>
+            </div>
+        </div>
+        <!--Product name area end-->
+    </div>
+    <div class="productInfoBottomDiv">
+        <!-- Product variants selector -->
+        <div class="variantsSelectorBdy">
+            <eSeller:If IsTrue="Product:HasVariants">
+                <eSeller:Control ControlType="EnhancedVariantSelector" ControlID="variantsSelector" />
+            </eSeller:If>
+        </div>
+        <div class="priceAndBasketDiv clearfix" itemscope="" itemtype="http://schema.org/Offer">
+            <eSeller:If IsTrue="Settings:IsCustomerLoggedIn">
+
+                <!--Product prices area start-->
+                <meta itemprop="priceCurrency" content="DKK" />
+                <div class="pInfoProductPrices clearfix">
+                    <eSeller:If istrue="Product:ShowSalesprice">
+                        <div class="price-before-discount" style="display:none;"></div>
+                        <script type="text/javascript">
+                            var salespriceNoFormat = '<eSeller:Select Value-Of="Product:Pricing.TagPrice" />';
+                            var discountpriceNoFormat = '<eSeller:Select Value-Of="Product:Pricing.TagPriceLineDiscountAmount" />';
+                            var currentCurrency = '<eSeller:Select Value-Of="Basket:CurrencySymbol" />';
+
+                            var hasComma = false;
+
+                            if(salespriceNoFormat.indexOf(",") >= 0) {
+
+                                salespriceNoFormat = salespriceNoFormat.replace(',', '.');
+                                discountpriceNoFormat = discountpriceNoFormat.replace(',', '.');
+                                hasComma = true;
+
+                            }
+
+                            salespriceNoFormat = Math.floor(parseFloat(salespriceNoFormat) * 100) / 100;
+                            discountpriceNoFormat = Math.floor(parseFloat(discountpriceNoFormat) * 100) / 100;
+                            var priceWithoutDiscount = salespriceNoFormat + discountpriceNoFormat;
+
+                            if(priceWithoutDiscount > salespriceNoFormat) {
+
+                                if(hasComma === true) {
+                                    priceWithoutDiscount = String(priceWithoutDiscount);
+                                    priceWithoutDiscount = priceWithoutDiscount.replace('.', ',');
+                                }
+
+                                $('.price-before-discount').show().append(currentCurrency + " " + priceWithoutDiscount);
+                            }
+                        </script>
+                        <div class="ProductPriceValue" itemprop="price">
+                            <eSeller:Control ControlID="SalesPrice" ControlType="Productprice" />
+                        </div>
+                        <eSeller:If istrue="Product:ShowPreviousSalesprice">
+                            <div class="ProductPreviousPriceValue">
+                                <eSeller:Control ControlID="PreviousSalesPrice" ControlType="Productprice" />
+                            </div>
+                        </eSeller:If>
+                    </eSeller:If>
+                    <eSeller:If istrue="Product:HasListprice">
+                        <div class="ProductListPriceLabel left">
+                            <eSeller:Select text="label_list_price" />
+                        </div>
+                        <div class="ProductListPriceValue left">
+                            <eSeller:Select Value-Of="Product:Pricing.ListTagPriceFormatted" />
+                        </div>
+                        <div style="clear:both;"></div>
+                    </eSeller:If>
+                    <eSeller:If IsTrue="Product:HasBetterPricing">
+                        <div class="betterPricingArea">
+                            <div style="float:left" class="betterPricingVol">
+                                <eSeller:Select text="label_Quantity1_text" />&amp;nbsp;<b><eSeller:Select Value-Of="Product:BetterPricing.QuantityFormatted" /></b>
+                            </div>
+                            <div style="float:left" class="betterPricingStepInfo">
+                                &amp;nbsp;
+                                <eSeller:Select text="label_BetterPricingStepInfo" />&amp;nbsp;
+                            </div>
+                            <div style="float:left" class="betterPricingPrice">
+                                <b><eSeller:Select Value-Of="Product:BetterPricing.TagPriceFormatted" /></b>&amp;nbsp;
+                            </div>
+                            <div style="float:left" class="betterPricingInfo">
+                                <eSeller:Select text="label_BetterPricingInfo" />
+                            </div>
+                            <div style="clear:both"></div>
+
+                            <eSeller:If IsTrue="Product:HasBetterPricing2">
+                                <div style="float:left" class="betterPricing2Vol">
+                                    <eSeller:Select text="label_Quantity2_text" />&amp;nbsp;<b><eSeller:Select Value-Of="Product:BetterPricing2.QuantityFormatted" /></b>
+                                </div>
+                                <div style="float:left" class="betterPricing2StepInfo">
+                                    &amp;nbsp;
+                                    <eSeller:Select text="label_BetterPricing2StepInfo" />&amp;nbsp;
+                                </div>
+                                <div style="float:left" class="betterPricing2Price">
+                                    <b><eSeller:Select Value-Of="Product:BetterPricing2.TagPriceFormatted" /></b>&amp;nbsp;
+                                </div>
+                                <div style="float:left" class="betterPricing2Info">
+                                    <eSeller:Select text="label_BetterPricing2Info" />
+                                </div>
+                                <div style="clear:both"></div>
+                            </eSeller:If>
+
+                            <eSeller:If IsTrue="Product:HasBetterPricing3">
+                                <div style="float:left" class="betterPricing3Vol">
+                                    <eSeller:Select text="label_Quantity3_text" />&amp;nbsp;<b><eSeller:Select Value-Of="Product:BetterPricing3.QuantityFormatted" /></b>
+                                </div>
+                                <div style="float:left" class="betterPricing3StepInfo">
+                                    &amp;nbsp;
+                                    <eSeller:Select text="label_BetterPricing3StepInfo" />&amp;nbsp;
+                                </div>
+                                <div style="float:left" class="betterPricing3Price">
+                                    <b><eSeller:Select Value-Of="Product:BetterPricing3.TagPriceFormatted" /></b>&amp;nbsp;
+                                </div>
+                                <div style="float:left" class="betterPricing3Info">
+                                    <eSeller:Select text="label_BetterPricing3Info" />
+                                </div>
+                                <div style="clear:both"></div>
+                            </eSeller:If>
+                        </div>
+                    </eSeller:If>
+                </div>
+                <!--Product prices area end-->
+            </eSeller:If>
+            <!--Stock status area start-->
+            <div class="pInfoStockStatus left">
+                <div id="etStockStatusText">
+                    <eSeller:If IsFalse="Product:HasVariants">
+                        <eSeller:If IsTrue="Product:IsInStock">
+                            <span class="inStockIcon"></span>&amp;nbsp;
+                            <eSeller:Select text="label_productInStock_text" />
+                        </eSeller:If>
+                        <eSeller:If IsTrue="Product:IsNotInStock">
+                            <span class="isNotInStockIcon"></span>&amp;nbsp;
+                            <eSeller:Select text="label_productIsNotInStock_text" />
+                        </eSeller:If>
+                    </eSeller:If>
+                    <eSeller:If IsTrue="Product:HasVariants">
+                        <eSeller:If IsTrue="Product:IsVariant">
+                            <eSeller:If IsTrue="Product:IsInStock">
+                                <span class="inStockIcon"></span>&amp;nbsp;
+                                <eSeller:Select text="label_productInStock_text" />
+                            </eSeller:If>
+                            <eSeller:If IsTrue="Product:IsNotInStock">
+                                <span class="isNotInStockIcon"></span>&amp;nbsp;
+                                <eSeller:Select text="label_productIsNotInStock_text" />
+                            </eSeller:If>
+                        </eSeller:If>
+                    </eSeller:If>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+            <!--Stock status area end-->
+			<span class="productIdSpan">
+				<eSeller:Select text="label_productIDText" />:&amp;nbsp;<eSeller:Select Value-Of="Product:ExtProductID" />
+			</span>
+            <eSeller:If IsTrue="Settings:IsCustomerLoggedIn">
+                <!--Basket area start-->
+                <div class="pInfoBasket clearfix">
+                    <eSeller:If IsFalse="Product:HasVariants">
+                        <eSeller:If istrue="Product:ShowAddToBasket">
+                            <div class="etBasket normalBasket">
+                                <eSeller:BasketButton ControlID="btnBasket">
+                                    <eSeller:Attribute Name="ToolTip" text="tooltip_add_to_basket" />
+                                </eSeller:BasketButton>
+                                <span id="newPInfoAddToBasket" style="display:none;"><eSeller:Select text="label_new_addToBasket_btn" /></span>
+                            </div>
+                        </eSeller:If>
+                        <eSeller:If IsTrue="Product:IsDeprecated">
+                            <div class="etBasket">
+                                <eSeller:Select text="IsDeprecated" />
+                            </div>
+                        </eSeller:If>
+                    </eSeller:If>
+                    <eSeller:If IsTrue="Product:HasVariants">
+                        <eSeller:If IsTrue="Product:IsVariant">
+                            <eSeller:If istrue="Product:ShowAddToBasket">
+                                <div class="etBasket variantBasket">
+                                    <eSeller:BasketButton ControlID="btnBasketVariant">
+                                        <eSeller:Attribute Name="ToolTip" text="tooltip_add_to_basket" />
+                                    </eSeller:BasketButton>
+                                    <span id="newPInfoAddToBasketVariant" style="display:none;"><eSeller:Select text="label_new_addToBasket_btn" /></span>
+                                </div>
+                            </eSeller:If>
+                            <eSeller:If IsTrue="Product:IsDeprecated">
+                                <div class="etBasket">
+                                    <eSeller:Select text="IsDeprecated" />
+                                </div>
+                            </eSeller:If>
+                        </eSeller:If>
+                        <eSeller:If IsFalse="Product:IsVariant">
+                            <input class="notVariantBuyInput" type="text" value="1" disabled="" />
+                            <div class="notVariantBuyBtn">
+                                <eSeller:Select text="label_notVariantBuyBtn" />
+                            </div>
+                        </eSeller:If>
+                    </eSeller:If>
+                    <eSeller:If istrue="Settings:IsLoggedIn">
+                        <div class="addToFavoritesBdy">
+
+                            <eSeller:If IsFalse="Product:ShowRemoveFromFavorites">
+
+                                <eSeller:HtmlElement TagName="a">
+                                    <eSeller:Attribute Name="class" Value="add-to-favorite" />
+                                    <eSeller:Select Text="label_add-to-favorite" />
+                                </eSeller:HtmlElement>
+
+                                <script type="text/javascript">
+                                    var pUrl = '<eSeller:Select Value-Of="Product:ProductUrl" />';
+                                    var fUrl = '<eSeller:Select Value-Of="Product:AddToFavoritesUrl" />';
+                                    //<![CDATA[
+
+                                    var newUrl = fUrl.split('&')[0] + '&rurl=' + encodeURIComponent(pUrl);
+                                    $('.add-to-favorite').attr('href', newUrl);
+                                    console.log('Updated 6');
+
+                                    //]]>
+                                </script>
+
+                            </eSeller:If>
+
+                            <eSeller:If IsTrue="Product:ShowRemoveFromFavorites">
+                                <eSeller:HtmlElement TagName="a">
+                                    <eSeller:Attribute Name="class" Value="remove-from-favorite" />
+                                    <eSeller:Attribute Name="href" Value-Of="Product:RemoveFromFavoritesUrl" />
+                                    <eSeller:Select Text="label_remove-from-favorite" />
+                                </eSeller:HtmlElement>
+                            </eSeller:If>
+
+                        </div>
+
+                        <!-- <div class="addToFavorites" style="display:none;">
+                            <eSeller:FavoritesButton ControlID="btnFavorites">
+                                <eSeller:Attribute Name="ToolTip" text="tooltip_add_to_product_favorite" />
+                            </eSeller:FavoritesButton>
+                            <span id="newPInfoAddToFavorites" style="display:none;"><eSeller:Select text="label_new_addToFavourites_btn" /></span>
+                        </div>
+                        <div class="addToFavoritesBdy">
+                            <a class="addToFavoritesLnk"><i class="fa fa-star"></i>&amp;nbsp;<eSeller:Select text="label_addToFavoritesLnk" /></a>
+                        </div>
+                        <script type="application/javascript">
+                            $('.addToFavoritesLnk').attr('href', $('.addToFavorites span a').attr('href'));
+                        </script> -->
+                    </eSeller:If>
+                </div>
+                <!--Basket area end-->
+            </eSeller:If>
+        </div>
+        <div class="product-barcode">
+            <canvas id="barcode"></canvas>
+        </div>
+        <!-- Info description area start -->
+        <div class="infoDropdownBdy">
+            <ul class="accordion" data-accordion="">
+                <eSeller:If isnotempty="Product:ProductLongDescription">
+                    <li class="accordion-navigation active">
+                        <a href="#panel1a">
+                            <eSeller:Select text="label_info_dropdown_01" />
+                        </a>
+                        <div id="panel1a" class="content active">
+                            <div id="etLongDesc">
+                                <eSeller:Select Value-Of="Product:ProductLongDescription" />
+                            </div>
+                        </div>
+                    </li>
+                </eSeller:If>
+                <li class="accordion-navigation">
+                    <a href="#panel2a">
+                        <eSeller:Select text="label_info_dropdown_02" />
+                    </a>
+                    <div id="panel2a" class="content">
+                        <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;return_text&quot;)" />
+                    </div>
+                </li>
+                <li class="accordion-navigation">
+                    <a href="#panel3a">
+                        <eSeller:Select text="label_info_dropdown_03" />
+                    </a>
+                    <div id="panel3a" class="content">
+                        <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;delivery_text&quot;)" />
+                    </div>
+                </li>
+                <li class="accordion-navigation">
+                    <a href="#panel4a">
+                        <eSeller:Select text="label_info_dropdown_04" />
+                    </a>
+                    <div id="panel4a" class="content">
+                        <eSeller:Control ControlType="ProductDocuments" ControlID="ProductDocument" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- Info description area end -->
+    </div>
+    <div style="clear:both;"></div>
+    <div class="relatedProducts">
+        <h3>
+            <eSeller:Select text="label_related_products_header" />
+        </h3>
+        <div id="relatedProductsList" class="jsonProducts relatedProducts">
+            <!-- Placeholder for product wich is added by JsonProductList.js -->
+        </div>
+    </div>
+    <div class="productsGoodMatch">
+        <h3>
+            <eSeller:Select text="label_goodMatch_products_header" />
+        </h3>
+        <div id="goodMatchProductsList" class="jsonProducts goodMatchProducts">
+            <!-- Placeholder for product wich is added by JsonProductList.js -->
+        </div>
+    </div>
+</div>
+
+<div class="hiddenText" style="display:none!important">
+    <!-- This is used to create text for the json productlist -->
+    <span class="goodDealText"><eSeller:Select text="label_goodDealText" /></span>
+    <span class="noveltyProductText"><eSeller:Select text="label_noveltyProductText" /></span>
+    <span class="deprecatedText"><eSeller:Select text="label_deprecatedText" /></span>
+</div>
+
+<script type="text/javascript">
+    var pId = '<eSeller:Select value-of="Product:ProductID" />';
+    var bareKode = '<eSeller:Select value-of="Product:AltExtProductID" />';
+    JsBarcode("#barcode", bareKode);
+    var productBundlesize = '<eSeller:Select value-of="Product:SalesBundleSize" />';
+
+    if(parseInt(productBundlesize) > 1) {
+        $('#main #ShopContent .pInfoBasket .etBasket .ecBB input').val(Math.floor(parseInt(productBundlesize))).attr('readonly', true);
+    }
+
+    //<![CDATA[
+    productQtyChangeDiv = $('<div class="productList-qty-changer"></div>');
+    productQtyAdd = $('<a></a>');
+    productQtyAdd.addClass('productList-qty-add');
+    productQtyAdd.append('<i class="fa fa-chevron-up"></i>');
+    productQtyChangeDiv.append(productQtyAdd);
+    productQtySubtract = $('<a></a>');
+    productQtySubtract.addClass('productList-qty-Subtract');
+    productQtySubtract.append('<i class="fa fa-chevron-down"></i>');
+    productQtyChangeDiv.append(productQtySubtract);
+
+    $('.etBasket').css('position', 'relative').append(productQtyChangeDiv);
+
+    $('a.productList-qty-add').on( "click", function() {
+        currentValue = $('#main #ShopContent .pInfoBasket .etBasket .ecBB input').val();
+        if(parseInt(productBundlesize) <= 0) {
+            productBundlesize = 1;
+        }
+        currentBundleSize = productBundlesize;
+        currentValue = parseInt(currentValue) + parseInt(currentBundleSize);
+        $('#main #ShopContent .pInfoBasket .etBasket .ecBB input').val(currentValue);
+    });
+
+    $('a.productList-qty-Subtract').on( "click", function() {
+        currentValue = $('#main #ShopContent .pInfoBasket .etBasket .ecBB input').val();
+        if(parseInt(productBundlesize) <= 0) {
+            productBundlesize = 1;
+        }
+        currentBundleSize = productBundlesize;
+        currentValue = parseInt(currentValue) - parseInt(currentBundleSize);
+        if(currentValue >= parseInt(currentBundleSize)) {
+            $('#main #ShopContent .pInfoBasket .etBasket .ecBB input').val(currentValue);
+        }
+    });
+    //]]>
+</script>
+
+<script src="/media/349/js/JsonProductList.js"></script>
