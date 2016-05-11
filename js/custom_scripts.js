@@ -1020,10 +1020,7 @@ $( document ).ready(function() {
       getOnclickEventFromImg = $(this).attr("onclick");
       newAddToBasketBtn = $("<a></a>");
       newAddToBasketBtn.addClass("addToBasketBtn");
-      /*newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
-      newAddToBasketBtn.append($("#newPInfoAddToBasket").text());
-      $(this).parent().append(newAddToBasketBtn);
-*/
+
       if($('span.isNotInStockIcon').length > 0){
         newAddToBasketBtn.addClass('not-in-stock');
         newAddToBasketBtn.text('Udsolgt');
