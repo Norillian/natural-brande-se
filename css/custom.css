@@ -1889,6 +1889,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         border-radius: 4px;
         padding: 0 20px 0 0;
     }
+    .product-list .listBdy{
+        margin-left: -1px;
+        border-left: 1px solid #e7e7e7;
+    }
+
     .leftSideListing > h2,
     .leftSideListing ul > h2,
     .product-filter h2{
@@ -5143,12 +5148,17 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 @media only screen and (max-width: 768px) {
 
 	#advancedSearchBdy input.textbox {
-		min-width: auto;
+		min-width: inherit;
 	}
 
 	div#rightTop > div {
 		width: auto;
 	}
+
+    .product-list .listBdy{
+        margin-left: 0;
+        border-left: none;
+    }
 
 }
 
@@ -5164,7 +5174,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         margin-left: 38px;
         height: 38px;
         font-size: 24px;
-        display: block !important;
+        display: block;
     }
     .productElement .productList-qty-changer a.productList-qty-add i{
         padding-bottom: 2px;
