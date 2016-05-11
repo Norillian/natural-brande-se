@@ -670,13 +670,21 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .left-off-canvas-menu .productMenuAllMobile li ul li {
-        margin-right: 0px;
+        margin-right: 0;
     }
 
     .left-off-canvas-menu .productMenuAllMobile li ul li a {
         background-color: #CDE9CD;
         font-size: 16px;
         color: #333333;
+        padding-left: 24px;
+    }
+    .left-off-canvas-menu .productMenuAllMobile li ul li ul li a{
+        padding-left: 36px;
+        font-size: 13px;
+    }
+    .left-off-canvas-menu .productMenuAllMobile li ul li ul li ul li a{
+        padding-left: 42px;
     }
 
     .left-off-canvas-menu .productMenuAllMobile li a.hasSubMenu:after {
