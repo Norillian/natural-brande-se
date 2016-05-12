@@ -228,7 +228,7 @@ weightBeforeZipCode=200000;
                 productPrevPriceDiv.addClass('productPrevPriceDiv');
 				if(val.hasSalesPrice.length != 0) {
                     if(val.hasSalesPrice == true) {
-						salespriceNoFormat = String(val.salesPrices[0].totalTagPrice);
+						salespriceNoFormat = String(val.salesPrices[0].tagPriceExcVATAmount);
 						discountpriceNoFormat = String(val.salesPrices[0].tagPriceLineDiscountAmount);
 						currentCurrency = CurrencySymbol;
 
@@ -264,7 +264,7 @@ weightBeforeZipCode=200000;
                 productPriceDiv.addClass('productPriceDiv');
                 if(val.hasSalesPrice.length != 0) {
                     if(!val.hasSalesPrice == false) {
-                        productPriceDiv.append(val.salesPrices[0].tagPriceFormatted);
+                        productPriceDiv.append(val.salesPrices[0].tagPriceExcVATAmountFormatted);
                     }
                 }
                 if(isCustomerLoggedIn == "True"){
@@ -980,7 +980,7 @@ function createAddedToBasketProducts() {
                 productPrevPriceDiv.addClass('productPrevPriceDiv');
 				if(val.hasSalesPrice.length != 0) {
                     if(val.hasSalesPrice == true) {
-						salespriceNoFormat = String(val.salesPrices[0].totalTagPrice);
+						salespriceNoFormat = String(val.salesPrices[0].tagPriceExcVATAmount);
 						discountpriceNoFormat = String(val.salesPrices[0].tagPriceLineDiscountAmount);
 						currentCurrency = CurrencySymbol;
 
@@ -1016,7 +1016,7 @@ function createAddedToBasketProducts() {
                 productPriceDiv.addClass('productPriceDiv');
                 if(val.hasSalesPrice.length != 0) {
                     if(!val.hasSalesPrice == false) {
-                        productPriceDiv.append(val.salesPrices[0].tagPriceFormatted);
+                        productPriceDiv.append(val.salesPrices[0].tagPriceExcVATAmountFormatted);
                     }
                 }
                 productInnerDiv.append(productPriceDiv);
