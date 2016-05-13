@@ -223,6 +223,12 @@ weightBeforeZipCode=200000;
 				}
 				productInnerDiv.append(productStockStatusDiv);
 
+				//Product ID
+				productEsellerID = $('<span></span>');
+				productEsellerID.addClass('product-id');
+				productEsellerID.append(eSellerIdText + ': ' + val.eSellerId);
+				productInnerDiv.append(productEsellerID);
+
                 productPrevPriceDiv = $('<a></a>');
                 productPrevPriceDiv.attr('href', val.URLPathAndQuery);
                 productPrevPriceDiv.addClass('productPrevPriceDiv');
@@ -272,13 +278,6 @@ weightBeforeZipCode=200000;
                 if(isCustomerLoggedIn == "True"){
                   productInnerDiv.append(productPriceDiv);
                 }
-
-
-				/*productEsellerID = $('<span></span>');
-                productEsellerID.attr('href', val.URLPathAndQuery);
-                productEsellerID.addClass('productEsellerID');
-				productEsellerID.append(eSellerIdText + ': ' + val.eSellerId);
-				productInnerDiv.append(productEsellerID);*/
 
 				if($('#favoriteProductsJsonBdy').length > 0){
 		          if(isCustomerLoggedIn == "True"){
