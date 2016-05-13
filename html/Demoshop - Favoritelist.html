@@ -1,0 +1,27 @@
+<div class="favoriteProductsJsonOuterBdy">
+    <h1>
+        <eSeller:Select text="label_favorite_products_header" />
+    </h1>
+    <div id="favoriteProductsJsonBdy" class="jsonProducts favoriteProductsJson"></div>
+</div>
+
+<div class="productListBdy" style="display:none;">
+    <eSeller:Control ControlID="ProductListFavorite" ControlType="ProductList" DataProvider="eSeller.DataProvider.ProductList.CustomerFavorites" IsMainProductList="false" />
+</div>
+
+<div class="hiddenText" style="display:none!important">
+    <!-- This is used to create text for the json productlist -->
+    <span class="goodDealText"><eSeller:Select text="label_goodDealText" /></span>
+    <span class="noveltyProductText"><eSeller:Select text="label_noveltyProductText" /></span>
+</div>
+
+<script type="application/javascript">
+    var getAllFavoriteProductIDs = "";
+    $( ".productListBdy .Tabular .ProductID a" ).each(function( index ) {
+        getAllFavoriteProductIDs += $(this).text();
+        getAllFavoriteProductIDs += ";";
+    });
+    getAllFavoriteProductIDs = getAllFavoriteProductIDs.substring(0, getAllFavoriteProductIDs.length - 1);
+</script>
+
+<script src="/media/349/js/JsonProductList.js"></script>
