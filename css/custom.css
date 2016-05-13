@@ -1425,6 +1425,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         display: inline-block;
         padding-right: 16px;
     }
+    #memberMenuDesktop .memberMenuText.logged-name{
+         font-weight: normal;
+         text-transform: none;
+     }
 
     #memberMenuDesktop:hover {
         cursor: pointer;
@@ -2554,6 +2558,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         color: #c72b2b;
         font-family: arial;
         line-height: 32px;
+        display: none;
     }
 
     .productElement .productRemoveFromFavorites:hover {
