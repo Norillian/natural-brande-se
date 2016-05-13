@@ -2568,6 +2568,9 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         line-height: 32px;
         display: none;
     }
+    .regualar-fav-list .productElement .productRemoveFromFavorites{
+        display: block !important;
+    }
 
     .productElement .productRemoveFromFavorites:hover {
         text-decoration: none;
