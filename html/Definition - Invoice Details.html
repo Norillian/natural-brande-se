@@ -1,0 +1,25 @@
+<div class="page-invoice-details">
+
+    <eSeller:Data DataID="Invoice" DataType="InvoiceHead" InvIdKeyName="InvoiceID"/>
+
+    <a href="javascript:history.back()" class="invoice-details-back-button"><eSeller:Select Text="label_invoice-back-button" /></a>
+    <br /><br />
+    <strong><eSeller:Select Text="label-invoice-firm-name" /></strong> <eSeller:Select Value-Of="Data_Invoice:AddressName" /><br />
+    <strong><eSeller:Select Text="label-invoice-ExtID" /></strong> <eSeller:Select Value-Of="Data_Invoice:ExtInvoiceID" /> <br />
+    <strong><eSeller:Select Text="label-invoice-Due-date" /></strong> <eSeller:Select Value-Of="Data_Invoice:DueDate" /> <br />
+    <strong><eSeller:Select Text="label-invoice-VAT-number" /></strong> <eSeller:Select Value-Of="Data_Invoice:VatNumber" /><br />
+    <strong><eSeller:Select Text="label-invoice-Payment-terms" /></strong> <eSeller:Select Value-Of="Data_Invoice:PaymentTerms" /><br />
+    <strong><eSeller:Select Text="label-invoice-address" /></strong> <eSeller:Select Value-Of="Data_Invoice:AddressLine1" /><br />
+    <strong><eSeller:Select Text="label-invoice-city" /></strong> <eSeller:Select Value-Of="Data_Invoice:AddressCity" /><br />
+    <strong><eSeller:Select Text="label-invoice-ZIP" /></strong> <eSeller:Select Value-Of="Data_Invoice:AddressZipCode" /><br />
+    <strong><eSeller:Select Text="label-invoice-Country" /></strong> <eSeller:Select Value-Of="Data_Invoice:AddressCountry" />
+    <br /><br />
+    <strong><eSeller:Select Text="label-invoice-Sub-total" /></strong> <eSeller:Select Value-Of="Data_Invoice:SubTotal" /><br />
+    <strong><eSeller:Select Text="label-invoice-VAT-amount" /></strong> <eSeller:Select Value-Of="Data_Invoice:VatAmount" /><br />
+    <strong><eSeller:Select Text="label-invoice-Total-inc-VAT" /></strong> <eSeller:Select Value-Of="Data_Invoice:TotalWithVAT" /><br />
+    <br /><br />
+
+    <eSeller:Control ControlType="InvoiceDetails" ControlID="InvoiceDetails" DataSourceId="Invoice" />
+    <br />
+
+</div>

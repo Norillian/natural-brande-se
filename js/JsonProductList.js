@@ -257,7 +257,9 @@ weightBeforeZipCode=200000;
 						}
                     }
                 }
-                productInnerDiv.append(productPrevPriceDiv);
+				if(isCustomerLoggedIn == "True") {
+					productInnerDiv.append(productPrevPriceDiv);
+				}
 
                 productPriceDiv = $('<a></a>');
                 productPriceDiv.attr('href', val.URLPathAndQuery);
@@ -786,6 +788,9 @@ if($('#productFilteringDrop').length > 0) {
 		filterUrl += customFieldFilter;
 		console.log(filterUrl);
 	}
+}
+if(isCustomerLoggedIn == "True"){
+	customerId = isloggedCustomerId;
 }
 
 var productList = "";
