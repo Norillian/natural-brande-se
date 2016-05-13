@@ -1020,6 +1020,7 @@ $( document ).ready(function() {
       getOnclickEventFromImg = $(this).attr("onclick");
       newAddToBasketBtn = $("<a></a>");
       newAddToBasketBtn.addClass("addToBasketBtn");
+      newAddToBasketBtn.text($("#newPInfoAddToBasket").text());
 
       if($('span.isNotInStockIcon').length > 0){
         newAddToBasketBtn.addClass('not-in-stock');
@@ -1027,7 +1028,6 @@ $( document ).ready(function() {
         $('.normalBasket input, .productList-qty-changer').hide();
       }
       newAddToBasketBtn.attr("onclick", getOnclickEventFromImg);
-      newAddToBasketBtn.append($("#newPInfoAddToBasket").text());
 
       $(this).parent().append(newAddToBasketBtn);
     }
