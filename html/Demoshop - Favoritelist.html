@@ -1,11 +1,14 @@
-<div class="favoriteProductsJsonOuterBdy">
+<style>
+    .pager {display:none!important}
+</style>
+<div class="favoriteProductsJsonOuterBdy regualar-fav-list">
     <h1>
         <eSeller:Select text="label_favorite_products_header" />
     </h1>
     <div id="favoriteProductsJsonBdy" class="jsonProducts favoriteProductsJson"></div>
 </div>
 
-<div class="productListBdy" style="display:none;">
+<div class="productListBdy" style="display:none !important;">
     <eSeller:Control ControlID="ProductListFavorite" ControlType="ProductList" DataProvider="eSeller.DataProvider.ProductList.CustomerFavorites" IsMainProductList="false" />
 </div>
 
