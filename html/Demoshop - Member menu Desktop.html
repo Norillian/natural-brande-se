@@ -1,6 +1,6 @@
-<ul class="accordion memberMenuBdy show-for-medium-up show-for-large-up" data-accordion="memberMenuAccordion">
-    <li class="accordion-navigation loginMenuBdy">
-        <a href="#memberMenuPanel" id="memberMenuDesktop">
+<ul class="memberMenuBdy show-for-medium-up show-for-large-up">
+    <li class="loginMenuBdy">
+        <a data-dropdown="memberMenuPanel" aria-controls="memberMenuPanel" aria-expanded="true" id="memberMenuDesktop">
 			<span class="memberMenuImg">
 				<img src="/media/349/img/memeberLock.png" />
 			</span>
@@ -14,7 +14,7 @@
         <eSeller:If IsFalse="Settings:IsCustomerLoggedIn">
             <span onclick="window.location = '/customers/CustomerCreate.aspx';" class="new-customer-link"><eSeller:Select text="create_customer_link" /></span>
         </eSeller:If>
-        <div id="memberMenuPanel" class="content">
+        <div data-dropdown-content="" aria-hidden="true" aria-autoclose="false" id="memberMenuPanel" class="content memberDroppedContent f-dropdown small">
             <eSeller:If IsFalse="Settings:IsLoggedIn">
                 <div class="customerLoginBdy active clearfix">
                     <eSeller:Control ControlID="customerLoginControl" ControlType="CustomerLogin" />
