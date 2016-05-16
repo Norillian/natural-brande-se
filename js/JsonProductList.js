@@ -596,15 +596,19 @@ weightBeforeZipCode=200000;
                     //jQuery.bbq.pushState("page="+getUrlVars(previousPage)["p"]);
                     goToPage(previousPage.replace("&imgSizeId=0",""));
                 });
-                target.append(pageLink);
+				if(totalPages > 1) {
+					target.append(pageLink);
+				}
             }
             else {
                 var pageLink = $("<a href='javascript:void(0);' class='previousPageLnk notActive' data-URLPathAndQuery='" + previousPage + "'><span class='icon prev'></span>" + PrevPageText + "</a></div>");
-                target.append(pageLink);
+				if(totalPages > 1) {
+					target.append(pageLink);
+				}
             }
 
 
-			if(currentPage && totalPages){
+			if(currentPage && totalPages > 1){
 				pagecount = $("<span class='pagecountspan'></span>");
 				pagecount.text(PageNo + " " + currentPage + " " + PageOf + " " + totalPages);
                 multipage = $("<span></span>");
