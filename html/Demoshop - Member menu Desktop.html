@@ -1,0 +1,57 @@
+<ul class="accordion memberMenuBdy show-for-medium-up show-for-large-up" data-accordion="memberMenuAccordion">
+    <li class="accordion-navigation loginMenuBdy">
+        <a href="#memberMenuPanel" id="memberMenuDesktop">
+			<span class="memberMenuImg">
+				<img src="/media/349/img/memeberLock.png" />
+			</span>
+            <eSeller:If IsFalse="Settings:IsCustomerLoggedIn">
+                <span class="memberMenuText"><eSeller:Select text="label_login_before" /></span>
+            </eSeller:If>
+            <eSeller:If IsTrue="Settings:IsCustomerLoggedIn">
+                <span class="memberMenuText logged-name"><eSeller:Select Value-Of="Customer:CompanyName" /></span>
+            </eSeller:If>
+        </a>
+        <eSeller:If IsFalse="Settings:IsCustomerLoggedIn">
+            <span onclick="window.location = '/customers/CustomerCreate.aspx';" class="new-customer-link"><eSeller:Select text="create_customer_link" /></span>
+        </eSeller:If>
+        <div id="memberMenuPanel" class="content">
+            <eSeller:If IsFalse="Settings:IsLoggedIn">
+                <div class="customerLoginBdy active clearfix">
+                    <eSeller:Control ControlID="customerLoginControl" ControlType="CustomerLogin" />
+                    <a href="/customers/CustomerCreate.aspx" class="createNewCustomerLnk"><eSeller:Select text="label_create_newCustomer_link" /></a>
+                    <a class="forgotLoginLnk"><eSeller:Select text="label_forgot_login_link" /></a>
+                </div>
+                <div class="forgotPasswordBdy clearfix">
+                    <h2><eSeller:Select text="label_forgotPasswordBdy_header" /></h2>
+                    <p><eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;sendPasswordReminder&quot;)" /></p>
+                    <div class="forgotPasswordInputContent clearfix">
+						<span>
+							<eSeller:Select text="label_forgotPasswordBdy_email_text" />
+						</span>
+                        <eSeller:Control ControlType="CustomerLoginPasswordReminder" ControlID="Password Reminder" />
+                    </div>
+                    <a class="forgotLoginBackLnk"><eSeller:Select text="label_forgotLoginBackLnk" /></a>
+                    <eSeller:Control ControlType="GenericButton" WorksOn="Password Reminder" ControlID="SubmitForgottenPassword" CssClass="sendPasswordReminder" />
+                </div>
+                <script type="application/javascript">
+                    $( "#memberMenuPanel .forgotLoginLnk" ).on( "click", function() {
+                        $('.forgotPasswordBdy').addClass('active');
+                        $('.customerLoginBdy').removeClass('active');
+                    });
+                    $( "#memberMenuPanel .forgotLoginBackLnk" ).on( "click", function() {
+                        $('.forgotPasswordBdy').removeClass('active');
+                        $('.customerLoginBdy').addClass('active');
+                    });
+                </script>
+            </eSeller:If>
+            <eSeller:If IsTrue="Settings:IsLoggedIn">
+                <div class="memberMenuLoggedIn clearfix">
+                    <a href="/customers/profile.aspx" class="editProfileLnk"><i class="fa fa-angle-right"></i>&amp;nbsp;<eSeller:Select text="label_editProfileLnk_link" /></a>
+                    <a style="display:none" href="/products/Productlist.aspx?ProductListTypeID=2" class="favoriteLnk"><i class="fa fa-angle-right"></i>&amp;nbsp;<eSeller:Select text="label_favoriteLnk_link" /></a>
+                    <a href="/customers/orderlist.aspx" class="orderHistory"><i class="fa fa-angle-right"></i>&amp;nbsp;<eSeller:Select text="label_orderHistory_link" /></a>
+                    <a href="/logout.aspx" class="logoutLnk right"><eSeller:Select text="label_logout_link" /></a>
+                </div>
+            </eSeller:If>
+        </div>
+    </li>
+</ul>
