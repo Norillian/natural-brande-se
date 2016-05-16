@@ -221,7 +221,9 @@ weightBeforeZipCode=200000;
 					productStockStatusDiv.addClass('productIsInStock');
 					productStockStatusDiv.append(productListOnStockTxt);
 				}
-				productInnerDiv.append(productStockStatusDiv);
+				if(isCustomerLoggedIn == "True") {
+					productInnerDiv.append(productStockStatusDiv);
+				}
 
 				//Product ID
 				productEsellerID = $('<span></span>');

@@ -1093,6 +1093,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     #topMenuQuickLinks > ul > li:hover .f-dropdown {
         left: 0;
+        display: block;
     }
 
     #topMenuQuickLinks > ul > li > a,
