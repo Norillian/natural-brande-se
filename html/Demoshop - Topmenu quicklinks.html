@@ -1,0 +1,29 @@
+<div id="topMenuQuickLinks" class="show-for-large-up">
+    <ul class="frontpageLnk">
+        <li>
+            <a href="/">
+                <eSeller:Select text="label_topMenu_frontpage" />
+            </a>
+        </li>
+    </ul>
+    <eSeller:Control ControlID="productsMenuBdy" ControlType="ShopMenu" MenuType="Product" Depth="All" Mode="Image" />
+</div>
+
+<script type="text/javascript">
+    var topMenuQuickLinksText = "";
+    $( "#topMenuQuickLinks .shopMenu > li > div.clListLink > a" ).each(function( index ) {
+        topMenuQuickLinksText = $(this).text();
+        topMenuQuickLinksText = topMenuQuickLinksText.replace(/ /g,'');
+        if($(this).parent().parent().children('ul').length > 0) {
+            $(this).removeAttr('href');
+            $(this).attr('data-dropdown', topMenuQuickLinksText + 'dropDown').attr('aria-controls', topMenuQuickLinksText + 'dropDown').attr('aria-expanded', 'false');
+            $(this).parent().parent().children('ul').children('li').wrapAll( '<div class="innerDropdown" />');
+            $(this).parent().parent().children('ul').attr('id', topMenuQuickLinksText + 'dropDown').addClass('f-dropdown mega').attr('data-dropdown-content', '').attr('aria-hidden', 'true').attr('tabindex', '-1');
+        }
+    });
+
+    $('.shopMenu li a').on('click',function(){
+        //Dont remove, it makes the links work on tablet
+    });
+
+</script>
