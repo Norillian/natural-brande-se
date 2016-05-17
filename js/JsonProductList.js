@@ -228,7 +228,7 @@ weightBeforeZipCode=200000;
 				//Product ID
 				productEsellerID = $('<span></span>');
 				productEsellerID.addClass('product-id');
-				productEsellerID.append(eSellerIdText + ': ' + val.eSellerId);
+				productEsellerID.append(eSellerIdText + ': ' + val.id);
 				productInnerDiv.append(productEsellerID);
 
                 productPrevPriceDiv = $('<a></a>');
