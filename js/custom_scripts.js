@@ -1175,6 +1175,14 @@ $( document ).ready(function() {
     $( ".newsletterBox p" ).show();
   });
 
+  /* Mini basket height solution */
+  var miniBasketHeight = $(".miniBasketBdy > div#ec32:first-child > table").height();
+  if(miniBasketHeight > 990){
+    $("div#ec38").append("<div class='basket-message'>" + basketMessageText + "</div>")
+  }else{
+    $(".basket-message").hide();
+  }
+
   var checkPrice = $('.show-hide-price');
   var isCheckedPrice = $('.show-hide-price').is(':checked');
   if(isCheckedPrice){
