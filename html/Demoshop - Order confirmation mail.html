@@ -1,0 +1,128 @@
+
+
+<eSeller:Data DataType="OrderHead" DataId="Order" IsOrderEmail="True" />
+<table class="content" cellspacing="2" cellpadding="2" width="564px" border="0" align="center">
+    <tr>
+        <td align="left">
+            <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;OrderConfirmationEmailTop&quot;)" />
+        </td>
+    </tr>
+</table>
+<div style="text-align:center; margin-top:30px;margin-bottom:30px;">
+
+
+	<span class="content">
+      <eSeller:Select Text="text_confirmation" />
+<br /><hr style="width:564px;height:1px;border-width:0;color:gray;background-color:gray;" />
+    </span>
+    <table width="564px">
+        <tr>
+            <td>
+                <span style="font-weight:bold"><eSeller:Select Text="labelOrderNumber" /></span>
+            </td>
+            <td>
+                <span style="font-weight:bold"><eSeller:Select Value-Of="Data_Order:OrderNumber"/></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<table class="content" cellspacing="2" cellpadding="2" width="564px" border="0" align="center">
+    <tr>
+        <td valign="top">
+            <div>
+                <strong>
+                    <eSeller:Select Text="label_invoice_head" TextSourceControlId="Betalingsadresse" />
+                </strong>
+            </div>
+
+            <eSeller:Control ControlId="Betalingsadresse" ControlType="OrderPaymentAddress" DataSourceId="Order" />
+        </td>
+        <td valign="top" width="564px">
+            <div>
+                <strong>
+                    <eSeller:Select Text="label_delivery_head" TextSourceControlId="Leveringsadresse" />
+                </strong>
+            </div>
+            <eSeller:If IsTrue="Data_Order:IsShipmentAddressSpecified">
+
+
+                <eSeller:Control ControlId="Leveringsadresse" ControlType="OrderShipmentAddress"  DataSourceId="Order" />
+            </eSeller:If>
+            <eSeller:If IsFalse="Data_Order:IsShipmentAddressSpecified">
+                <eSeller:Select Text="label_delivery_not_specified" TextSourceControlId="Leveringsadresse"/>
+            </eSeller:If>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td valign="top" style="margin-top:10px;">
+                        <eSeller:Select Text="label_payment_method" TextSourceControlId="Betalingsmåde" />
+                    </td>
+                    <td valign="top" style="margin-top:10px;">
+                        <eSeller:Control ControlType="OrderPaymentMethod" ControlId="Betalingsmåde"  DataSourceId="Order" />
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <eSeller:Select Text="label_delivery_method" TextSourceControlId="Leveringsmåde" />
+                    </td>
+                    <td valign="top">
+                        <eSeller:Control ControlType="OrderShipmentMethod" ControlId="Leveringsmåde" DataSourceId="Order" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="content" colspan="2" style="margin-top:5px;">
+
+                        <eSeller:Select Text="label_order_remarks" TextSourceControlId="Ordrebemærkning"/>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+
+                        <eSeller:Control ControlType="OrderOrderingRemarks" ControlId="Ordrebemærkning"  DataSourceId="Order"  />
+                        <br /><br />
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <style type="text/css">
+                .ec64TableTotals {width:100%;}
+                .ec64TableTotals .c2 {text-align:left;}
+                .ec54Table {border-collapse:collapse;}
+                .ec54Head th {font-weight: bold; background-color:#dddddd }
+                <!-- Styrer "Ext varenr" overskrift-->
+                                         .ec54Table .c3 { text-align: left; }
+                <!-- Styrer "Beskrivelse" overskrift-->
+                                          .ec54Table .c4 { text-align: left; }
+                <!-- Styrer "Antal" overskrift-->
+                                    .ec54Table .c5 { text-align: center; }
+                <!-- Styrer "Pris" overskrift-->
+                                   .ec54Table .c6 { text-align: right; }
+                <!-- Styrer "" overskrift-->
+                               .ec54Table .c7 { text-align: right; }
+                <!-- Styrer "Beløb" overskrift-->
+                                    .ec54Table .c8 { text-align: right; }
+            </style>
+            <div style="width:564px">
+                <eSeller:Control ControlId="Ordrelinjer" ControlType="OrderDetails" DataSourceId="Order" CanReOrder="False" />
+            </div>
+            <div style="width:564px">
+                <eSeller:Control ControlId="Totaler" ControlType="OrderTotals" DataSourceId="Order" />
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="margin-top:10px;">
+            <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;OrderConfirmationEmailBottom&quot;)" />
+        </td>
+    </tr>
+</table>
+

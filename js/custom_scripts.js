@@ -1182,6 +1182,14 @@ $( document ).ready(function() {
   }else{
     $(".basket-message").hide();
   }
+  /* Search on Enter */
+  $(".advancedSearchBdy .textbox.ui-autocomplete-input").keyup(function(event){
+    if(event.keyCode == 13){
+      $(".advancedSearchBdy .submit").click();
+    }
+  });
+  /* Enable shipping fields */
+  $( ".shipmentInfo.right input,.shipmentInfo.right select" ).prop( "disabled", false );
 
   var checkPrice = $('.show-hide-price');
   var isCheckedPrice = $('.show-hide-price').is(':checked');
