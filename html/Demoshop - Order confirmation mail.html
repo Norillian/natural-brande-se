@@ -98,20 +98,25 @@
                 .ec64TableTotals .c2 {text-align:left;}
                 .ec54Table {border-collapse:collapse;}
                 .ec54Head th {font-weight: bold; background-color:#dddddd }
-                <!-- Styrer "Ext varenr" overskrift-->
-                                         .ec54Table .c3 { text-align: left; }
-                <!-- Styrer "Beskrivelse" overskrift-->
-                                          .ec54Table .c4 { text-align: left; }
-                <!-- Styrer "Antal" overskrift-->
-                                    .ec54Table .c5 { text-align: center; }
-                <!-- Styrer "Pris" overskrift-->
-                                   .ec54Table .c6 { text-align: right; }
-                <!-- Styrer "" overskrift-->
-                               .ec54Table .c7 { text-align: right; }
-                <!-- Styrer "Beløb" overskrift-->
-                                    .ec54Table .c8 { text-align: right; }
+                .ec54Table .c2 { display: none; }
+                .ec54Table .c1 { display: none; }
+                .ec54Table .c2 { display: none; }
+                .order-basket-table td.c2{display: none}
+                .order-basket-table td.c1{display: none}
+                /* Styrer "Ext varenr" overskrift */
+                .ec54Table .c3 { text-align: left; }
+                /* Styrer "Beskrivelse" overskrift */
+                .ec54Table .c4 { text-align: left; }
+                /* Styrer "Antal" overskrift */
+                .ec54Table .c5 { text-align: center; }
+                /* Styrer "Pris" overskrift */
+                .ec54Table .c6 { text-align: right; }
+                /* Styrer "" overskrift */
+                .ec54Table .c7 { text-align: right; }
+                /* Styrer "Beløb" overskrift */
+                .ec54Table .c8 { text-align: right; }
             </style>
-            <div style="width:564px">
+            <div style="width:564px" class="order-basket-table">
                 <eSeller:Control ControlId="Ordrelinjer" ControlType="OrderDetails" DataSourceId="Order" CanReOrder="False" />
             </div>
             <div style="width:564px">
