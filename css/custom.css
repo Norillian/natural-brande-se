@@ -4934,7 +4934,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         top: 58px !important;
     }
 
-
+    .favoriteProductsJson .productElement .addToBasketLnk{
+        margin-left: 0;
+        min-width: 155px;
+    }
+    
 }
 
 @media only screen and (min-width: 1025px) {

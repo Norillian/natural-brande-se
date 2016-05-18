@@ -1188,8 +1188,6 @@ $( document ).ready(function() {
       $(".advancedSearchBdy .submit").click();
     }
   });
-  /* Enable shipping fields */
-  $( ".shipmentInfo.right input,.shipmentInfo.right select" ).prop( "disabled", false );
 
   var checkPrice = $('.show-hide-price');
   var isCheckedPrice = $('.show-hide-price').is(':checked');
