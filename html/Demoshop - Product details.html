@@ -193,7 +193,7 @@
             <div style="clear:both;"></div>
             <!--Stock status area end-->
 			<span class="productIdSpan">
-				<eSeller:Select text="label_productIDText" />:&amp;nbsp;<eSeller:Select Value-Of="Product:ExtProductID" />
+				<eSeller:Select text="label_productIDText" />:&amp;nbsp;<eSeller:Select Value-Of="Product:ExtProductID" /><eSeller:If IsTrue="Product:IsNotInStock">&amp;nbsp; / &amp;nbsp;<eSeller:Select text="label_expected_deliverydate" />&amp;nbsp;<eSeller:Select Value-Of="Product:ExpectedDeliveryDateFormatted" /></eSeller:If>
 			</span>
             <eSeller:If IsTrue="Settings:IsCustomerLoggedIn">
                 <!--Basket area start-->

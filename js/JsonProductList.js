@@ -231,6 +231,14 @@ weightBeforeZipCode=200000;
 				productEsellerID.append(eSellerIdText + ': ' + val.id);
 				productInnerDiv.append(productEsellerID);
 
+				//Expected delivery dataType
+				productExpDelivery = $('<span></span>');
+				productExpDelivery.addClass('product-exp-delivery');
+				if(val.hasExpectedDeliveryDate === true) {
+					productExpDelivery.append(expDeliveryDateTxt + ": " + val.expectedDeliveryDateFormatted);
+				}
+				productInnerDiv.append(productExpDelivery);
+
                 productPrevPriceDiv = $('<a></a>');
                 productPrevPriceDiv.attr('href', val.URLPathAndQuery);
                 productPrevPriceDiv.addClass('productPrevPriceDiv');
