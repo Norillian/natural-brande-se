@@ -902,8 +902,8 @@ $( document ).ready(function() {
 
   //if cusomer not logg in disable search
   if(isCustomerLoggedIn == "False"){
-    $("#advancedSearchBdy").addClass('disabled-attr');
-    $('#advancedSearchBdy input').attr('disabled', 'disabled');
+    //$("#advancedSearchBdy").addClass('disabled-attr');
+    //$('#advancedSearchBdy input').attr('disabled', 'disabled');
   }
 
   if(isCustomerLoggedIn == "False"){
@@ -1144,9 +1144,9 @@ $( document ).ready(function() {
     var getProductIds = $(".frontpageQuickBasket div input.textbox").val();
     var getItemAmount = "1";
 
-    if (getProductIds.indexOf("#") > 0) {
-      getItemAmount = getProductIds.substr(getProductIds.indexOf("#") + 1);
-      getProductIds = getProductIds.substr(0, getProductIds.indexOf('#'));
+    if (getProductIds.indexOf(".") > 0) {
+      getItemAmount = getProductIds.substr(getProductIds.indexOf(".") + 1);
+      getProductIds = getProductIds.substr(0, getProductIds.indexOf('.'));
     }
 
     if(getProductIds != "") {
@@ -1168,6 +1168,16 @@ $( document ).ready(function() {
 
     }
 
+  });
+
+  $('.frontpageQuickBasket div input.textbox').bind("enterKey",function(e){
+       $( ".frontpageQuickBasket div a" ).trigger('click');
+  });
+  $('.frontpageQuickBasket div input.textbox').keyup(function(e){
+      if(e.keyCode == 13)
+      {
+          $(this).trigger("enterKey");
+      }
   });
 
   $( ".newsletterBox > div a" ).on( "click", function() {
