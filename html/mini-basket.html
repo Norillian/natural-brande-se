@@ -1,0 +1,58 @@
+<div id="miniBasket">
+    <a class="show-for-medium-up show-for-large-up" data-dropdown="basketPanel" aria-controls="basketPanel" aria-expanded="false">
+		<div class="basketCartImg">
+			<img src="/media/349/img/basketCart.png" />
+			<span class="miniBasketItemCount">
+            	<eSeller:Select Value-Of="Basket:ItemCount" />
+        	</span>
+		</div>
+        <span class="miniBasketText">
+            <eSeller:Select Value-Of="Basket:TotalAmountFormatted" />&amp;nbsp;<eSeller:Select Value-Of="Basket:CurrencySymbol" /><eSeller:Select text="label_miniBasketText" />
+        </span>
+    </a>
+	<div id="basketPanel" class="content f-dropdown small" data-dropdown-content="" aria-hidden="true" tabindex="-1">
+		<eSeller:If IsTrue="Basket:IsEmpty">
+			<div class="basketIsEmptyBdy miniBasketBdy">
+				<span>
+					<eSeller:Select text="label_basket_isEmpty" />
+				</span>
+			</div>
+		</eSeller:If>
+		<eSeller:If IsFalse="Basket:IsEmpty">
+			<div class="miniBasketBdy clearfix">
+				<eSeller:Control ControlID="BasketDetailsTopmenu" ControlType="BasketDetails" />
+				<script type="text/javascript">
+					$('#basketPanel .ec32Table .c5 input').attr('disabled', 'disabled');
+				</script>
+				<eSeller:Control ControlID="BasketTotalsTopmenu" ControlType="BasketTotals" />
+				<!--<img src="/media/232/paymentLogos/DK_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg01" />
+				<img src="/media/232/paymentLogos/VISA_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg02" />
+				<img src="/media/232/paymentLogos/MasterCard_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg03" />
+				<img src="/media/232/paymentLogos/VisaElectron_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg04" />
+				<img src="/media/232/paymentLogos/Maestro_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg05" />
+				<img src="/media/232/paymentLogos/JCB_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg06" />-->
+				<a class="goToShoppingcartLnk right" href="/basket/shoppingcart.aspx">
+					<eSeller:Select text="label_basket_goTo_shoppingcart_link" />
+				</a>
+			</div>
+		</eSeller:If>
+	</div>
+</div>
+<script type="text/javascript">
+    $('#miniBasket').parent().addClass('miniBasketBdy');
+
+	$( "#basketPanel .miniBasketBdy #ec32 td.c5 input" ).each(function() {
+		getCurrentItemCount = $('<span></span>');
+		getCurrentItemCount.append($(this).attr('value'));
+		$(this).parent().parent().children('.c4').prepend(getCurrentItemCount);
+	});
+
+$('#miniBasket a').on('click',function(){
+		//Dont remove, it makes the links work on tablet
+    });
+</script>
+<eSeller:If IsFalse="Settings:IsCustomerLoggedIn">
+  <script type="text/javascript">
+    $('.miniBasketBdy').remove();
+</script>
+</eSeller:If>
