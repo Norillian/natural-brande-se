@@ -763,45 +763,6 @@ $j(document).ready(function() {
 
 page=1;
 
-//Filters
-var customFieldCount = 2;
-//Price Filters
-var filterUrl = "";
-if($("input[name$='tbxMinPrice']").length>0 && $("input[name$='tbxMaxPrice']").length>0){
-	filterUrl += "&fn1=ProductPrice&fv1=" + $("input[name$='tbxMinPrice']").val() + '^' + $("input[name$='tbxMaxPrice']").val();
-}
-//Manufacture Filters
-var manufactureFilter = "&fn2=ProductManufacturer&fv2=";
-if($('#productFilteringDrop').length > 0) {
-	if($('#productFilteringDrop .productFilteringManufacture ul li').children('input[type="checkbox"]:checked').length > 0) {
-		$( "#productFilteringDrop .productFilteringManufacture ul li" ).each(function( index ) {
-			if($(this).children('input[type="checkbox"]:checked').length > 0) {
-				manufactureFilter += $(this).children('input[type="checkbox"]:checked').val();
-				manufactureFilter += "^";
-			}
-		});
-		customFieldCount++;
-		manufactureFilter = manufactureFilter.substring(0, manufactureFilter.length - 1);
-		filterUrl += manufactureFilter;
-	}
-}
-//Customfield Filters
-var customFieldFilter = "";
-if($('#productFilteringDrop').length > 0) {
-	if($('#productFilteringDrop .customFieldFilterList ul li').children('input[type="checkbox"]:checked').length > 0) {
-		$( "#productFilteringDrop .customFieldFilterList ul li" ).each(function( index ) {
-			if($(this).children('input[type="checkbox"]:checked').length > 0) {
-				customFieldFilter += "&fn"+customFieldCount+"=CustomFields&fk"+customFieldCount+"="+ $(this).parent().parent().parent().attr('data-filtername') +"&fv"+customFieldCount+"=";
-				customFieldFilter += $(this).children('input[type="checkbox"]:checked').val();
-				customFieldFilter += "^";
-				customFieldCount++;
-			}
-		});
-		customFieldFilter = customFieldFilter.substring(0, customFieldFilter.length - 1);
-		filterUrl += customFieldFilter;
-		console.log(filterUrl);
-	}
-}
 if(isCustomerLoggedIn == "True"){
 	customerId = isloggedCustomerId;
 }
@@ -836,7 +797,6 @@ if($('#favoriteProductsJsonBdy').length > 0){
 	productList += getAllFavoriteProductIDs;
 }
 
-productList += filterUrl;
 productList += '&serial=' + serial;
 jsonProductList = new JsonProductList(targetelement, productList, true);
 function ChangeCurrentLanguage(oSelect){

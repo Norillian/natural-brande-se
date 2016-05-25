@@ -5,9 +5,6 @@
     </eSeller:HtmlElement>
 
 
-
-
-
     <eSeller:If IsFalse='Context:QueryparmExists("_escaped_fragment_")'>
 
         <div class="product-filter large-3 medium-3 show-for-medium-up columns">
@@ -17,43 +14,6 @@
                     <eSeller:Control ControlID="categoryListContent1" CssClass="categoriesLeftSide" ControlType="ShopMenu" MenuType="Product" Depth="All" Mode="Text" />
                 </div>
 
-                <ul id="productFilteringDrop" class="productFilteringBdy">
-                    <h2><eSeller:Select text="label_productFilteringHeader" /></h2>
-                    <eSeller:If IsTrue="Settings:IsCustomerLoggedIn">
-                        <li class="productFilteringPrice">
-                            <h2 class="filterHeader active">
-                                <eSeller:Select text="label_filterHeader_01" />
-                            </h2>
-                            <div class="filterControlBdy active">
-                                <eSeller:Control ControlType="ProductFilteringControl" Controlid="filterProductPrice" workson="JsonProductList" FilterType="ProductPrice" FilterSource="" DisplaySelector="Slider"/>
-                            </div>
-                        </li>
-                    </eSeller:If>
-                    <li class="productFilteringManufacture">
-                        <h2 class="filterHeader">
-                            <eSeller:Select text="label_filterHeader_02" />
-                        </h2>
-                        <div class="filterControlBdy">
-                            <eSeller:Control ControlType="ProductFilteringControl" Controlid="filterProductManufacturer" workson="JsonProductList" FilterType="ProductManufacturer" FilterSource="" DisplaySelector="CheckBoxes"/>
-                        </div>
-                    </li>
-                    <li class="customFieldFilterList">
-                        <h2 class="filterHeader">
-                            <eSeller:Select text="label_filterHeader_03" />
-                        </h2>
-                        <div class="filterControlBdy">
-                            <eSeller:Control ControlType="ProductFilteringControl" Controlid="filterCustomFields2" workson="JsonProductList" FilterType="CustomFields" FilterSource="2" DisplaySelector="CheckBoxes"/>
-                        </div>
-                    </li>
-                    <li class="customFieldFilterList">
-                        <h2 class="filterHeader">
-                            <eSeller:Select text="label_filterHeader_04" />
-                        </h2>
-                        <div class="filterControlBdy">
-                            <eSeller:Control ControlType="ProductFilteringControl" Controlid="filterCustomFields3" workson="JsonProductList" FilterType="CustomFields" FilterSource="3" DisplaySelector="CheckBoxes"/>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="listBdy large-9 medium-9 small-12 columns">
@@ -71,13 +31,6 @@
                     <!-- SortingElement start, do not modify --><script type="text/javascript">$j(document).ready(function() {var productsCount = 0; productsCount = 0;if (productsCount == 0) $j('.sortingContainer').attr('style', 'display:none!important;'); });</script><div class="sortingContainer" ><span class="sortingLabel" ><eSeller:Css Name="container" selector=".sortingContainer" groupname="General Sorting Control" selectorgroup="3" /><eSeller:Css Name="label" selector=".sortingContainer .sortingLabel" groupname="General Sorting Control" selectorgroup="3" /></span><eSeller:Control ControlType="ProductSortingList" Controlid="ProductSortingList1" WorksOn="JsonProductList" DefaultValue="ProductCard" DisplayStyle="DropDown" /></div><!-- SortingElement end -->
                 </div>
 
-                <script type="text/javascript">
-                    $( ".productFilteringHeaderBdy" ).on( "click", function() {
-                        $(this).toggleClass('active');
-                        $('#productFilteringDrop').toggleClass('active');
-                    });
-                </script>
-
             </div>
             <div class="categoryListBdy">
                 <eSeller:Control ControlID="categoryListContent" CssClass="small-block-grid-2 medium-block-grid-4 large-block-grid-5" ControlType="ShopMenu" MenuType="Current" Depth="1" Mode="Image" />
@@ -88,7 +41,6 @@
             </div>
         </div>
 
-
         <div class="hiddenText" style="display:none!important">
             <!-- This is used to create text for the json productlist -->
             <span class="goodDealText"><eSeller:Select text="label_goodDealText" /></span>
@@ -96,7 +48,7 @@
             <span class="deprecatedText"><eSeller:Select text="label_deprecatedText" /></span>
         </div>
 
-        <script src="/media/349/js/JsonProductList.js?nb1"></script>
+        <script src="/media/349/js/JsonProductList.js?nb2"></script>
     </eSeller:If>
     <eSeller:If IsTrue='Context:QueryparmExists("_escaped_fragment_")'>
         <eSeller:Control ControlType="ProductList" ControlID="normalProductList" IsMainProductList="True" />
