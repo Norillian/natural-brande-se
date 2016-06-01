@@ -2542,7 +2542,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     /* font-family: 'Open Sans', sans-serif; */
 
     .productElement .basketQtyInput {
-        width: 50px;
+        width: 45px;
         height: 38px;
         border-radius: 4px !important;
         border: solid 1px #dededc;
@@ -2559,9 +2559,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .not-found-text	 a {
         background-color: #00763a;
         color: #FFF;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 16px;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
         font-weight: 600;
+        letter-spacing: -0.4px;
         padding: 0 8px 0;
         margin-left: 4px;
         margin-bottom: 10px;
@@ -2885,7 +2886,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .productInfoBackDiv #navigateParentLnk:hover {
-        background-color: #cccc;
+        background-color: #ccc;
         color: #333333;
     }
 
@@ -4111,11 +4112,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .productList-qty-changer {
-        display: inline-block;
         max-width: 16px;
         position: absolute;
         bottom: 10px;
-        left: 38px;
+        left: 33px;
         font-size: 12px;
         height: 38px;
         display: none;
@@ -4255,7 +4255,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     #topMenu {
-        padding: 0px;
+        padding: 0;
         margin-top: 1rem;
     }
 
@@ -4270,7 +4270,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         width:33.3337%;
         float:left;
         border:0;
-        padding: 0px;
+        padding: 0;
     }
 
     #mobileTopMenu > div a {
@@ -4338,7 +4338,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         left: 0;
         right: 0;
         padding: 0.5rem;
-        box-shadow:0px 7px 10px -4px #000;
+        box-shadow: 0 7px 10px -4px #000;
         margin: 0;
         width:100%;
         top: 92px;
@@ -4430,7 +4430,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .jsonProducts .productElement:hover {
-        box-shadow: 0px 0px 0px 0px #e6e6e6 inset;
+        box-shadow: 0 0 0 0 #e6e6e6 inset;
     }
 
     .productElement .addToBasketLnk {
@@ -4614,7 +4614,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .onePageCheckoutBdy.basketOuterBdy .basketDetailsBdy table.ec32Table tr.row td.c8 {
-        padding: 0px 0.625rem;
+        padding: 0 0.625rem;
     }
 
     .basketDetailsBdy .content.c2,
@@ -4638,7 +4638,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .basketUpdAll.right {
-        margin-left: 0px;
+        margin-left: 0;
     }
 
     .basketBottomNavBdy {
@@ -4665,7 +4665,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     .basketBottomNavBdy .buttonNavNext {
         width: 100%;
         padding: 10px;
-        margin: 0.9375rem 0px;
+        margin: 0.9375rem 0;
         font-size: 24px;
     }
 
@@ -4688,7 +4688,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .onePageCheckoutBdy > div.basketNxtStep2 input {
         width: 100%;
-        min-width: 0px;
+        min-width: 0;
         margin: 0 0 0 0;
         font-size: 24px;
         padding: 0.9375rem;
@@ -4725,7 +4725,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .OrderDetailsBdy #ec54 table td,
     .OrderDetailsBdy #ec54 table th {
-        min-width: 0px;
+        min-width: 0;
         width: auto;
     }
 
@@ -4771,7 +4771,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     /*** Frontpage Carousel styles ***/
 
     .frontpageCarousel {
-        margin: 0px -0.9375rem 1rem;
+        margin: 0 -0.9375rem 1rem;
     }
 
     .frontpageQuickBasket div .textbox {
@@ -4788,6 +4788,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         font-size: 12px;
     }
 
+    .product-list .listBdy{
+        margin-left: 0;
+        border-left: none;
+    }
 
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
@@ -5211,11 +5215,11 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 		width: auto;
 	}
 
-    .product-list .listBdy{
-        margin-left: 0;
-        border-left: none;
-    }
 
+}
+
+@media only screen and (max-width: 322px) {
+    .productElement .addToBasketLnk{font-size: 12px;}
 }
 
 @media only screen and (max-width: 1024px) {
