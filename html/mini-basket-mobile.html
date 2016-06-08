@@ -1,36 +1,9 @@
 <div id="miniBasketMobile">
-    <a class="hide-for-large-up" data-dropdown="basketPanel" aria-controls="basketPanel" aria-expanded="false">
+    <a href="/basket/shoppingcart.aspx" class="hide-for-large-up">
         <div class="miniBasketItemCount">
             <span><eSeller:Select Value-Of="Basket:ItemCount" /></span>
         </div>
     </a>
-	<div id="basketPanelMobile" class="content f-dropdown small" data-dropdown-content="" aria-hidden="true" tabindex="-1">
-		<eSeller:If IsTrue="Basket:IsEmpty">
-			<div class="basketIsEmptyBdy miniBasketBdy">
-				<span>
-					<eSeller:Select text="label_basket_isEmpty" />
-				</span>
-			</div>
-		</eSeller:If>
-		<eSeller:If IsFalse="Basket:IsEmpty">
-			<div class="miniBasketBdy clearfix">
-				<eSeller:Control ControlID="BasketDetailsTopmenu" ControlType="BasketDetails" />
-				<script type="text/javascript">
-					$('#basketPanel .ec32Table .c5 input').attr('disabled', 'disabled');
-				</script>
-				<eSeller:Control ControlID="BasketTotalsTopmenu" ControlType="BasketTotals" />
-				<!--<img src="/media/232/paymentLogos/DK_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg01" />
-				<img src="/media/232/paymentLogos/VISA_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg02" />
-				<img src="/media/232/paymentLogos/MasterCard_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg03" />
-				<img src="/media/232/paymentLogos/VisaElectron_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg04" />
-				<img src="/media/232/paymentLogos/Maestro_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg05" />
-				<img src="/media/232/paymentLogos/JCB_payLogo.png" alt="" class="left paymentLogoImg paymentLogoImg06" />-->
-				<a class="goToShoppingcartLnk right" href="/basket/shoppingcart.aspx">
-					<eSeller:Select text="label_basket_goTo_shoppingcart_link" />
-				</a>
-			</div>
-		</eSeller:If>
-	</div>
 </div>
 <script type="text/javascript">
     $('#miniBasketMobile').parent().addClass('miniBasketBdy');
