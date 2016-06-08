@@ -79,7 +79,7 @@ weightBeforeZipCode=200000;
 				//Create the add to basket button
 				var bundlesToAdd = 1;
 				var addToBasketData = "";
-				var addToBasketTxt = "Lägg till kundvagn";
+				var addToBasketTxt = productListBasketTxt;
 				var addToBasketNotInStockTxt = "UTSÅLD";
 
 				basketOuterDiv = $('<div></div>');
@@ -878,7 +878,7 @@ function createAddedToBasketProducts() {
 
 				//Create the add to basket button
 				var addToBasketData = "";
-				var addToBasketTxt = "TilfÃ¸j til kurv";
+				var addToBasketTxt = productListBasketTxt;
 				var addToBasketNotInStockTxt = "UTSÅLD";
 
 				basketQtyInput = $('<input></input>')
