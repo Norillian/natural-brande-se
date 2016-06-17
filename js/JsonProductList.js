@@ -262,6 +262,8 @@ weightBeforeZipCode=200000;
 						discountpriceNoFormat = Math.floor(parseFloat(discountpriceNoFormat) * 100) / 100;
 						var priceWithoutDiscount = salespriceNoFormat + discountpriceNoFormat;
 
+						priceWithoutDiscount = priceWithoutDiscount.toFixed(2);
+
 						if(priceWithoutDiscount > salespriceNoFormat) {
 
 							if(hasComma === true) {
