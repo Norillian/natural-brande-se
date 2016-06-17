@@ -2796,10 +2796,19 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         background-color: #038342;
     }
 
-    .ucImageControltrImg,
     #main #ShopContent .ucImageControl {
         width: 100% !important;
         text-align: center;
+    }
+    .ucImageControltrImg{
+        width: 80% !important;
+        text-align: center;
+    }
+    .ucImageControltrThumbs{
+        width: 20%;
+    }
+    .ucImageControltrThumbs td{
+        cursor: pointer;
     }
 
     .ucImageControl img {
