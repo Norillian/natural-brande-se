@@ -790,7 +790,7 @@ if($('.basketProducts').length > 0){
 }
 
 if($('.searchResultsProductsOuterBdy').length > 0){
-	productList = '/Services/ProductService.asmx/ProductList?v=1.0&cId=54&langId=1&so=0&maxSearchResults=100&rp=48&countryId=11&locId=&customerId=&imgSizeId=0&pIds=';
+	productList = '/Services/ProductService.asmx/ProductList?v=1.0&cId=' + cId + '&langId=' + langId + '&so=0&maxSearchResults=100&rp=48&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&imgSizeId=0&pIds=';
 	productList += '&search=' + jsonSearchQueryString;
 }
 
