@@ -128,6 +128,8 @@ weightBeforeZipCode=200000;
 								ActivateBasketButtonPrompt(val.eSellerId,0,'',getQtyAmount,'GET',encodeURIComponent(window.location.pathname + window.location.search),false,true,val.expectedDeliveryDateFormatted);
 							}
 							else {
+								// The atb Postback ruins our scroll position so store it
+								cookie.create(location.href + "-scrollPosition", window.pageYOffset, 0.01);
 								atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
 							}
 						});
@@ -339,6 +341,13 @@ weightBeforeZipCode=200000;
 				$('.not-in-stock').closest('.basket-outer').find('.productList-qty-changer').hide();
 
             });
+
+						// Here the product list should be built, so let's see if we need to restore our scroll position
+						var scrollPos = cookie.read(location.href + "-scrollPosition");
+						if(scrollPos != null) {
+							window.scrollTo(0, scrollPos);
+							cookie.erase(location.href + "-scrollPosition");
+						}
 
 			//Check if related products has products if yes then show
 			if($('#relatedProductsList').length > 0) {
@@ -899,6 +908,8 @@ function createAddedToBasketProducts() {
 								ActivateBasketButtonPrompt(val.eSellerId,0,'',getQtyAmount,'GET',encodeURIComponent(window.location.pathname + window.location.search),false,true,val.expectedDeliveryDateFormatted);
 							}
 							else {
+								// The atb Postback ruins our scroll position so store it
+								cookie.create(location.href + "-scrollPosition", window.pageYOffset, 0.01);
 								atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
 							}
 						});
@@ -1063,6 +1074,41 @@ function createAddedToBasketProducts() {
 
 	}
 }
+
+// Cookie Handler
+var cookie = {
+
+  create: function(name,value,days) {
+
+    var expires = "";
+
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime()+(days*24*60*60*1000));
+          expires = "; expires="+date.toGMTString();
+      }
+
+      document.cookie = name+"="+value+expires+"; path=/";
+
+  },
+
+  read: function(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  },
+
+  erase: function(name) {
+      this.create(name,"",-1);
+  }
+
+};
+
 
 /**
  * TinySort is a small script that sorts HTML elements. It sorts by text- or attribute value, or by that of one of it's children.
