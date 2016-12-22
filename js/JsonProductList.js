@@ -1,3 +1,37 @@
+// Cookie Handler
+var cookie = {
+
+  create: function(name,value,days) {
+
+    var expires = "";
+
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime()+(days*24*60*60*1000));
+          expires = "; expires="+date.toGMTString();
+      }
+
+      document.cookie = name+"="+value+expires+"; path=/";
+
+  },
+
+  read: function(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  },
+
+  erase: function(name) {
+      this.create(name,"",-1);
+  }
+
+};
+
 var imgDomains = new Array();
 PageNo="Side";
 PageOf="af";
@@ -587,7 +621,8 @@ weightBeforeZipCode=200000;
 						fetchEarly=false;
 					}
 					parseJSON(jsondata,fetchEarly);
-					//Update the pager with current results
+					//Update the pager with current results and store a page cookie for this page
+					cookie.create(location.pathname, jsondata.data.pageNumber, 1);
 					setPager(jsondata.data.pageNumber, jsondata.data.previousLink, jsondata.data.nextLink, jsondata.data.totalPages);
 					$(document).trigger(me.loadCompleted, { data: jsondata.data, error: jsondata.error });
 				})
@@ -603,8 +638,8 @@ weightBeforeZipCode=200000;
                 plist.addClass("pager");
                 plist.addClass("clearfix");
                 plist2 = plist.clone();
-                $(".jsonProducts").prepend(plist);
-                $(".jsonProducts").append(plist2);
+                $(".jsonProducts").first().prepend(plist);
+                $(".jsonProducts").first().append(plist2);
             }
             var target = $("div.pager");
             target.empty();
@@ -772,7 +807,9 @@ $j(document).ready(function() {
 	$('#changeSortOrderBdy div').text($('#sortAZ').text());
 });
 
-page=1;
+var pageCookie = cookie.read(location.pathname);
+
+page = (pageCookie == null ? 1 : parseInt(pageCookie));
 
 if(isCustomerLoggedIn == "True"){
 	customerId = isloggedCustomerId;
@@ -799,7 +836,7 @@ if($('.basketProducts').length > 0){
 }
 
 if($('.searchResultsProductsOuterBdy').length > 0){
-	productList = '/Services/ProductService.asmx/ProductList?v=1.0&cId=' + cId + '&langId=' + langId + '&so=0&maxSearchResults=100&rp=48&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&imgSizeId=0&pIds=';
+	productList = '/Services/ProductService.asmx/ProductList?v=1.0&cId=' + cId + '&langId=' + langId + '&so=0&maxSearchResults=100&rp=72&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&imgSizeId=0&pIds=';
 	productList += '&search=' + jsonSearchQueryString;
 }
 
@@ -1075,39 +1112,7 @@ function createAddedToBasketProducts() {
 	}
 }
 
-// Cookie Handler
-var cookie = {
 
-  create: function(name,value,days) {
-
-    var expires = "";
-
-      if (days) {
-          var date = new Date();
-          date.setTime(date.getTime()+(days*24*60*60*1000));
-          expires = "; expires="+date.toGMTString();
-      }
-
-      document.cookie = name+"="+value+expires+"; path=/";
-
-  },
-
-  read: function(name) {
-      var nameEQ = name + "=";
-      var ca = document.cookie.split(';');
-      for(var i=0;i < ca.length;i++) {
-          var c = ca[i];
-          while (c.charAt(0)==' ') c = c.substring(1,c.length);
-          if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-      }
-      return null;
-  },
-
-  erase: function(name) {
-      this.create(name,"",-1);
-  }
-
-};
 
 
 /**
