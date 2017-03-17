@@ -103,7 +103,7 @@ weightBeforeZipCode=200000;
 				//Get the main image url from the product, and if no image is found load the no image replacement
 				var imgsrc = "";
 				if(val.images[0]){
-					imgsrc = val.images[0].url.replace(/sizeId=([0-9]+)/,"sizeId=3340");
+					imgsrc = val.images[0].url.replace(/sizeId=([0-9]+)/,"sizeId=6681");
 				}
 				else
 				{
@@ -917,7 +917,7 @@ function createAddedToBasketProducts() {
 				//Get the main image url from the product, and if no image is found load the no image replacement
 				var imgsrc = "";
 				if(val.images[0]){
-					imgsrc = val.images[0].url.replace(/sizeId=([0-9]+)/,"sizeId=3340");
+					imgsrc = val.images[0].url.replace(/sizeId=([0-9]+)/,"sizeId=6681");
 				}
 				else
 				{
