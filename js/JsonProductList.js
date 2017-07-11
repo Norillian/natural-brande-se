@@ -273,7 +273,8 @@ weightBeforeZipCode=200000;
 				if(val.hasExpectedDeliveryDate === true) {
 					productExpDelivery.append(expDeliveryDateTxt + ": " + val.expectedDeliveryDateFormatted);
 				}
-				productInnerDiv.append(productExpDelivery);
+				// Per customer request, do not show expected delivery date on products
+				// productInnerDiv.append(productExpDelivery);
 
                 productPrevPriceDiv = $('<a></a>');
                 productPrevPriceDiv.attr('href', val.URLPathAndQuery);
