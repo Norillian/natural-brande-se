@@ -1,0 +1,54 @@
+<div class="frontArea">
+    <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;Frontpage&quot;)" />
+</div>
+<div class="frontpageCarousel">
+    <div style="background-image: url(/media/349/forsidebanner/CarouselImage01.jpg?maj);">
+    </div>
+    <div style="background-image: url(/media/349/forsidebanner/CarouselImage02.jpg?maj);">
+    </div>
+    <div style="background-image: url(/media/349/forsidebanner/CarouselImage01.jpg?maj);">
+    </div>
+    <div style="background-image: url(/media/349/forsidebanner/CarouselImage02.jpg?maj);">
+    </div>
+</div>
+
+<div class="row teaserBoxdiv">
+    <div class="small-12 medium-6 large-3 columns">
+        <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;customerServiceFrontpage&quot;)" />
+    </div>
+    <div class="small-12 medium-6 large-3 columns newsletterBox">
+        <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;newsFrontpage&quot;)" />
+    </div>
+    <div class="small-12 large-6 columns frontpageQuickBasket">
+        <h2>
+            <eSeller:Select text="label_quickAdd_header" />
+        </h2>
+        <div>
+            <input placeholder="Ange artikelnumren" class="textbox" type="text" />
+            <a><eSeller:Select text="label_quickAdd_btn" /></a>
+        </div>
+        <p>
+            <eSeller:Select text="label_quickAdd_text" />
+        </p>
+    </div>
+</div>
+
+<eSeller:If IsFalse="Settings:IsCustomerLoggedIn">
+<script type="text/javascript">
+    $('.frontpageQuickBasket .textbox').attr('readonly', true)
+</script>
+</eSeller:If>
+
+<div class="row teaser-containers">
+    <div class="small-12 medium-6 large-6 columns">
+        <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;frontpageTeaser1&quot;)" />
+    </div>
+    <div class="small-12 medium-6 large-6 columns">
+        <div class="small-teaser left">
+            <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;frontpageTeaserSmall1&quot;)" />
+        </div>
+        <div class="small-teaser right">
+            <eSeller:Select Value-Of="CmsSpecialPages:Text(&quot;frontpageTeaserSmall2&quot;)" />
+        </div>
+    </div>
+</div>
