@@ -27,6 +27,16 @@
         <div class="basketDetailsBdy">
             <eSeller:Control ControlId="Basket" ControlType="BasketDetails" />
         </div>
+        <div class="basketQuickBasket left">
+        		<eSeller:HtmlElement Tagname="input">
+        			<eSeller:Attribute name="class" Value="textbox" />
+        			<eSeller:Attribute name="placeholder" Text="label_quickAdd-placeholder" />
+        			<eSeller:Attribute name="type" Value="text" />
+        		</eSeller:HtmlElement>
+				    <a>
+				        <eSeller:Select text="label_quickAdd_btn" />
+				    </a>
+    		</div>
         <div class="basketTotalsBdy right clearfix">
             <eSeller:Control ControlId="Totals" ControlType="BasketTotals"></eSeller:Control>
         </div>

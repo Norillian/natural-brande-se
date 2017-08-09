@@ -39,9 +39,9 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     display:none;
 }
 
-.frontpageCms li img {
+/*.frontpageCms li img {
 	width: 100%;
-}
+} */
 
 .slick-list {
     position: relative;
@@ -1840,6 +1840,29 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .frontpageQuickBasket div a:hover {
         text-decoration: none;
+    }
+
+    .basketQuickBasket {
+    	margin-bottom: 8px;
+    }
+
+    .basketQuickBasket input {
+    	width: auto;
+    	display: inline;
+    }
+
+    .basketQuickBasket a {
+	    display: inline-block;
+	    padding: 0 6px;
+	    line-height: 30px;
+    	color: white;
+	    background: black;
+	    font-size: 15px;
+    }
+
+    .basketQuickBasket a:hover {
+    	text-decoration: none;
+    	background: #555;
     }
 
     .teaser-containers{

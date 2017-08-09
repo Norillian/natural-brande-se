@@ -78,6 +78,15 @@ weightBeforeZipCode=200000;
 				divList = $(selector + " > div.products");
 			}
 
+			// If we are on the search result page and searching for an EAN, confirm that the single match returned by the API is a match
+			if($('.searchResultsProductsOuterBdy').length > 0 && isEAN(jsonSearchQueryString)) {
+				console.log(jsondata);
+				if(jsondata.data.items.length < 1 || jsondata.data.items[0].secondaryId !== jsonSearchQueryString) {
+					divList.html('Search for EAN product did not return a match');
+					return;
+				}
+			}
+
 			var productCount=0;
 			$.each(jsondata.data.items, function(key, val) {
 
@@ -783,6 +792,12 @@ weightBeforeZipCode=200000;
 		}
 	};
 })({}, jQuery);
+
+/* Returns true is value is a 13-digit EAN, false otherwise */
+function isEAN(value) {
+	return (value !== undefined ? /^\d{13}$/.test(value) : false);
+};
+
 var splashurl = '';
 $j(document).ready(function() {
 	var productsCount = 0;
@@ -837,8 +852,11 @@ if($('.basketProducts').length > 0){
 }
 
 if($('.searchResultsProductsOuterBdy').length > 0){
-	productList = '/Services/ProductService.asmx/ProductList?v=1.0&cId=' + cId + '&langId=' + langId + '&so=0&maxSearchResults=100&rp=72&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&imgSizeId=0&pIds=';
-	productList += '&search=' + jsonSearchQueryString;
+	var maxSearchResults = (isEAN(jsonSearchQueryString) ? 1 : 100); // EAN searches should only yield the top result (and expect it to be a match)
+
+	productList = '/Services/ProductService.asmx/ProductList?v=1.0&cId=' + cId + '&langId=' + langId + '&so=0&maxSearchResults=' + 
+									maxSearchResults + '&rp=72&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&imgSizeId=0' + 
+									'&search=' + jsonSearchQueryString;
 }
 
 if($('#favoriteProductsJsonBdy').length > 0){

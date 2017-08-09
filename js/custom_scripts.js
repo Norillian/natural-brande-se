@@ -1138,20 +1138,36 @@ $( document ).ready(function() {
     }
   });
 
-  //Quick add to basket
-  $( ".frontpageQuickBasket div a" ).on( "click", function() {
+  /* Returns true is value is a 13-digit EAN, false otherwise */
+	function isEAN(value) {
+		return (value !== undefined ? /^\d{13}$/.test(value) : false);
+	};
 
-    var getProductIds = $(".frontpageQuickBasket div input.textbox").val();
-    var getItemAmount = "1";
+  //Quick add to basket
+  $( ".frontpageQuickBasket div a, .basketQuickBasket a" ).on( "click", function() {
+
+		var getProductIds = $(".frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox").val();
+		var getItemAmount = "1";
 
     if (getProductIds.indexOf(".") > 0) {
       getItemAmount = getProductIds.substr(getProductIds.indexOf(".") + 1);
       getProductIds = getProductIds.substr(0, getProductIds.indexOf('.'));
     }
 
+    var isProductIdEAN = isEAN(getProductIds);
+
     if(getProductIds != "") {
 
-      addProductToBasket = '/Services/ProductService.asmx/Products?v=1.0&cId=54&langId=1&countryId=11&locId=&customerId=&imgSizeId=0&pEId=' + getProductIds;
+      var addProductToBasket;
+
+    	if(isProductIdEAN) {
+    		// If the product ID input is an EAN, use the search API to fetch a product instead
+    		addProductToBasket = '/Services/ProductService.asmx/ProductList?v=1.0&cId=' + cId + '&langId=' + langId + '&so=0&maxSearchResults=1' + 
+    							'&rp=72&countryId=' + contId +  '&locId=' + locId + '&customerId=&imgSizeId=0' + 
+									'&search=' + getProductIds;
+    	} else {
+      	addProductToBasket = '/Services/ProductService.asmx/Products?v=1.0&cId=54&langId=1&countryId=11&locId=&customerId=&imgSizeId=0&pEId=' + getProductIds;
+    	}
 
       addProductToBasket += '&serial=' + serial;
 
@@ -1159,6 +1175,14 @@ $( document ).ready(function() {
 
         var productCount=0;
         $.each(jsondata.data.items, function(key, val) {
+
+        	// If product ID is an EAN, confirm it matches the user input, since the search API might not have returned an exact match
+        	if(isProductIdEAN) {
+        		if(val.secondaryId != getProductIds) {
+        			console.log("Product doesn't match EAN input, cancelling operation: ", val.secondaryId);
+        			return;
+        		}
+        	}
 
           atbNoQty(val.eSellerId, 0, getItemAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
 
@@ -1173,7 +1197,12 @@ $( document ).ready(function() {
   $('.frontpageQuickBasket div input.textbox').bind("enterKey",function(e){
        $( ".frontpageQuickBasket div a" ).trigger('click');
   });
-  $('.frontpageQuickBasket div input.textbox').keyup(function(e){
+  
+  $('.basketQuickBasket input.textbox').bind("enterKey",function(e){
+       $( ".basketQuickBasket a" ).trigger('click');
+  });
+
+  $('.frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox').keyup(function(e){
       if(e.keyCode == 13)
       {
           $(this).trigger("enterKey");
