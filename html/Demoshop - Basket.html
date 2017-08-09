@@ -1,0 +1,113 @@
+<style type="text/css">
+    img {
+        height: auto !important;
+    }
+</style>
+
+<!-- If basket is not empty -->
+
+<eSeller:If IsFalse="Basket:IsEmpty">
+    
+    <div class="basketOuterBdy clearfix">
+        <div class="basketTopNavBdy">
+            <div class="basketHeader">
+                <h1><eSeller:Select Text="basket_header" /></h1>
+            </div>
+            <div class="basketBtnDiv clearfix">
+                <div class="basketPreStep left">
+                    <eSeller:Control ControlType="BasketActionButton" ControlId="PreviousStep" Mode="NavigatePrevious" CssClass="buttonNavPrev" />
+                </div>
+                <div class="basketNxtStep right">
+                    <eSeller:Control ControlType="BasketActionButton" ControlId="Next" Mode="NavigateNext" CssClass="buttonNavNext" CausesValidation="True" >
+                        <eSeller:Attribute Name="Text" Text="button_next(basket)" />
+                    </eSeller:Control>
+                </div>
+            </div>
+        </div>
+        <div class="basketDetailsBdy">
+            <eSeller:Control ControlId="Basket" ControlType="BasketDetails" />
+        </div>
+        <div class="basketTotalsBdy right clearfix">
+            <eSeller:Control ControlId="Totals" ControlType="BasketTotals"></eSeller:Control>
+        </div>
+        <!--<div class="basketCouponBdy left clearfix">
+            <div class="couponControlDiv clearfix">
+                <div class="couponHeader">
+                    <eSeller:Select text="label_couponHeader" />
+                </div>
+				<div class="couponContent">
+					<div class="couponInput">
+						<eSeller:Control ControlId="CouponCode" ControlType="CouponCode"/>
+					</div>
+					<div class="couponButton">
+						<eSeller:Control ControlType="GenericButton" Command="Apply Discount Code" ControlID="Apply Coupon" WorksOn="CouponCode"></eSeller:Control>
+					</div> 
+				</div>         
+            </div>
+			<div class="giftCardControlDiv clearfix">
+				<div class="giftCardHeader">
+                    <eSeller:Select text="label_giftCardHeader" />
+                </div>
+				<div class="giftCardContent">
+					<div class="giftCardInput">
+						<eSeller:Control ControlType="RedeemGiftCard" ControlID="GiftCardInputField" />
+					</div>
+					<div class="giftCardButton">
+						<eSeller:Control ControlType="GenericButton" ControlID="SubmitCode" WorksOn="GiftCardInputField" />
+					</div>
+				</div>
+			</div>
+			<script type="application/javascript">
+				
+				//Handles opening/closing of .couponContent
+				$( ".basketCouponBdy .couponHeader" ).on( "click", function() {
+					$(this).toggleClass('active');
+					$('.basketCouponBdy .couponContent').toggleClass('active');
+				});
+				
+				//Handles opening/closing of .giftCardContent
+				$( ".basketCouponBdy .giftCardHeader" ).on( "click", function() {
+					$(this).toggleClass('active');
+					$('.basketCouponBdy .giftCardContent').toggleClass('active');
+				});
+				
+			</script>
+        </div>-->
+        <div style="clear:both;"></div>
+        <div class="basketBottomNavBdy clearfix">
+            <div class="basketNxtStep2 right">
+                <eSeller:Control ControlType="BasketActionButton" ControlId="Next2" Mode="NavigateNext" CssClass="buttonNavNext" CausesValidation="True" />
+		        <eSeller:Attribute Name="Text" Text="button_next(basket)" />
+            </div> 
+            <div class="basketUpdAll right">
+                <eSeller:Control ControlType="BasketActionButton" ControlId="UpdateBasket" Mode="UpdateBasket" CausesValidation="True" CssClass="buttonUpdateBasket" />
+            </div>
+            <div class="basketClrAll right">
+                <eSeller:Control ControlType="BasketActionButton" ControlId="ClearBasket" Mode="ClearBasket" CausesValidation="True" CssClass="buttonClearBasket" />
+            </div>
+        </div>
+    </div>
+    <div class="basketOuterDiv">
+        <div class="basketMessageDiv">
+            <eSeller:Control ControlType="BasketMessages" ControlId="BasketMessages" />
+        </div>
+    </div>
+</eSeller:If>
+
+<!-- If basket is empty -->
+<eSeller:If IsTrue="Basket:IsEmpty">
+    <div class="basketIsEmptyBdy">
+        <h1><eSeller:Select Text="error_label_empty_basket" /></h1>
+        <br />
+        <eSeller:Control ControlType="BasketActionButton" ControlId="PreviousStep" Mode="NavigatePrevious" DuplicateID="True" CssClass="buttonNavPrev" />
+    </div>
+</eSeller:If>
+
+<div class="basketProducts">
+	<h3>
+		<eSeller:Select text="label_basket_products_header" />
+	</h3>
+	<div id="basketProductsBdy" class="jsonProducts basketProducts"></div>
+</div>
+	
+<script src="/media/349/js/JsonProductList.js?nb1"></script>
