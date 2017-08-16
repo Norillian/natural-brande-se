@@ -891,6 +891,40 @@
 
 // Custom Scripts
 
+// Cookie Handler
+var cookie = {
+
+  create: function(name,value,days) {
+
+    var expires = "";
+
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime()+(days*24*60*60*1000));
+          expires = "; expires="+date.toGMTString();
+      }
+
+      document.cookie = name+"="+value+expires+"; path=/";
+
+  },
+
+  read: function(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  },
+
+  erase: function(name) {
+      this.create(name,"",-1);
+  }
+
+};
+
 $( document ).ready(function() {
 
   //Accordion hide tabs
@@ -1143,6 +1177,57 @@ $( document ).ready(function() {
 		return (value !== undefined ? /^\d{13}$/.test(value) : false);
 	};
 
+	function isElementInViewport (el) {
+
+    //special bonus for those using jQuery
+    if (typeof jQuery === "function" && el instanceof jQuery) {
+        el = el[0];
+    }
+
+    var rect = el.getBoundingClientRect();
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+    );
+	}
+
+	var quickSearchCookieName = 'quicksearch-cookie';
+
+	function setQuickSearchStateCookie() {
+		cookie.create(quickSearchCookieName, true);
+	};
+
+	function getQuickSearchStateCookie() {
+		if(cookie.read(quickSearchCookieName) !== null && (location.pathname == '/' || location.pathname == '/basket/shoppingcart.aspx')) {
+			// Cookie exists and we are on a relevant page
+			// This means we need to make sure the quicksearch widget is in the viewport and scroll down if it is not
+			if(!isElementInViewport($('.basketQuickBasket, .frontpageQuickBasket'))) {
+				$('html, body').animate({
+		        scrollTop: $(".basketQuickBasket, .frontpageQuickBasket").offset().top - 100
+		    }, 300);
+			}
+			// Automatically focussing an input on iOS is apparently a problem (and a feature)
+			// // As well as setting it in focus
+			// $('body').append('<div class="ios-focus-hack"></div>');
+			// $('.ios-focus-hack').click(function() {
+			$('body').prepend('focussing input')
+			$('.basketQuickBasket input, .frontpageQuickBasket input').focus();
+			var ch = function() {
+				$('body').prepend('focussing input again')
+				$('.basketQuickBasket input, .frontpageQuickBasket input').focus();
+				$('.basketQuickBasket input, .frontpageQuickBasket input').off('keydown', ch);
+			}
+			$('.basketQuickBasket input, .frontpageQuickBasket input').on('keydown', ch);
+			// });
+			// $('.ios-focus-hack').click();
+		}
+		// Either way, remove the cookie, it is only ever relevant on the first page load
+		cookie.erase(quickSearchCookieName);
+	}
+
   //Quick add to basket
   $( ".frontpageQuickBasket div a, .basketQuickBasket a" ).on( "click", function() {
 
@@ -1184,6 +1269,15 @@ $( document ).ready(function() {
         		}
         	}
 
+        	// When we add a product through the quicksøg widget, the widget should be in focus (and in screen) again on page reload
+        	// We do this by setting a cookie now, before the postback, and the function XXX will handle the rest on page load
+        	setQuickSearchStateCookie();
+
+        	// If no item amount is given (the default value 1), and the product has a bundleSize higher than one, add a quantity of bundleSize instead
+        	if(getItemAmount == "1" && (val.bundleSize !== undefined && val.bundleSize > 1)) {
+        		getItemAmount = val.bundleSize;
+        	}
+
           atbNoQty(val.eSellerId, 0, getItemAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
 
         });
@@ -1202,7 +1296,7 @@ $( document ).ready(function() {
        $( ".basketQuickBasket a" ).trigger('click');
   });
 
-  $('.frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox').keyup(function(e){
+  $('.frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox').keydown(function(e){
       if(e.keyCode == 13)
       {
           $(this).trigger("enterKey");
@@ -1256,4 +1350,5 @@ $( document ).ready(function() {
     });
   }
 
+  getQuickSearchStateCookie();
 });
