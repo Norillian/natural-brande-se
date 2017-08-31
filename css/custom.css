@@ -1985,10 +1985,10 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
       display:block;
     }
 
-    ul.categoriesLeftSide > li.active a,
+   /* ul.categoriesLeftSide > li.active a,
     ul.categoriesLeftSide > li.activeParent a {
       font-weight: bold;
-    }
+    }*/
 
     ul.categoriesLeftSide > li > a{
       display:block;
@@ -2043,11 +2043,81 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
       font-size:13px;
       padding-left:20px;
     }
-
+/*
     ul.categoriesLeftSide > li > ul > li > ul > li.active > a,
     ul.categoriesLeftSide > li > ul > li > ul > li.activeParent > a{
       font-weight:bold;
     }
+*/
+
+		/* Bold text fixes */
+		li.active
+		{
+			font-weight: bold;
+		}
+
+		ul > li.activeParent 
+		{
+			font-weight: bold;
+		} 
+
+		ul
+		{
+			font-weight: 400;
+		}
+
+		/* General styling menus */
+		ul.categoriesLeftSide > li > ul > li
+		{
+			font-size: 16px;
+		}
+
+		ul.categoriesLeftSide > li > ul > li > ul > li 
+		{
+			font-size: 14px;
+		}
+
+		/* Styling level 3 menus */
+		ul.categoriesLeftSide > li > ul > li > ul > li > ul > li
+		{
+			display: none;
+			font-size: 12px;
+		}
+
+		ul.categoriesLeftSide > li > ul > li > ul > li.active > ul > li
+		{
+			display: block;
+			font-size: 12px;
+			padding-left: 20px;
+		}
+
+		ul.categoriesLeftSide > li > ul > li > ul > li.activeParent > ul > li
+		{
+			display: block;
+			font-size: 12px;
+			padding-left: 20px;
+		}
+
+		/* Styling level 4 menus */
+		ul.categoriesLeftSide > li > ul > li > ul > li > ul > li > ul > li
+		{
+			display: none;
+			font-size: 12px;
+		}	
+
+		ul.categoriesLeftSide > li > ul > li > ul > li > ul > li.active > ul > li
+		{
+			display: block;
+			font-size: 12px;
+			padding-left: 20px;
+		}
+
+		ul.categoriesLeftSide > li > ul > li > ul > li > ul > li.activeParent > ul > li
+		{
+			display: block;
+			font-size: 12px;
+			padding-left: 20px;
+		}
 
     /*.leftSideListing ul.categoriesLeftSide > li,
     .leftSideListing ul.categoriesLeftSide > li > a{
@@ -5293,6 +5363,53 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
         width: 60px;
         height: 40px;
     }
+
+    /* Menu styling on tablet fix*/
+		.leftSideListing
+		{
+			margin-left: -10px;
+			width: 110%;
+		}
+
+		/* Forces elements to stay on one line */
+		ul.categoriesLeftSide > li > ul > li > ul > li , ul.categoriesLeftSide > li > ul > li , ul.categoriesLeftSide > li
+		{
+			white-space: nowrap;
+		}
+
+		/* Allows only the text to wrap to next line */
+		ul.categoriesLeftSide > li > ul a
+		{
+			white-space: pre-wrap;
+		}
+
+		/* Fixes the ">" icons on menus with multiple lines of text */
+		ul.categoriesLeftSide > li > ul li:before
+		{
+			vertical-align: top;
+			position: relative;
+			top: 7px;
+		}
+
+		ul.categoriesLeftSide > li > ul > li
+		{
+			font-size: 13px;
+		}
+
+		ul.categoriesLeftSide > li > ul > li > ul > li 
+		{
+			font-size: 12px;
+		}
+
+		ul.categoriesLeftSide > li > ul > li > ul > li > ul > li > ul > li
+		{
+			font-size: 11px;
+		}	
+
+		ul.categoriesLeftSide > li > ul > li > ul > li > ul > li
+		{
+			font-size: 11px;
+		}
 
 }
 
