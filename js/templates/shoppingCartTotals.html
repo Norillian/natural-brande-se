@@ -1,0 +1,47 @@
+<div class="basketTotalsBdy right clearfix">
+  <div id="ec38">
+    <table class="ec38TableTotals">
+      <tbody>
+        <tr class="ec38Subtotal">
+          <td class="content c1">
+            <%= labels.subTotal %>
+            <!-- Subtotal -->
+          </td>
+          <td class="content c2">
+            <span><%= helpers.formatMoney(basket.lineTotal.priceIncVat, currency) %></span>
+          </td>
+        </tr>
+        <% _.each(basket.fees, function(fee) { %>
+          <% if(fee.fee.priceIncVat != 0) { %>
+            <tr class="ec38Shipment">
+              <td class="content c1">
+                <%= fee.name %> - <%= fee.description %>
+              </td>
+              <td class="content c2">
+                <%= helpers.formatMoney(fee.fee.priceIncVat, currency) %>
+              </td>
+            </tr>
+            <% } %>
+            <% }); %>
+            <tr class="HeaderBar ec38Total">
+              <td class="content c1">
+                <%= labels.total %>
+                <!-- Total -->
+              </td>
+              <td class="content c2">
+                <%= helpers.formatMoney(basket.basketTotal.priceIncVat, currency) %>
+              </td>
+            </tr>
+            <tr class="ec38Tax">
+              <td class="content c1">
+                <%= labels.ofWhichVat %>
+                <!-- heraf moms -->
+              </td>
+              <td class="content c2">
+                <%= helpers.formatMoney(basket.basketTotal.vatAmount, currency) %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+</div>
