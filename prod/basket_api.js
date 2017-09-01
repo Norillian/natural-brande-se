@@ -70,7 +70,34 @@ var basketApi = (function($, _) {
           success: function(res) {
           	basketContent.isEmpty = false;
             basketContent.lines = res.data.items;
-            basketLinesGet.resolve();
+            // There are lines, add to them the JSON Product list info for each product
+            var products = _.map(res.data.items, 
+            											function(line) {
+            												return line.internalItemId1;
+            											}).join(';');
+            var apiCall = constants.jplUrl + '?v=1.0&lId=0&locId=' + locId + '&cId=' + cId + '&langId=' + 
+            							langId + '&countryId=' + contId +  '&customerId=' + customerId + 
+            							'&pIds=' + products;
+            debugLog("read(): %s", apiCall);
+            $.ajax({
+            	url: apiCall,
+            	error: function(res) {
+            		debugLog("read(): %s", res);
+            		basketLinesGet.resolve();
+            	},
+            	success: function(res) {
+            		// Received JSON API products
+            		basketContent.lines.forEach(function(line) {
+            			res.data.items.forEach(function(product) {
+            				if(line.internalItemId1 == product.eSellerId) {
+            					line.jpl = product;
+            				}
+            			});
+            		});
+            		debugLog(basketContent);
+            		basketLinesGet.resolve();		
+            	}
+            });
           }
         });
       	
@@ -131,6 +158,12 @@ var basketApi = (function($, _) {
   	} else {
   		var html = templates.shoppingCart({
         // Some labels
+        onCheckout : onCheckout,
+        lines: basketContent.lines,
+        currency: basketContent.lineTotal.currencySymbol,
+        helpers: {
+        	formatMoney: formatMoney
+        }
       });
 
       $('#basket').empty().append(html);
@@ -153,7 +186,9 @@ var basketApi = (function($, _) {
     return cur + ' ' + parseFloat(Number(num).toFixed(2)).format(2, 3, '.', ',');
   }
 
-	update();
+  $(document).ready(function() {
+		update();
+  });
 
 	return {
 		// Public interface to basket API
@@ -277,49 +312,45 @@ __p+='\r\n            <tr class="row '+
 ((__t=( line.itemUrl ))==null?'':__t)+
 '\'>\r\n                  '+
 ((__t=( line.description1 ))==null?'':__t)+
-'\r\n                  ';
- if(line.description3 != undefined && line.description3 != "") { 
-__p+='\r\n                    '+
-((__t=( "- " + line.description3 ))==null?'':__t)+
-'\r\n                  ';
- } 
-__p+='\r\n                </a>\r\n              </td>\r\n              <td class="content c5">\r\n                ';
- if(onCheckout || line.notUpdatable) { 
+'\r\n                </a>\r\n              </td>\r\n              <td class="content c5">\r\n                ';
+ if(onCheckout) { 
 __p+='\r\n                  <span>\r\n                    '+
 ((__t=( line.quantity ))==null?'':__t)+
 '\r\n                  </span>\r\n                ';
  } else { 
-__p+='\r\n                  <div class="shoppingCartInputContainer">\r\n                    <input class=\'shoppingCartInput\' type=\'text\' name=\'name\' value=\''+
+__p+='\r\n                  <input class=\'shoppingCartInput\' type=\'text\' name=\'name\' value=\''+
 ((__t=( line.quantity ))==null?'':__t)+
 '\' data-lineid=\''+
 ((__t=( line.id ))==null?'':__t)+
-'\' >\r\n                    ';
+'\' >\r\n                  <!-- <div class="shoppingCartInputContainer">\r\n                    ';
  if(line.jpl && line.jpl.bundleSize > 0) { 
 __p+='\r\n                      <div class="product-basket-crs-controls">\r\n                        <div class="product-basket-crs-add">\r\n                          <i class="zmdi zmdi-caret-up"></i>\r\n                        </div>\r\n                        <div class="product-basket-crs-sub">\r\n                          <i class="zmdi zmdi-caret-down"></i>\r\n                        </div>\r\n                      </div>\r\n                    ';
  } 
-__p+='\r\n                  </div>\r\n                ';
+__p+='\r\n                  </div> -->\r\n                ';
  } 
-__p+='\r\n                '+
+__p+='\r\n                <!-- '+
 ((__t=( line.userCode3 ))==null?'':__t)+
-'\r\n              </td>\r\n              <td class="content c6">\r\n                <a href=\''+
+' -->\r\n              </td>\r\n              <td class="content c6">\r\n                <a href=\''+
 ((__t=( line.itemUrl ))==null?'':__t)+
 '\'>\r\n                  '+
 ((__t=( helpers.formatMoney(line.unitPrice.priceIncVat, currency) ))==null?'':__t)+
-'\r\n                </a>\r\n              </td>\r\n              <td class="content c8">\r\n                <a href=\''+
-((__t=( line.itemUrl ))==null?'':__t)+
-'\'>\r\n                  '+
+'\r\n                </a>\r\n              </td>\r\n              <td class="content c7">\r\n                '+
+((__t=( (line.jpl.salesPrices.length > 0 && 
+                			line.jpl.salesPrices[0].lineDiscountPercentage !== 0 ? 
+                			line.jpl.salesPrices[0].lineDiscountPercentageFormatted + ' %' : '') ))==null?'':__t)+
+'\r\n              </td>\r\n              <td class="content c8">\r\n                '+
 ((__t=( helpers.formatMoney(line.lineAmount.priceIncVat, currency) ))==null?'':__t)+
-'\r\n                </a>\r\n              </td>\r\n              ';
+'\r\n              </td>\r\n              ';
  if(!onCheckout) { 
 __p+='\r\n              <td class="content c9">\r\n              	';
  if(line.itemContent !== 'Coupon') { 
-__p+='\r\n	                <img src="/media/316/img/delete-icon.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketUI.deleteItem( '+
+__p+='\r\n	                <img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketUI.deleteItem( '+
 ((__t=( line.id ))==null?'':__t)+
 ' )"/>\r\n              	';
  } else { 
 __p+=' \r\n              		<a href="/basket/shoppingcart.aspx?ce32cmd=remove&ce32lid='+
 ((__t=( line.id ))==null?'':__t)+
-'">\r\n              			<img src="/media/316/img/delete-icon.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;"/>\r\n              		</a>\r\n              	';
+'">\r\n              			<img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;"/>\r\n              		</a>\r\n              	';
  } 
 __p+='\r\n              </td>\r\n              ';
  } 

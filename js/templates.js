@@ -65,7 +65,7 @@ var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments
 with(obj||{}){
 __p+='';
  if(!onCheckout) { 
-__p+='\r\n<div class="basketTopNavBdy">\r\n    <div class="basketHeader">\r\n        <h1>\r\n          Korg\r\n          <!-- Indkøbskurv -->\r\n        </h1>\r\n    </div>\r\n    <div class="basketBtnDiv clearfix">\r\n        <div class="basketPreStep left">\r\n            <a class="buttonNavPrev">\r\n              Fortsätt handla\r\n              <!-- shop videre -->\r\n            </a>\r\n        </div>\r\n        <div class="basketNxtStep right">\r\n            <a class="buttonNavNext">\r\n              Kassan\r\n              <!-- Gå til kassen -->\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>\r\n';
+__p+='\r\n<div class="basketTopNavBdy">\r\n    <div class="basketHeader">\r\n        <h1>\r\n          Korg\r\n          <!-- Indkøbskurv -->\r\n        </h1>\r\n    </div>\r\n    <div class="basketBtnDiv clearfix">\r\n        <div class="basketPreStep left">\r\n            <a class="buttonNavPrev" href="/">\r\n              Fortsätt handla\r\n              <!-- shop videre -->\r\n            </a>\r\n        </div>\r\n        <div class="basketNxtStep right">\r\n            <a class="buttonNavNext">\r\n              Kassan\r\n              <!-- Gå til kassen -->\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>\r\n';
  } 
 __p+='\r\n\r\n';
  if(onCheckout) { 
@@ -92,42 +92,44 @@ __p+='\r\n            <tr class="row '+
 '\'>\r\n                  '+
 ((__t=( line.description1 ))==null?'':__t)+
 '\r\n                </a>\r\n              </td>\r\n              <td class="content c5">\r\n                ';
- if(onCheckout || line.notUpdatable) { 
+ if(onCheckout) { 
 __p+='\r\n                  <span>\r\n                    '+
 ((__t=( line.quantity ))==null?'':__t)+
 '\r\n                  </span>\r\n                ';
  } else { 
-__p+='\r\n                  <div class="shoppingCartInputContainer">\r\n                    <input class=\'shoppingCartInput\' type=\'text\' name=\'name\' value=\''+
+__p+='\r\n                  <input class=\'shoppingCartInput\' type=\'text\' name=\'name\' value=\''+
 ((__t=( line.quantity ))==null?'':__t)+
 '\' data-lineid=\''+
 ((__t=( line.id ))==null?'':__t)+
-'\' >\r\n                    ';
+'\' >\r\n                  <!-- <div class="shoppingCartInputContainer">\r\n                    ';
  if(line.jpl && line.jpl.bundleSize > 0) { 
 __p+='\r\n                      <div class="product-basket-crs-controls">\r\n                        <div class="product-basket-crs-add">\r\n                          <i class="zmdi zmdi-caret-up"></i>\r\n                        </div>\r\n                        <div class="product-basket-crs-sub">\r\n                          <i class="zmdi zmdi-caret-down"></i>\r\n                        </div>\r\n                      </div>\r\n                    ';
  } 
-__p+='\r\n                  </div>\r\n                ';
+__p+='\r\n                  </div> -->\r\n                ';
  } 
-__p+='\r\n                '+
+__p+='\r\n                <!-- '+
 ((__t=( line.userCode3 ))==null?'':__t)+
-'\r\n              </td>\r\n              <td class="content c6">\r\n                <a href=\''+
+' -->\r\n              </td>\r\n              <td class="content c6">\r\n                <a href=\''+
 ((__t=( line.itemUrl ))==null?'':__t)+
 '\'>\r\n                  '+
 ((__t=( helpers.formatMoney(line.unitPrice.priceIncVat, currency) ))==null?'':__t)+
-'\r\n                </a>\r\n              </td>\r\n              <td class="content c8">\r\n                <a href=\''+
-((__t=( line.itemUrl ))==null?'':__t)+
-'\'>\r\n                  '+
+'\r\n                </a>\r\n              </td>\r\n              <td class="content c7">\r\n                '+
+((__t=( (line.jpl.salesPrices.length > 0 && 
+                			line.jpl.salesPrices[0].lineDiscountPercentage !== 0 ? 
+                			line.jpl.salesPrices[0].lineDiscountPercentageFormatted + ' %' : '') ))==null?'':__t)+
+'\r\n              </td>\r\n              <td class="content c8">\r\n                '+
 ((__t=( helpers.formatMoney(line.lineAmount.priceIncVat, currency) ))==null?'':__t)+
-'\r\n                </a>\r\n              </td>\r\n              ';
+'\r\n              </td>\r\n              ';
  if(!onCheckout) { 
 __p+='\r\n              <td class="content c9">\r\n              	';
  if(line.itemContent !== 'Coupon') { 
-__p+='\r\n	                <img src="/media/316/img/delete-icon.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketUI.deleteItem( '+
+__p+='\r\n	                <img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketUI.deleteItem( '+
 ((__t=( line.id ))==null?'':__t)+
 ' )"/>\r\n              	';
  } else { 
 __p+=' \r\n              		<a href="/basket/shoppingcart.aspx?ce32cmd=remove&ce32lid='+
 ((__t=( line.id ))==null?'':__t)+
-'">\r\n              			<img src="/media/316/img/delete-icon.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;"/>\r\n              		</a>\r\n              	';
+'">\r\n              			<img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;"/>\r\n              		</a>\r\n              	';
  } 
 __p+='\r\n              </td>\r\n              ';
  } 

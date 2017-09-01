@@ -70,7 +70,34 @@ var basketApi = (function($, _) {
           success: function(res) {
           	basketContent.isEmpty = false;
             basketContent.lines = res.data.items;
-            basketLinesGet.resolve();
+            // There are lines, add to them the JSON Product list info for each product
+            var products = _.map(res.data.items, 
+            											function(line) {
+            												return line.internalItemId1;
+            											}).join(';');
+            var apiCall = constants.jplUrl + '?v=1.0&lId=0&locId=' + locId + '&cId=' + cId + '&langId=' + 
+            							langId + '&countryId=' + contId +  '&customerId=' + customerId + 
+            							'&pIds=' + products;
+            debugLog("read(): %s", apiCall);
+            $.ajax({
+            	url: apiCall,
+            	error: function(res) {
+            		debugLog("read(): %s", res);
+            		basketLinesGet.resolve();
+            	},
+            	success: function(res) {
+            		// Received JSON API products
+            		basketContent.lines.forEach(function(line) {
+            			res.data.items.forEach(function(product) {
+            				if(line.internalItemId1 == product.eSellerId) {
+            					line.jpl = product;
+            				}
+            			});
+            		});
+            		debugLog(basketContent);
+            		basketLinesGet.resolve();		
+            	}
+            });
           }
         });
       	
@@ -131,6 +158,12 @@ var basketApi = (function($, _) {
   	} else {
   		var html = templates.shoppingCart({
         // Some labels
+        onCheckout : onCheckout,
+        lines: basketContent.lines,
+        currency: basketContent.lineTotal.currencySymbol,
+        helpers: {
+        	formatMoney: formatMoney
+        }
       });
 
       $('#basket').empty().append(html);
@@ -153,7 +186,9 @@ var basketApi = (function($, _) {
     return cur + ' ' + parseFloat(Number(num).toFixed(2)).format(2, 3, '.', ',');
   }
 
-	update();
+  $(document).ready(function() {
+		update();
+  });
 
 	return {
 		// Public interface to basket API

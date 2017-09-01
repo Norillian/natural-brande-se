@@ -8,7 +8,7 @@
     </div>
     <div class="basketBtnDiv clearfix">
         <div class="basketPreStep left">
-            <a class="buttonNavPrev">
+            <a class="buttonNavPrev" href="/">
               Fortsätt handla
               <!-- shop videre -->
             </a>
@@ -71,13 +71,13 @@
                 </a>
               </td>
               <td class="content c5">
-                <% if(onCheckout || line.notUpdatable) { %>
+                <% if(onCheckout) { %>
                   <span>
                     <%= line.quantity %>
                   </span>
                 <% } else { %>
-                  <div class="shoppingCartInputContainer">
-                    <input class='shoppingCartInput' type='text' name='name' value='<%= line.quantity %>' data-lineid='<%= line.id %>' >
+                  <input class='shoppingCartInput' type='text' name='name' value='<%= line.quantity %>' data-lineid='<%= line.id %>' >
+                  <!-- <div class="shoppingCartInputContainer">
                     <% if(line.jpl && line.jpl.bundleSize > 0) { %>
                       <div class="product-basket-crs-controls">
                         <div class="product-basket-crs-add">
@@ -88,28 +88,31 @@
                         </div>
                       </div>
                     <% } %>
-                  </div>
+                  </div> -->
                 <% } %>
-                <%= line.userCode3 %>
+                <!-- <%= line.userCode3 %> -->
               </td>
               <td class="content c6">
                 <a href='<%= line.itemUrl %>'>
                   <%= helpers.formatMoney(line.unitPrice.priceIncVat, currency) %>
                 </a>
               </td>
+              <td class="content c7">
+                <%= (line.jpl.salesPrices.length > 0 && 
+                			line.jpl.salesPrices[0].lineDiscountPercentage !== 0 ? 
+                			line.jpl.salesPrices[0].lineDiscountPercentageFormatted + ' %' : '') %>
+              </td>
               <td class="content c8">
-                <a href='<%= line.itemUrl %>'>
-                  <%= helpers.formatMoney(line.lineAmount.priceIncVat, currency) %>
-                </a>
+                <%= helpers.formatMoney(line.lineAmount.priceIncVat, currency) %>
               </td>
               <% if(!onCheckout) { %>
               <td class="content c9">
               	<% if(line.itemContent !== 'Coupon') { %>
-	                <img src="/media/316/img/delete-icon.png"
+	                <img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"
 	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketUI.deleteItem( <%= line.id %> )"/>
               	<% } else { %> 
               		<a href="/basket/shoppingcart.aspx?ce32cmd=remove&ce32lid=<%= line.id %>">
-              			<img src="/media/316/img/delete-icon.png"
+              			<img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"
 	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;"/>
               		</a>
               	<% } %>
