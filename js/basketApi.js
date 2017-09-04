@@ -37,6 +37,7 @@ var basketApi = (function($, _) {
 			// We are on the product detail page
 			replaceAddToBasketButtonHandler();
 		}
+		basketLineUpdateListeners();
 	}
 
 	function update() {
@@ -50,7 +51,7 @@ var basketApi = (function($, _) {
 				updateBasket(true);
 			}
 			setupButtonListeners();
-			basketLineUpdateListeners();
+			
 			updateMiniBasket();
 		}).fail(function(res) {
 			debugLog("update(): %s", res);
@@ -169,7 +170,7 @@ var basketApi = (function($, _) {
   // Update an item in the basket.
   function updateById(id, quantity) {
 
-    var items = []
+  	var items = []
     items.push({
       basketLineId: id,
       quantity: quantity
@@ -190,11 +191,46 @@ var basketApi = (function($, _) {
   }
 
   function updateItem(eSellerId, quantity) {
+
+  	// Do some checks:
+  	// Find nearest matching bundleSize if necessary
+  	// Make sure quantity doesn't exceed available inventory
+  	// inventoryCount
+  	var messageOverride = "";
+  	basketContent.lines.forEach(function(line) {
+  		if(eSellerId == line.id) {
+  			// On the matching basket line for this id
+  			if(line.jpl.bundleSize !== undefined && line.jpl.bundleSize > 1) {
+  				// If there is a bundlesize > 1
+  				var bundleSize = line.jpl.bundleSize
+  				if((quantity % bundleSize) !== 0) {
+  					// And this bundlesize is not matched by the given quantity
+  					// Increase the quantity to the closes match
+  					debugLog("updateItem(): Increased quantity by %i", bundleSize - (quantity % bundleSize));
+  					quantity += bundleSize - (quantity % bundleSize);
+  					// "Arion No Grain Salmon & Potato 150g (20)" ska bestillas i kolli av 20, Du behöver beställa ytterligare 19, så det totala antalet blir 40. Klicka här för att gå till varukorgen.
+  					messageOverride = 'Antal blev rettet til at matche kolli';
+  				}
+  			}
+  			if(line.jpl.inventoryCount < quantity) {
+  				// If quantity exceeds inventory
+  				quantity = line.jpl.inventoryCount;
+  				debugLog("updateItem(): Reducing quantity to match inventoryCount: %i ", quantity);
+  				messageOverride = 'Antal blev rettet til at matche lagerantal';
+  			}
+  		}
+  	});
+
   	updateById(eSellerId, quantity).done(function(data) {
 
   		debugLog(data);
 
-      displayBasketMessage('Din varukorg är uppdaterad.');
+  		var kolliWarningMessage = '{productName} ska bestillas i kolli av {bundleSize}, Du behöver beställa ytterligare {difference},' + 
+  															' så  det totala antalet blir {total}. <a href="http://www.natural-sverige.se/basket/shoppingcart.aspx">' + 
+  															'Klicka här</a> för att gå till varukorgen.';
+
+
+      displayBasketMessage(messageOverride !== '' ? messageOverride : 'Din varukorg är uppdaterad.');
       // var message = data && data.data && data.data.items && data.data.items[0].messages && 
       // 							data.data.items[0].messages[0] && data.data.items[0].messages[0].message;
 
@@ -284,6 +320,7 @@ var basketApi = (function($, _) {
   function setupButtonListeners() {
     
     $('.basketBottomNavBdy .basketUpdAll').on('click', function(e) {
+    	debugLog("setupButtonListeners(): %s", linesToUpdate);
       _.each(_.pairs(linesToUpdate), function(line, i) {
         updateItem(line[0], line[1]);
       });
@@ -314,6 +351,11 @@ var basketApi = (function($, _) {
           var lineId = parseInt($(e.target).attr('data-lineid'));
           var value = parseFloat($(e.target).val());
           if(!isNaN(value)) {
+ 	          // var bundleSize = parseInt($(e.target).attr('data-bundlesize'));
+ 	          // if(!isNaN(bundleSize) && (value % bundleSize) !== 0) {
+ 	          // 	displayBasketMessage("urmom");
+ 	          // } else {
+ 	          // }
             updateItem(lineId, value);
             e.stopPropagation();
             return true;
