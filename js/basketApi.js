@@ -1,11 +1,13 @@
 // TODO
 // Change Message box to fixed since we are no longer scrolling up after each fucking purchase
 // If there is time, implement a queue system for when someone is spamming the buy button
+// Delivery fee line has a * in the vanilla controller
 
 
 var basketApi = (function($, _) {
 
 	var basketContent = {};
+	var linesToUpdate = {};
 
 	var production = false;
 	// var production = true;
@@ -25,6 +27,18 @@ var basketApi = (function($, _) {
 		}
 	}
 
+	function init() {
+		// No need for basket API on checkout page
+		if(location.pathname !== "/basket/shoppingcart_step3.aspx") {
+			copyAndHideControlButtons();
+			update();
+		}
+		if(location.pathname.indexOf('/pi/') !== -1) {
+			// We are on the product detail page
+			replaceAddToBasketButtonHandler();
+		}
+	}
+
 	function update() {
 		read().done(function(data) {
 			debugLog(basketContent);
@@ -32,9 +46,11 @@ var basketApi = (function($, _) {
 			// updateBasket when on checkout page
 			if(location.pathname === "/basket/shoppingcart.aspx") {
 				updateBasket(false);
-			} else if(location.path === "/basket/shoppingcart_step3.aspx") {
+			} else if(location.pathname === "/basket/shoppingcart_step3.aspx") {
 				updateBasket(true);
 			}
+			setupButtonListeners();
+			basketLineUpdateListeners();
 			updateMiniBasket();
 		}).fail(function(res) {
 			debugLog("update(): %s", res);
@@ -76,7 +92,7 @@ var basketApi = (function($, _) {
             												return line.internalItemId1;
             											}).join(';');
             var apiCall = constants.jplUrl + '?v=1.0&lId=0&locId=' + locId + '&cId=' + cId + '&langId=' + 
-            							langId + '&countryId=' + contId +  '&customerId=' + customerId + 
+            							langId + '&countryId=' + contId +  '&customerId=' + (typeof customerId !== "undefined" ? customerId : 0 ) + 
             							'&pIds=' + products;
             debugLog("read(): %s", apiCall);
             $.ajax({
@@ -129,12 +145,80 @@ var basketApi = (function($, _) {
       url: constants.apiUrl + 'line',
       data: JSON.stringify(data),
       error: function(res) {
+        debugLog(res);
+      },
+      success: function(res){
+      }
+    });
+  }
+
+  function deleteLine(eSellerId) {
+  	return $.ajax({
+      type: "DELETE",
+      contentType: "application/json",
+      dataType: "json",
+      url: constants.apiUrl + 'line/' + eSellerId,
+      error: function(res) {
+        debugLog(res);
+      },
+      success: function(res){
+      }
+    });
+  }
+
+  // Update an item in the basket.
+  function updateById(id, quantity) {
+
+    var items = []
+    items.push({
+      basketLineId: id,
+      quantity: quantity
+    });
+
+    return $.ajax({
+      type: "PUT",
+      contentType: "application/json",
+      dataType: "json",
+      url: constants.apiUrl + 'line',
+      data: JSON.stringify(items),
+      error: function(res) {
         console.log(res);
       },
       success: function(res){
       }
     });
   }
+
+  function updateItem(eSellerId, quantity) {
+  	updateById(eSellerId, quantity).done(function(data) {
+
+  		debugLog(data);
+
+      displayBasketMessage('Din varukorg är uppdaterad.');
+      // var message = data && data.data && data.data.items && data.data.items[0].messages && 
+      // 							data.data.items[0].messages[0] && data.data.items[0].messages[0].message;
+
+      // if(message) {
+      //   displayBasketMessage(message);
+        
+      // }
+
+      update();
+
+    }).fail(function(res) {
+    	debugLog("updateItem(): %s", res);
+    });
+	}
+
+	function deleteItem(eSellerId) {
+		deleteLine(eSellerId).done(function(data) {
+			debugLog(data);
+
+			update();
+		}).fail(function(res) {
+			debugLog("deleteItem(): %s", res);
+		});
+	}
 
   function displayBasketMessage(msg) {
     var html = templates['basketMessage']({
@@ -167,7 +251,86 @@ var basketApi = (function($, _) {
       });
 
       $('#basket').empty().append(html);
+
+      html = templates.shoppingCartTotals({
+      	basket: basketContent,
+      	currency: basketContent.basketTotal.currencySymbol,
+      	helpers: {
+        	formatMoney: formatMoney
+        }
+      });
+
+      $('.basketTotalsBdy').replaceWith(html);
+
+      html = templates.basketButtons({
+      	onCheckout : onCheckout
+      });
+      $('.basketBottomNavBdy').replaceWith(html);
   	}
+  }
+
+  function replaceAddToBasketButtonHandler() {
+  	// debugLog("replaceAddToBasketButtonHandler(): Not implemented");
+  	$('.addToBasketBtn').attr('onclick', 'basketApi.addItem(pId, (isNaN($(".etBasket input").val()) ? 1 : $(".etBasket input").val() ))');
+  }
+
+  function copyAndHideControlButtons() {
+  	var copy = $('.basketBottomNavBdy').clone();
+  	$(copy).removeClass('basketBottomNavBdy').addClass('hiddenBasketBottomNavBdy').hide();
+  	$('.basketOuterBdy').append(copy);
+  }
+
+  // Set up listeners for the buttons in a basket or minibasket
+  function setupButtonListeners() {
+    
+    $('.basketBottomNavBdy .basketUpdAll').on('click', function(e) {
+      _.each(_.pairs(linesToUpdate), function(line, i) {
+        updateItem(line[0], line[1]);
+      });
+      linesToUpdate = {};
+    });
+
+    $('.basketBottomNavBdy .basketClrAll').on('click', function(e) {
+      $('.hiddenBasketBottomNavBdy .basketClrAll input').click();
+    });
+
+    $('.basketBtnDiv .buttonNavNext').on('click', function(e) {
+      $('.hiddenBasketBottomNavBdy .basketNxtStep2 input').click();
+    });
+
+    $('.basketBottomNavBdy .buttonNavNext').on('click', function(e) {
+      $('.hiddenBasketBottomNavBdy .basketNxtStep2 input').click();
+    });
+  }
+
+  function basketLineUpdateListeners() {
+    // Intercept input in 'input' tags so that we can keep track of the user's changes
+    // to the basket.
+    // This is to facilitate the use-case that a user changes the values in multiple lines
+    // and then presses the 'opdater alt' button
+    $(document).on('keyup', function(e) {
+      if($(e.target).hasClass('shoppingCartInput') && !$(e.target).prop("is:disabled")) { // Ignore inputs that were disabled by constrainedInputBasket
+        if (e.keyCode == 13) {
+          var lineId = parseInt($(e.target).attr('data-lineid'));
+          var value = parseFloat($(e.target).val());
+          if(!isNaN(value)) {
+            updateItem(lineId, value);
+            e.stopPropagation();
+            return true;
+          } else {
+            console.log("value is not a number!");
+            return true;
+          }
+        } else {
+          var inputField = $(e.target);
+          var lineId = parseInt(inputField.attr('data-lineid'));
+          var value = parseFloat(inputField.val());
+          if(!isNaN(value)) {
+            linesToUpdate[lineId] = value;
+          }
+        }
+      }
+    });
   }
 
   function updateMiniBasket() {
@@ -187,7 +350,7 @@ var basketApi = (function($, _) {
   }
 
   $(document).ready(function() {
-		update();
+		init();
   });
 
 	return {
@@ -207,7 +370,18 @@ var basketApi = (function($, _) {
       }).fail(function(res) {
       	debugLog("addItem(): %s", res);
       });
-  	}
+  	},
+  	deleteItem: function(eSellerId) {
+			deleteLine(eSellerId).done(function(data) {
+				debugLog(data);
+
+				displayBasketMessage('Din varukorg är uppdaterad.');
+
+				update();
+			}).fail(function(res) {
+				debugLog("deleteItem(): %s", res);
+			});
+		}
 	}
 
 

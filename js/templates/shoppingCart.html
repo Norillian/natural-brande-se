@@ -76,8 +76,8 @@
                     <%= line.quantity %>
                   </span>
                 <% } else { %>
-                  <input class='shoppingCartInput' type='text' name='name' value='<%= line.quantity %>' data-lineid='<%= line.id %>' >
-                  <!-- <div class="shoppingCartInputContainer">
+                  <input class='shoppingCartInput' type='text' name='name' value='<%= line.quantity %>' data-lineid='<%= line.id %>' data-bundlesize='<%= line.jpl.bundleSize %>' >
+                  <div class="shoppingCartInputContainer">
                     <% if(line.jpl && line.jpl.bundleSize > 0) { %>
                       <div class="product-basket-crs-controls">
                         <div class="product-basket-crs-add">
@@ -88,7 +88,7 @@
                         </div>
                       </div>
                     <% } %>
-                  </div> -->
+                  </div>
                 <% } %>
                 <!-- <%= line.userCode3 %> -->
               </td>
@@ -109,7 +109,7 @@
               <td class="content c9">
               	<% if(line.itemContent !== 'Coupon') { %>
 	                <img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"
-	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketUI.deleteItem( <%= line.id %> )"/>
+	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketApi.deleteItem( <%= line.id %> )"/>
               	<% } else { %> 
               		<a href="/basket/shoppingcart.aspx?ce32cmd=remove&ce32lid=<%= line.id %>">
               			<img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"

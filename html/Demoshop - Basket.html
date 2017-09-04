@@ -6,27 +6,33 @@
 
 <!-- If basket is not empty -->
 
+<div id="basket"> </div>
+
 <eSeller:If IsFalse="Basket:IsEmpty">
     
     <div class="basketOuterBdy clearfix">
-        <div class="basketTopNavBdy">
-            <div class="basketHeader">
-                <h1><eSeller:Select Text="basket_header" /></h1>
-            </div>
-            <div class="basketBtnDiv clearfix">
-                <div class="basketPreStep left">
-                    <eSeller:Control ControlType="BasketActionButton" ControlId="PreviousStep" Mode="NavigatePrevious" CssClass="buttonNavPrev" />
-                </div>
-                <div class="basketNxtStep right">
-                    <eSeller:Control ControlType="BasketActionButton" ControlId="Next" Mode="NavigateNext" CssClass="buttonNavNext" CausesValidation="True" >
-                        <eSeller:Attribute Name="Text" Text="button_next(basket)" />
-                    </eSeller:Control>
-                </div>
-            </div>
-        </div>
-        <div class="basketDetailsBdy">
-            <eSeller:Control ControlId="Basket" ControlType="BasketDetails" />
-        </div>
+
+    		<eSeller:If IsFalse="Context:QueryparmExists(&quot;dev&quot;)" >
+	        <div class="basketTopNavBdy">
+	            <div class="basketHeader">
+	                <h1><eSeller:Select Text="basket_header" /></h1>
+	            </div>
+	            <div class="basketBtnDiv clearfix">
+	                <div class="basketPreStep left">
+	                    <eSeller:Control ControlType="BasketActionButton" ControlId="PreviousStep" Mode="NavigatePrevious" CssClass="buttonNavPrev" />
+	                </div>
+	                <div class="basketNxtStep right">
+	                    <eSeller:Control ControlType="BasketActionButton" ControlId="Next" Mode="NavigateNext" CssClass="buttonNavNext" CausesValidation="True" >
+	                        <eSeller:Attribute Name="Text" Text="button_next(basket)" />
+	                    </eSeller:Control>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="basketDetailsBdy">
+	            <eSeller:Control ControlId="Basket" ControlType="BasketDetails" />
+	        </div>
+        </eSeller:If>
+
         <div class="basketQuickBasket left">
         		<eSeller:HtmlElement Tagname="input">
         			<eSeller:Attribute name="class" Value="textbox" />
@@ -37,8 +43,11 @@
 				        <eSeller:Select text="label_quickAdd_btn" />
 				    </a>
     		</div>
+
         <div class="basketTotalsBdy right clearfix">
+    			<eSeller:If IsFalse="Context:QueryparmExists(&quot;dev&quot;)" >
             <eSeller:Control ControlId="Totals" ControlType="BasketTotals"></eSeller:Control>
+        	</eSeller:If>
         </div>
         <!--<div class="basketCouponBdy left clearfix">
             <div class="couponControlDiv clearfix">

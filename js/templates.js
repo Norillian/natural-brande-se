@@ -5,17 +5,9 @@ var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments
 with(obj||{}){
 __p+='';
  if(!onCheckout) { 
-__p+='\r\n  <div class="clearfix">\r\n\r\n  </div>\r\n  <div class="basketBottomNavBdy">\r\n    <a class="basketNxtStep2 right">\r\n      <span class="buttonNavNext">\r\n        '+
-((__t=( labels.goToRegister ))==null?'':__t)+
-'\r\n        <!-- Gå til kassen -->\r\n      </span>\r\n    </a>\r\n    <a class="basketUpdAll right">\r\n      <span class="buttonUpdateBasket">\r\n        '+
-((__t=( labels.updateBasket ))==null?'':__t)+
-'\r\n        <!-- Opdater indhold -->\r\n      </span>\r\n    </a>\r\n    <a class="basketClrAll right">\r\n      <span class="buttonClearBasket">\r\n        '+
-((__t=( labels.emptyBasket ))==null?'':__t)+
-'\r\n        <!-- Tøm kurven -->\r\n      </span>\r\n    </a>\r\n  </div>\r\n';
+__p+='\r\n  <div class="basketBottomNavBdy clearfix">\r\n    <a class="basketNxtStep2 right">\r\n      <span class="buttonNavNext">\r\n      	Kassan\r\n	      <!-- Gå til kassen -->\r\n      </span>\r\n    </a>\r\n    <a class="basketUpdAll right">\r\n      <span class="buttonUpdateBasket">\r\n        Uppdatera innehållet\r\n        <!-- Opdater indhold -->\r\n      </span>\r\n    </a>\r\n    <a class="basketClrAll right">\r\n      <span class="buttonClearBasket">\r\n        Töm varukorg\r\n        <!-- Tøm kurven -->\r\n      </span>\r\n    </a>\r\n  </div>\r\n';
  } else { 
-__p+='\r\n  <div class="clearfix">\r\n\r\n  </div>\r\n  <a class="basketNxtStep2">\r\n    <span class="buttonNavNext">\r\n      '+
-((__t=( labels.goToPayment ))==null?'':__t)+
-'\r\n      <!-- Gå til betaling -->\r\n    </span>\r\n  </a>\r\n';
+__p+='\r\n  <div class="clearfix">\r\n\r\n  </div>\r\n  <a class="basketNxtStep2">\r\n    <span class="buttonNavNext">\r\n      Kassan\r\n      <!-- Gå til betaling -->\r\n    </span>\r\n  </a>\r\n';
  } 
 __p+='\r\n';
 }
@@ -101,11 +93,13 @@ __p+='\r\n                  <input class=\'shoppingCartInput\' type=\'text\' nam
 ((__t=( line.quantity ))==null?'':__t)+
 '\' data-lineid=\''+
 ((__t=( line.id ))==null?'':__t)+
-'\' >\r\n                  <!-- <div class="shoppingCartInputContainer">\r\n                    ';
+'\' data-bundlesize=\''+
+((__t=( line.jpl.bundleSize ))==null?'':__t)+
+'\' >\r\n                  <div class="shoppingCartInputContainer">\r\n                    ';
  if(line.jpl && line.jpl.bundleSize > 0) { 
 __p+='\r\n                      <div class="product-basket-crs-controls">\r\n                        <div class="product-basket-crs-add">\r\n                          <i class="zmdi zmdi-caret-up"></i>\r\n                        </div>\r\n                        <div class="product-basket-crs-sub">\r\n                          <i class="zmdi zmdi-caret-down"></i>\r\n                        </div>\r\n                      </div>\r\n                    ';
  } 
-__p+='\r\n                  </div> -->\r\n                ';
+__p+='\r\n                  </div>\r\n                ';
  } 
 __p+='\r\n                <!-- '+
 ((__t=( line.userCode3 ))==null?'':__t)+
@@ -123,7 +117,7 @@ __p+='\r\n                <!-- '+
  if(!onCheckout) { 
 __p+='\r\n              <td class="content c9">\r\n              	';
  if(line.itemContent !== 'Coupon') { 
-__p+='\r\n	                <img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketUI.deleteItem( '+
+__p+='\r\n	                <img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"\r\n	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketApi.deleteItem( '+
 ((__t=( line.id ))==null?'':__t)+
 ' )"/>\r\n              	';
  } else { 
@@ -145,33 +139,27 @@ $.extend(templates, {
 shoppingCartTotals: function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<div class="basketTotalsBdy right clearfix">\r\n  <div id="ec38">\r\n    <table class="ec38TableTotals">\r\n      <tbody>\r\n        <tr class="ec38Subtotal">\r\n          <td class="content c1">\r\n            '+
-((__t=( labels.subTotal ))==null?'':__t)+
-'\r\n            <!-- Subtotal -->\r\n          </td>\r\n          <td class="content c2">\r\n            <span>'+
-((__t=( helpers.formatMoney(basket.lineTotal.priceIncVat, currency) ))==null?'':__t)+
-'</span>\r\n          </td>\r\n        </tr>\r\n        ';
+__p+='<div class="basketTotalsBdy right clearfix">\r\n	<div id="ec38">\r\n	  <table class="ec38TableTotals">\r\n	    <tbody>\r\n	      <tr class="ec38Subtotal">\r\n	        <td class="content c1">\r\n	          Delsumma - this is api plis\r\n	          <!-- Subtotal -->\r\n	        </td>\r\n	        <td class="content c2">\r\n	          <span>'+
+((__t=( helpers.formatMoney(basket.lineTotal.priceExVat, currency) ))==null?'':__t)+
+'</span>\r\n	        </td>\r\n	      </tr>\r\n	      ';
  _.each(basket.fees, function(fee) { 
-__p+='\r\n          ';
- if(fee.fee.priceIncVat != 0) { 
-__p+='\r\n            <tr class="ec38Shipment">\r\n              <td class="content c1">\r\n                '+
+__p+='\r\n	        ';
+ if(fee.fee.priceExVat != 0) { 
+__p+='\r\n	          <tr class="ec38Shipment">\r\n	            <td class="content c1">\r\n	              '+
 ((__t=( fee.name ))==null?'':__t)+
 ' - '+
 ((__t=( fee.description ))==null?'':__t)+
-'\r\n              </td>\r\n              <td class="content c2">\r\n                '+
-((__t=( helpers.formatMoney(fee.fee.priceIncVat, currency) ))==null?'':__t)+
-'\r\n              </td>\r\n            </tr>\r\n            ';
+'\r\n	            </td>\r\n	            <td class="content c2">\r\n	              '+
+((__t=( helpers.formatMoney(fee.fee.priceExVat, currency) ))==null?'':__t)+
+'\r\n	            </td>\r\n	          </tr>\r\n	        ';
  } 
-__p+='\r\n            ';
+__p+='\r\n	      ';
  }); 
-__p+='\r\n            <tr class="HeaderBar ec38Total">\r\n              <td class="content c1">\r\n                '+
-((__t=( labels.total ))==null?'':__t)+
-'\r\n                <!-- Total -->\r\n              </td>\r\n              <td class="content c2">\r\n                '+
-((__t=( helpers.formatMoney(basket.basketTotal.priceIncVat, currency) ))==null?'':__t)+
-'\r\n              </td>\r\n            </tr>\r\n            <tr class="ec38Tax">\r\n              <td class="content c1">\r\n                '+
-((__t=( labels.ofWhichVat ))==null?'':__t)+
-'\r\n                <!-- heraf moms -->\r\n              </td>\r\n              <td class="content c2">\r\n                '+
+__p+='\r\n	      <tr class="ec38Tax">\r\n	        <td class="content c1">\r\n	          Moms\r\n	          <!-- heraf moms -->\r\n	        </td>\r\n	        <td class="content c2">\r\n	          '+
 ((__t=( helpers.formatMoney(basket.basketTotal.vatAmount, currency) ))==null?'':__t)+
-'\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n  </div>\r\n</div>\r\n';
+'\r\n	        </td>\r\n	      </tr>\r\n	      <tr class="HeaderBar ec38Total">\r\n	        <td class="content c1">\r\n	          Totalt\r\n	          <!-- Total -->\r\n	        </td>\r\n	        <td class="content c2">\r\n	          '+
+((__t=( helpers.formatMoney(basket.basketTotal.priceIncVat, currency) ))==null?'':__t)+
+'\r\n	        </td>\r\n	      </tr>\r\n	    </tbody>\r\n	  </table>\r\n	  <div class="content">* Momsfri</div>\r\n	</div>\r\n	\r\n</div>\r\n';
 }
 return __p;
 }
