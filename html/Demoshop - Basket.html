@@ -115,11 +115,13 @@
 
 <!-- If basket is empty -->
 <eSeller:If IsTrue="Basket:IsEmpty">
+	<eSeller:If IsFalse="Context:QueryparmExists(&quot;dev&quot;)" >
     <div class="basketIsEmptyBdy">
         <h1><eSeller:Select Text="error_label_empty_basket" /></h1>
         <br />
         <eSeller:Control ControlType="BasketActionButton" ControlId="PreviousStep" Mode="NavigatePrevious" DuplicateID="True" CssClass="buttonNavPrev" />
     </div>
+  </eSeller:If>
 </eSeller:If>
 
 <div class="basketProducts">

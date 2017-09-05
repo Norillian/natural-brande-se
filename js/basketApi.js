@@ -85,8 +85,8 @@ var basketApi = (function($, _) {
             basketLinesGet.resolve();
           },
           success: function(res) {
-          	basketContent.isEmpty = false;
             basketContent.lines = res.data.items;
+            basketContent.isEmpty = (basketContent.lines.length > 0 ? false : true);
             // There are lines, add to them the JSON Product list info for each product
             var products = _.map(res.data.items, 
             											function(line) {
@@ -271,6 +271,7 @@ var basketApi = (function($, _) {
 
   function updateBasket(onCheckout) {
   	if(basketContent.isEmpty) {
+  		debugLog("updateBasket(): Empty basket");
   		var html = templates.emptyBasket({
   			// Some labels
   		});
