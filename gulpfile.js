@@ -1,5 +1,8 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var gutil = require('gulp-util');
+var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
 // var htmlmin = require('gulp-htmlmin');
 var template = require('gulp-underscore-template-custom');
 
@@ -21,7 +24,10 @@ gulp.task('templates', function() {
 
 gulp.task('basketApi', function() {
   return gulp.src(['./js/basketApi.js', './js/templates.js'])
+ 		.pipe(gutil.env.type !== 'production' ? sourcemaps.init() : gutil.noop())
     .pipe(concat('basket_api.js'))
+    .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+    .pipe(gutil.env.type !== 'production' ? sourcemaps.write() : gutil.noop())
     .pipe(gulp.dest('./prod/'));
 });
 
