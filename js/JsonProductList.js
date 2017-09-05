@@ -173,7 +173,8 @@ weightBeforeZipCode=200000;
 							else {
 								// The atb Postback ruins our scroll position so store it
 								cookie.create(location.href + "-scrollPosition", window.pageYOffset, 0.01);
-								atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
+								// atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
+								basketApi.addItem(val.eSellerId, getQtyAmount);
 							}
 						});
 
@@ -966,7 +967,8 @@ function createAddedToBasketProducts() {
 							else {
 								// The atb Postback ruins our scroll position so store it
 								cookie.create(location.href + "-scrollPosition", window.pageYOffset, 0.01);
-								atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
+								// atbNoQty(val.eSellerId, 0, getQtyAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
+								basketApi.addItem(val.eSellerId, getQtyAmount);
 							}
 						});
 						basketDiv.addClass("addToBasketLnk not-in-stock");

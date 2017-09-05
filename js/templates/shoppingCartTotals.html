@@ -1,0 +1,49 @@
+<div class="basketTotalsBdy right clearfix">
+	<div id="ec38">
+	  <table class="ec38TableTotals">
+	    <tbody>
+	      <tr class="ec38Subtotal">
+	        <td class="content c1">
+	          Delsumma - this is api plis
+	          <!-- Subtotal -->
+	        </td>
+	        <td class="content c2">
+	          <span><%= helpers.formatMoney(basket.lineTotal.priceExVat, currency) %></span>
+	        </td>
+	      </tr>
+	      <% _.each(basket.fees, function(fee) { %>
+	        <% if(fee.fee.priceExVat != 0) { %>
+	          <tr class="ec38Shipment">
+	            <td class="content c1">
+	              <%= fee.name %> - <%= fee.description %>
+	            </td>
+	            <td class="content c2">
+	              <%= helpers.formatMoney(fee.fee.priceExVat, currency) %>
+	            </td>
+	          </tr>
+	        <% } %>
+	      <% }); %>
+	      <tr class="ec38Tax">
+	        <td class="content c1">
+	          Moms
+	          <!-- heraf moms -->
+	        </td>
+	        <td class="content c2">
+	          <%= helpers.formatMoney(basket.basketTotal.vatAmount, currency) %>
+	        </td>
+	      </tr>
+	      <tr class="HeaderBar ec38Total">
+	        <td class="content c1">
+	          Totalt
+	          <!-- Total -->
+	        </td>
+	        <td class="content c2">
+	          <%= helpers.formatMoney(basket.basketTotal.priceIncVat, currency) %>
+	        </td>
+	      </tr>
+	    </tbody>
+	  </table>
+	  <div class="content">* Momsfri</div>
+	</div>
+	
+</div>

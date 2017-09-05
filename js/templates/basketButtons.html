@@ -1,0 +1,32 @@
+<% if(!onCheckout) { %>
+  <div class="basketBottomNavBdy clearfix">
+    <a class="basketNxtStep2 right">
+      <span class="buttonNavNext">
+      	Kassan
+	      <!-- Gå til kassen -->
+      </span>
+    </a>
+    <a class="basketUpdAll right">
+      <span class="buttonUpdateBasket">
+        Uppdatera innehållet
+        <!-- Opdater indhold -->
+      </span>
+    </a>
+    <a class="basketClrAll right">
+      <span class="buttonClearBasket">
+        Töm varukorg
+        <!-- Tøm kurven -->
+      </span>
+    </a>
+  </div>
+<% } else { %>
+  <div class="clearfix">
+
+  </div>
+  <a class="basketNxtStep2">
+    <span class="buttonNavNext">
+      Kassan
+      <!-- Gå til betaling -->
+    </span>
+  </a>
+<% } %>

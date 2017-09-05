@@ -1,0 +1,127 @@
+<% if(!onCheckout) { %>
+<div class="basketTopNavBdy">
+    <div class="basketHeader">
+        <h1>
+          Korg
+          <!-- Indkøbskurv -->
+        </h1>
+    </div>
+    <div class="basketBtnDiv clearfix">
+        <div class="basketPreStep left">
+            <a class="buttonNavPrev" href="/">
+              Fortsätt handla
+              <!-- shop videre -->
+            </a>
+        </div>
+        <div class="basketNxtStep right">
+            <a class="buttonNavNext">
+              Kassan
+              <!-- Gå til kassen -->
+            </a>
+        </div>
+    </div>
+</div>
+<% } %>
+
+<% if(onCheckout) { %>
+<div class="orderDetails">
+  <div class="header_bullet">
+    <span>5</span>
+  </div>
+  <div class="checkoutHeadersLabel">
+    <h2>
+      Fattttttttt
+      <!-- Tjek din ordre -->
+    </h2>
+  </div>
+</div>
+<% } %>
+
+<div class="basketDetailsBdy">
+    <div id="ec32">
+      <table class='HeaderBarTables ec32Table'>
+        <tbody>
+          <tr class="HeaderBar ec32Head">
+            <td class="HeaderBar c1">Bild</td>
+            <td class="HeaderBar c3">Varenr.</td>
+            <td class="HeaderBar c4">Beskrivning</td>
+            <td class="HeaderBar c5">Antal</td>
+            <td class="HeaderBar c6">Pris</td>
+            <td class="HeaderBar c7">Rabatt</td>
+            <td class="HeaderBar c8">Pris</td>
+            <% if(!onCheckout) { %>
+              <td class="HeaderBar c9">Radera</td>
+            <% } %>
+          </tr>
+          <% _.each(lines, function(line, i) { %>
+            <tr class="row <%= ((i % 2 != 0) ? 'rowOdd' : 'rowEven') %>" >
+              <td class="content c1">
+                <a href='<%= line.itemUrl %>'>
+                  <img src='<%= line.itemImageUrl %>' style="display:inline-block;height:250px;width:250px;">
+                </a>
+              </td>
+              <td class="content c3">
+                <a href='<%= line.itemUrl %>'>
+                  <%= line.externalItemId1 %>
+                </a>
+              </td>
+              <td class="content c4">
+                <a href='<%= line.itemUrl %>'>
+                  <%= line.description1 %>
+                </a>
+              </td>
+              <td class="content c5">
+                <% if(onCheckout) { %>
+                  <span>
+                    <%= line.quantity %>
+                  </span>
+                <% } else { %>
+                  <input class='shoppingCartInput' type='text' name='name' value='<%= line.quantity %>' data-lineid='<%= line.id %>' data-bundlesize='<%= line.jpl.bundleSize %>' >
+                  <div class="shoppingCartInputContainer">
+                    <% if(line.jpl && line.jpl.bundleSize > 0) { %>
+                      <div class="product-basket-crs-controls">
+                        <div class="product-basket-crs-add">
+                          <i class="zmdi zmdi-caret-up"></i>
+                        </div>
+                        <div class="product-basket-crs-sub">
+                          <i class="zmdi zmdi-caret-down"></i>
+                        </div>
+                      </div>
+                    <% } %>
+                  </div>
+                <% } %>
+                <!-- <%= line.userCode3 %> -->
+              </td>
+              <td class="content c6">
+                <a href='<%= line.itemUrl %>'>
+                  <%= helpers.formatMoney(line.unitPrice.priceIncVat, currency) %>
+                </a>
+              </td>
+              <td class="content c7">
+                <%= (line.jpl.salesPrices.length > 0 && 
+                			line.jpl.salesPrices[0].lineDiscountPercentage !== 0 ? 
+                			line.jpl.salesPrices[0].lineDiscountPercentageFormatted + ' %' : '') %>
+              </td>
+              <td class="content c8">
+                <%= helpers.formatMoney(line.lineAmount.priceIncVat, currency) %>
+              </td>
+              <% if(!onCheckout) { %>
+              <td class="content c9">
+              	<% if(line.itemContent !== 'Coupon') { %>
+	                <img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"
+	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;" onclick="basketApi.deleteItem( <%= line.id %> )"/>
+              	<% } else { %> 
+              		<a href="/basket/shoppingcart.aspx?ce32cmd=remove&ce32lid=<%= line.id %>">
+              			<img src="/SL/SI/836/50/f36e3098-5799-4978-95cc-1c7ed0df3f0a.png"
+	                  alt="Delete item" style="display:inline-block;height:22px;width:22px;"/>
+              		</a>
+              	<% } %>
+              </td>
+              <% } %>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+
+    </div>
+</div>

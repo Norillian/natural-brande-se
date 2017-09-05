@@ -1213,14 +1213,14 @@ $( document ).ready(function() {
 			// // As well as setting it in focus
 			// $('body').append('<div class="ios-focus-hack"></div>');
 			// $('.ios-focus-hack').click(function() {
-			$('body').prepend('focussing input')
-			$('.basketQuickBasket input, .frontpageQuickBasket input').focus();
-			var ch = function() {
-				$('body').prepend('focussing input again')
-				$('.basketQuickBasket input, .frontpageQuickBasket input').focus();
-				$('.basketQuickBasket input, .frontpageQuickBasket input').off('keydown', ch);
-			}
-			$('.basketQuickBasket input, .frontpageQuickBasket input').on('keydown', ch);
+			// $('body').prepend('focussing input')
+			// $('.basketQuickBasket input, .frontpageQuickBasket input').focus();
+			// var ch = function() {
+			// 	// $('body').prepend('focussing input again')
+			// 	$('.basketQuickBasket input, .frontpageQuickBasket input').focus();
+			// 	$('.basketQuickBasket input, .frontpageQuickBasket input').off('keydown', ch);
+			// }
+			// $('.basketQuickBasket input, .frontpageQuickBasket input').on('keydown', ch);
 			// });
 			// $('.ios-focus-hack').click();
 		}
@@ -1278,7 +1278,8 @@ $( document ).ready(function() {
         		getItemAmount = val.bundleSize;
         	}
 
-          atbNoQty(val.eSellerId, 0, getItemAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
+          // atbNoQty(val.eSellerId, 0, getItemAmount, '', '', '', '', encodeURIComponent(window.location.pathname + window.location.search));
+          basketApi.addItem(val.eSellerId, getItemAmount);
 
         });
 
@@ -1290,10 +1291,12 @@ $( document ).ready(function() {
 
   $('.frontpageQuickBasket div input.textbox').bind("enterKey",function(e){
        $( ".frontpageQuickBasket div a" ).trigger('click');
+       $(this).val('');
   });
   
   $('.basketQuickBasket input.textbox').bind("enterKey",function(e){
        $( ".basketQuickBasket a" ).trigger('click');
+       $(this).val('');
   });
 
   $('.frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox').keydown(function(e){

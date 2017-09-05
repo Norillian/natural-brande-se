@@ -3203,12 +3203,14 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .buttonNavNext {
+    		display: block;
         background-color: #00763a;
         color: #fff;
         font-size: 16px;
         border: medium none;
         text-transform: uppercase;
         padding: 12px 15px;
+        text-align: center;
         min-width: 320px;
         margin-left: 0.9375rem;
         border-radius: 4px !important;
@@ -3223,6 +3225,8 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .buttonNavNext:hover {
         background-color: #038342;
+        text-decoration: none;
+        color: white;
     }
 
     .onePageCheckoutBdy .buttonNavNext {
@@ -3230,6 +3234,7 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     }
 
     .buttonNavPrev {
+    		display: block;
         background-color: #605f5f;
         color: #fff;
         font-size: 16px;
@@ -3241,10 +3246,14 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
 
     .buttonNavPrev:hover {
         background-color: #a0a0a0;
+        text-decoration: none;
+        color: white;
     }
 
     .basketUpdAll input,
-    .basketClrAll input {
+    .basketClrAll input,
+    .basketUpdAll span,
+    .basketClrAll span {
         background-color: transparent;
         color: #787878;
         font-size: 13px;
@@ -3758,8 +3767,8 @@ meta.foundation-version{font-family:"/5.5.1/"}meta.foundation-mq-small{font-fami
     /*** Message box styles ***/
 
     #ucInfoMessagebdy {
-        position: absolute;
-        top: 0px;
+        position: fixed;
+        top: 40px;
         z-index: 200;
         border: solid 2px #d0d0d0;
         background-color: #FFFFFF;
