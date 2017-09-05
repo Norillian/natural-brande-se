@@ -385,6 +385,8 @@ var basketApi = (function($, _) {
       productCount: productCount
     });
     $('#miniBasket').empty().html(html);
+
+    $('#miniBasketMobile .miniBasketItemCount span').text(productCount);
   }
 
   function formatMoney(num,cur){
