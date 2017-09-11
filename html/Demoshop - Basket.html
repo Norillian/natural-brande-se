@@ -12,7 +12,7 @@
     
     <div class="basketOuterBdy clearfix">
 
-    		<eSeller:If IsFalse="Context:QueryparmExists(&quot;dev&quot;)" >
+    		<eSeller:If IsTrue="Context:QueryparmExists(&quot;dev&quot;)" >
 	        <div class="basketTopNavBdy">
 	            <div class="basketHeader">
 	                <h1><eSeller:Select Text="basket_header" /></h1>
@@ -115,7 +115,7 @@
 
 <!-- If basket is empty -->
 <eSeller:If IsTrue="Basket:IsEmpty">
-	<eSeller:If IsFalse="Context:QueryparmExists(&quot;dev&quot;)" >
+	<eSeller:If IsTrue="Context:QueryparmExists(&quot;dev&quot;)" >
     <div class="basketIsEmptyBdy">
         <h1><eSeller:Select Text="error_label_empty_basket" /></h1>
         <br />

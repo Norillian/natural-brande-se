@@ -2,6 +2,7 @@
 // Change Message box to fixed since we are no longer scrolling up after each fucking purchase
 // If there is time, implement a queue system for when someone is spamming the buy button
 // Delivery fee line has a * in the vanilla controller
+// Add a default image to the shoppingcart layout like on rsh
 
 
 var basketApi = (function($, _) {
@@ -9,8 +10,8 @@ var basketApi = (function($, _) {
 	var basketContent = {};
 	var linesToUpdate = {};
 
-	var production = false;
-	// var production = true;
+	// var production = false;
+	var production = true;
 
 	var constants = {
     jplUrl: '/Services/ProductService.asmx/Products', // JSON Product list base URL
@@ -382,7 +383,7 @@ var basketApi = (function($, _) {
 
   	var html = templates['miniBasket']({
       // Some data
-      formattedAmount: formatMoney(basketContent.basketTotal.priceIncVat, basketContent.basketTotal.currencySymbol),
+      formattedAmount: formatMoney(basketContent.basketTotal.priceExVat, basketContent.basketTotal.currencySymbol, true),
       productCount: productCount
     });
     $('#miniBasket').empty().html(html);
@@ -390,8 +391,10 @@ var basketApi = (function($, _) {
     $('#miniBasketMobile .miniBasketItemCount span').text(productCount);
   }
 
-  function formatMoney(num,cur){
-    return cur + ' ' + parseFloat(Number(num).toFixed(2)).format(2, 3, '.', ',');
+  function formatMoney(num,cur,reverse){
+    return (typeof reverse !== 'undefined' && reverse ? 
+    	parseFloat(Number(num).toFixed(2)).format(2, 3, '.', ',') + ' ' + cur : 
+    	cur + ' ' + parseFloat(Number(num).toFixed(2)).format(2, 3, '.', ','));
   }
 
   $(document).ready(function() {

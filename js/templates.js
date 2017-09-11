@@ -73,9 +73,11 @@ __p+='\r\n            <tr class="row '+
 ((__t=( ((i % 2 != 0) ? 'rowOdd' : 'rowEven') ))==null?'':__t)+
 '" >\r\n              <td class="content c1">\r\n                <a href=\''+
 ((__t=( line.itemUrl ))==null?'':__t)+
-'\'>\r\n                  <img src=\''+
-((__t=( line.itemImageUrl ))==null?'':__t)+
-'\' style="display:inline-block;height:250px;width:250px;">\r\n                </a>\r\n              </td>\r\n              <td class="content c3">\r\n                <a href=\''+
+'\'>\r\n                	';
+ var imageUrl = (line.jpl && line.jpl.images && line.jpl.images[0] && line.jpl.images[0].url); 
+__p+='\r\n                  <img src=\''+
+((__t=( imageUrl ))==null?'':__t)+
+'\' style="display:inline-block;height:60px !important;">\r\n                </a>\r\n              </td>\r\n              <td class="content c3">\r\n                <a href=\''+
 ((__t=( line.itemUrl ))==null?'':__t)+
 '\'>\r\n                  '+
 ((__t=( line.externalItemId1 ))==null?'':__t)+
@@ -139,7 +141,7 @@ $.extend(templates, {
 shoppingCartTotals: function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<div class="basketTotalsBdy right clearfix">\r\n	<div id="ec38">\r\n	  <table class="ec38TableTotals">\r\n	    <tbody>\r\n	      <tr class="ec38Subtotal">\r\n	        <td class="content c1">\r\n	          Delsumma - this is api plis\r\n	          <!-- Subtotal -->\r\n	        </td>\r\n	        <td class="content c2">\r\n	          <span>'+
+__p+='<div class="basketTotalsBdy right clearfix">\r\n	<div id="ec38">\r\n	  <table class="ec38TableTotals">\r\n	    <tbody>\r\n	      <tr class="ec38Subtotal">\r\n	        <td class="content c1">\r\n	          Delsumma\r\n	          <!-- Subtotal -->\r\n	        </td>\r\n	        <td class="content c2">\r\n	          <span>'+
 ((__t=( helpers.formatMoney(basket.lineTotal.priceExVat, currency) ))==null?'':__t)+
 '</span>\r\n	        </td>\r\n	      </tr>\r\n	      ';
  _.each(basket.fees, function(fee) { 

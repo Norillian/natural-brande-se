@@ -57,7 +57,8 @@
             <tr class="row <%= ((i % 2 != 0) ? 'rowOdd' : 'rowEven') %>" >
               <td class="content c1">
                 <a href='<%= line.itemUrl %>'>
-                  <img src='<%= line.itemImageUrl %>' style="display:inline-block;height:250px;width:250px;">
+                	<% var imageUrl = (line.jpl && line.jpl.images && line.jpl.images[0] && line.jpl.images[0].url); %>
+                  <img src='<%= imageUrl %>' style="display:inline-block;height:60px !important;">
                 </a>
               </td>
               <td class="content c3">
