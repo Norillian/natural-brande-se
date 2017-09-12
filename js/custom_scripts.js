@@ -1232,6 +1232,8 @@ $( document ).ready(function() {
   $( ".frontpageQuickBasket div a, .basketQuickBasket a" ).on( "click", function() {
 
 		var getProductIds = $(".frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox").val();
+		// Reset input field
+    $(".frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox").val('');
 		var getItemAmount = "1";
 
     if (getProductIds.indexOf(".") > 0) {
@@ -1291,12 +1293,10 @@ $( document ).ready(function() {
 
   $('.frontpageQuickBasket div input.textbox').bind("enterKey",function(e){
        $( ".frontpageQuickBasket div a" ).trigger('click');
-       $(this).val('');
   });
   
   $('.basketQuickBasket input.textbox').bind("enterKey",function(e){
        $( ".basketQuickBasket a" ).trigger('click');
-       $(this).val('');
   });
 
   $('.frontpageQuickBasket div input.textbox, .basketQuickBasket input.textbox').keydown(function(e){
