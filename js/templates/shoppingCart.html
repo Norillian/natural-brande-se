@@ -95,7 +95,7 @@
               </td>
               <td class="content c6">
                 <a href='<%= line.itemUrl %>'>
-                  <%= helpers.formatMoney(line.unitPrice.priceIncVat, currency) %>
+                  <%= helpers.formatMoney(line.unitPrice.priceExVat, currency) %>
                 </a>
               </td>
               <td class="content c7">
@@ -104,7 +104,7 @@
                 			line.jpl.salesPrices[0].lineDiscountPercentageFormatted + ' %' : '') %>
               </td>
               <td class="content c8">
-                <%= helpers.formatMoney(line.lineAmount.priceIncVat, currency) %>
+                <%= helpers.formatMoney(line.lineAmount.priceExVat, currency) %>
               </td>
               <% if(!onCheckout) { %>
               <td class="content c9">

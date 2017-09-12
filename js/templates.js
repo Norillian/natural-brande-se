@@ -108,13 +108,13 @@ __p+='\r\n                <!-- '+
 ' -->\r\n              </td>\r\n              <td class="content c6">\r\n                <a href=\''+
 ((__t=( line.itemUrl ))==null?'':__t)+
 '\'>\r\n                  '+
-((__t=( helpers.formatMoney(line.unitPrice.priceIncVat, currency) ))==null?'':__t)+
+((__t=( helpers.formatMoney(line.unitPrice.priceExVat, currency) ))==null?'':__t)+
 '\r\n                </a>\r\n              </td>\r\n              <td class="content c7">\r\n                '+
 ((__t=( (line.jpl.salesPrices.length > 0 && 
                 			line.jpl.salesPrices[0].lineDiscountPercentage !== 0 ? 
                 			line.jpl.salesPrices[0].lineDiscountPercentageFormatted + ' %' : '') ))==null?'':__t)+
 '\r\n              </td>\r\n              <td class="content c8">\r\n                '+
-((__t=( helpers.formatMoney(line.lineAmount.priceIncVat, currency) ))==null?'':__t)+
+((__t=( helpers.formatMoney(line.lineAmount.priceExVat, currency) ))==null?'':__t)+
 '\r\n              </td>\r\n              ';
  if(!onCheckout) { 
 __p+='\r\n              <td class="content c9">\r\n              	';
