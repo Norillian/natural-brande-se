@@ -1,9 +1,7 @@
 // TODO
-// Change Message box to fixed since we are no longer scrolling up after each fucking purchase
 // If there is time, implement a queue system for when someone is spamming the buy button
 // Delivery fee line has a * in the vanilla controller
 // Add a default image to the shoppingcart layout like on rsh
-
 
 var basketApi = (function($, _) {
 
@@ -18,7 +16,10 @@ var basketApi = (function($, _) {
     apiUrl: '/sessionservices/v2/basket/current/', // Basket API base URL
     // defaultImageUrl: "/SL/SI/596/7e8d0f1e-58b2-4bcb-a41d-d124a29c18fc.jpg"
     messageBoxTimer: 3000, // The time a message box is shown before it fades out again
-    messageBoxFadeTime: 500 // The duration of the fade in and out animations
+    messageBoxFadeTime: 500, // The duration of the fade in and out animations
+    labelProductOutOfStock: 'Antal har ändrats för att passa lagermängd', // Message shown when an action was modified to account for lacking stock
+    labelProductWrongKollie: 'Antal har ändrats för att passa kollistorleken', // Message shown when an action was modified to account for non-matching bundlesize
+    labelBasketUpdated: 'Din varukorg är uppdaterad.' // Generic basket update message shown on update/delete actions
   }
 
   /* Logger function that will drop any attempt to log when this.production is true */
@@ -210,14 +211,14 @@ var basketApi = (function($, _) {
   					debugLog("updateItem(): Increased quantity by %i", bundleSize - (quantity % bundleSize));
   					quantity += bundleSize - (quantity % bundleSize);
   					// "Arion No Grain Salmon & Potato 150g (20)" ska bestillas i kolli av 20, Du behöver beställa ytterligare 19, så det totala antalet blir 40. Klicka här för att gå till varukorgen.
-  					messageOverride = 'Antal blev rettet til at matche kolli';
+  					messageOverride = constants.labelProductWrongKollie;
   				}
   			}
   			if(line.jpl.inventoryCount < quantity) {
   				// If quantity exceeds inventory
   				quantity = line.jpl.inventoryCount;
   				debugLog("updateItem(): Reducing quantity to match inventoryCount: %i ", quantity);
-  				messageOverride = 'Antal blev rettet til at matche lagerantal';
+  				messageOverride = constants.labelProductOutOfStock;
   			}
   		}
   	});
@@ -226,19 +227,7 @@ var basketApi = (function($, _) {
 
   		debugLog(data);
 
-  		var kolliWarningMessage = '{productName} ska bestillas i kolli av {bundleSize}, Du behöver beställa ytterligare {difference},' + 
-  															' så  det totala antalet blir {total}. <a href="http://www.natural-sverige.se/basket/shoppingcart.aspx">' + 
-  															'Klicka här</a> för att gå till varukorgen.';
-
-
-      displayBasketMessage(messageOverride !== '' ? messageOverride : 'Din varukorg är uppdaterad.');
-      // var message = data && data.data && data.data.items && data.data.items[0].messages && 
-      // 							data.data.items[0].messages[0] && data.data.items[0].messages[0].message;
-
-      // if(message) {
-      //   displayBasketMessage(message);
-        
-      // }
+      displayBasketMessage(messageOverride !== '' ? messageOverride : constants.labelBasketUpdated);
 
       update();
 
@@ -353,11 +342,6 @@ var basketApi = (function($, _) {
           var lineId = parseInt($(e.target).attr('data-lineid'));
           var value = parseFloat($(e.target).val());
           if(!isNaN(value)) {
- 	          // var bundleSize = parseInt($(e.target).attr('data-bundlesize'));
- 	          // if(!isNaN(bundleSize) && (value % bundleSize) !== 0) {
- 	          // 	displayBasketMessage("urmom");
- 	          // } else {
- 	          // }
             updateItem(lineId, value);
             e.stopPropagation();
             return true;
@@ -423,7 +407,7 @@ var basketApi = (function($, _) {
 			deleteLine(eSellerId).done(function(data) {
 				debugLog(data);
 
-				displayBasketMessage('Din varukorg är uppdaterad.');
+				displayBasketMessage(constants.labelBasketUpdated);
 
 				update();
 			}).fail(function(res) {

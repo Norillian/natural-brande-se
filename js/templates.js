@@ -61,7 +61,7 @@ __p+='\r\n<div class="basketTopNavBdy">\r\n    <div class="basketHeader">\r\n   
  } 
 __p+='\r\n\r\n';
  if(onCheckout) { 
-__p+='\r\n<div class="orderDetails">\r\n  <div class="header_bullet">\r\n    <span>5</span>\r\n  </div>\r\n  <div class="checkoutHeadersLabel">\r\n    <h2>\r\n      Fattttttttt\r\n      <!-- Tjek din ordre -->\r\n    </h2>\r\n  </div>\r\n</div>\r\n';
+__p+='\r\n<div class="orderDetails">\r\n  <div class="header_bullet">\r\n    <span>5</span>\r\n  </div>\r\n  <div class="checkoutHeadersLabel">\r\n    <h2>\r\n      Tjek din ordre\r\n      <!-- Tjek din ordre -->\r\n    </h2>\r\n  </div>\r\n</div>\r\n';
  } 
 __p+='\r\n\r\n<div class="basketDetailsBdy">\r\n    <div id="ec32">\r\n      <table class=\'HeaderBarTables ec32Table\'>\r\n        <tbody>\r\n          <tr class="HeaderBar ec32Head">\r\n            <td class="HeaderBar c1">Bild</td>\r\n            <td class="HeaderBar c3">Varenr.</td>\r\n            <td class="HeaderBar c4">Beskrivning</td>\r\n            <td class="HeaderBar c5">Antal</td>\r\n            <td class="HeaderBar c6">Pris</td>\r\n            <td class="HeaderBar c7">Rabatt</td>\r\n            <td class="HeaderBar c8">Pris</td>\r\n            ';
  if(!onCheckout) { 
