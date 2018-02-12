@@ -44,6 +44,8 @@ rp=72;
 so=7;
 weightBeforeZipCode=200000;
 
+var tilbudMenuId = 132454;
+
 (function (m, $) {
 
 	this.JsonProductList = function (selector, serviceUrl, testMode) {
@@ -849,7 +851,7 @@ if($('.frontPageProducts').length > 0){
 }
 
 if($('.basketProducts').length > 0){
-	productList = '/Services/ProductService.asmx/ProductList?v=1.0&lId=0&so=' + so + '&cId=' + cId + '&langId=' + langId + '&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&mId=&p=1&rp=72&imgSizeId=0&fn1=CustomFields&fk1=3&fv1=true';
+	productList = '/Services/ProductService.asmx/ProductList?v=1.0&lId=0&so=' + so + '&cId=' + cId + '&langId=' + langId + '&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&mId=' + tilbudMenuId + '&p=1&rp=72&imgSizeId=0&';
 }
 
 if($('.searchResultsProductsOuterBdy').length > 0){
@@ -893,7 +895,7 @@ if($('.frontPageProductsMostSold').length > 0){
 }
 
 if($('.productsGoodMatch').length > 0){
-	productList = '/Services/ProductService.asmx/ProductList?v=1.0&lId=0&so=' + so + '&cId=' + cId + '&langId=' + langId + '&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&mId=&p=1&rp=50&imgSizeId=0&fn1=CustomFields&fk1=3&fv1=true';
+	productList = '/Services/ProductService.asmx/ProductList?v=1.0&lId=0&so=' + so + '&cId=' + cId + '&langId=' + langId + '&countryId=' + contId +  '&locId=' + locId + '&customerId=' + customerId + '&mId=' + tilbudMenuId + '&p=1&rp=50&imgSizeId=0';
 	targetelement = $(".goodMatchProducts").attr("id");
 
 	productList += '&serial=' + serial;
